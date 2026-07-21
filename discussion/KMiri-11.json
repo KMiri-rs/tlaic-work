@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4Ak9m5",
+    "number": 11,
+    "title": "Rust Provenance",
+    "body": "* [RFC#3559 Rust has provenance](https://rust-lang.github.io/rfcs/3559-rust-has-provenance.html)\r\n* Discussion [C-style strict aliasing](https://rust-lang.zulipchat.com/#narrow/channel/136281-t-opsem/topic/C-style.20strict.20aliasing/with/592575333)",
+    "bodyText": "RFC#3559 Rust has provenance\nDiscussion C-style strict aliasing",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/11",
+    "createdAt": "2026-03-19T04:59:47Z",
+    "updatedAt": "2026-05-04T14:49:03Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVN",
+      "name": "General",
+      "emoji": ":speech_balloon:",
+      "description": "Chat about anything and everything here"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

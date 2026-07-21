@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4AnbBX",
+    "number": 82,
+    "title": "【第 16 周】KMiri：成功解释执行至启动完成；领取旋武社区 2025 贡献奖",
+    "body": "# KMiri：成功解释执行至启动完成\r\n\r\nmiri_boot 启动阶段基本上是页表初始化，现在成功解释执行。接下来需要让任务执行解释成功。\r\n\r\n## 内存分配与指针语义\r\n\r\n- 补齐 `alloc_frame_with` 的缺失 shim 调用：https://github.com/KMiri-rs/asterinas/pull/8\r\n- 修复 `ptr.add` 的地址偏移语义：https://github.com/KMiri-rs/asterinas/pull/9\r\n- 修复 slab 分配中的悬垂指针与 provenance 问题：https://github.com/KMiri-rs/asterinas/pull/11\r\n- 修复 boot pages 与 kmiri shims 的衔接问题：https://github.com/KMiri-rs/asterinas/pull/16\r\n\r\n## 页表与地址空间逻辑\r\n\r\n- 修复 `pop_level` / `guard_level` 相关 panic：https://github.com/KMiri-rs/asterinas/pull/10\r\n\r\n## 启动流程与初始化\r\n\r\n- 在 `late_init_on_bsp` 中纳入 `boot_all_aps`：https://github.com/KMiri-rs/asterinas/pull/13\r\n- 跳过 `invoke_ffi_init_funcs`：https://github.com/KMiri-rs/asterinas/pull/14\r\n- 删除重复 `miri_main` 入口：https://github.com/KMiri-rs/asterinas/pull/15\r\n\r\n## 诊断与错误处理\r\n\r\n- 在 `panic_handler` 输出 `PanicInfo`：https://github.com/KMiri-rs/asterinas/pull/12\r\n- 拒绝未知符号：https://github.com/KMiri-rs/miri/pull/24\r\n- 优化 `check_page_state` panic 信息与赋值处理：https://github.com/KMiri-rs/miri/pull/25\r\n\r\n# 其他\r\n\r\n1. 周四下午参加通明湖中心 AI 中台培训\r\n2. 尝试在虚拟机和联想真机运行星绽 NixOS，遇到各种问题，在虚拟机勉强运行但很难用，在真机上无法运行\r\n3. 完善 https://github.com/asterinas/asterinas/pull/3237\r\n2. 周日按照邹主任的评语，把洪亮的星绽 PPT 汇报图片改成了 PPT 元素\r\n4. 周五下午在北京亦庄领取开放原子开源基金会 华为旋武社区 2025 贡献奖\r\n\r\n<img width=\"1280\" height=\"960\" alt=\"微信图片_20260629002408_6\" src=\"https://github.com/user-attachments/assets/67893fbf-2d9c-44bc-ae70-17989939ac6a\" />\r\n\r\n<img width=\"1280\" height=\"854\" alt=\"微信图片_20260629002408_0\" src=\"https://github.com/user-attachments/assets/a976a496-1fb2-426c-b643-bcf0e312f53d\" />\r\n\r\n\r\n\r\n# 总结\r\n\r\n本周 [新提交 11 个 PR、13 个 issue](https://github.com/search?q=author%3Azjp-CN+created%3A2026-06-21T23%3A59%3A00%2B08%3A00..2026-06-28T23%3A59%3A00%2B08%3A00+org%3AKMiri-rs++org%3Aasterinas+&type=pullrequests)，[关闭 11 个 PR、9 个 issue](https://github.com/search?q=author%3Azjp-CN+closed%3A2026-06-21T23%3A59%3A00%2B08%3A00..2026-06-28T23%3A59%3A00%2B08%3A00+org%3AKMiri-rs++org%3Aasterinas+&type=pullrequests)。\r\n\r\n\r\n仓库分布：\r\n- `KMiri-rs/asterinas`: 9\r\n- `KMiri-rs/miri`: 2\r\n",
+    "bodyText": "KMiri：成功解释执行至启动完成\nmiri_boot 启动阶段基本上是页表初始化，现在成功解释执行。接下来需要让任务执行解释成功。\n内存分配与指针语义\n\n补齐 alloc_frame_with 的缺失 shim 调用：KMiri-rs/asterinas#8\n修复 ptr.add 的地址偏移语义：KMiri-rs/asterinas#9\n修复 slab 分配中的悬垂指针与 provenance 问题：KMiri-rs/asterinas#11\n修复 boot pages 与 kmiri shims 的衔接问题：KMiri-rs/asterinas#16\n\n页表与地址空间逻辑\n\n修复 pop_level / guard_level 相关 panic：KMiri-rs/asterinas#10\n\n启动流程与初始化\n\n在 late_init_on_bsp 中纳入 boot_all_aps：KMiri-rs/asterinas#13\n跳过 invoke_ffi_init_funcs：KMiri-rs/asterinas#14\n删除重复 miri_main 入口：KMiri-rs/asterinas#15\n\n诊断与错误处理\n\n在 panic_handler 输出 PanicInfo：KMiri-rs/asterinas#12\n拒绝未知符号：KMiri-rs/miri#24\n优化 check_page_state panic 信息与赋值处理：KMiri-rs/miri#25\n\n其他\n\n周四下午参加通明湖中心 AI 中台培训\n尝试在虚拟机和联想真机运行星绽 NixOS，遇到各种问题，在虚拟机勉强运行但很难用，在真机上无法运行\n完善 asterinas/asterinas#3237\n周日按照邹主任的评语，把洪亮的星绽 PPT 汇报图片改成了 PPT 元素\n周五下午在北京亦庄领取开放原子开源基金会 华为旋武社区 2025 贡献奖\n\n\n\n总结\n本周 新提交 11 个 PR、13 个 issue，关闭 11 个 PR、9 个 issue。\n仓库分布：\n\nKMiri-rs/asterinas: 9\nKMiri-rs/miri: 2",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/82",
+    "createdAt": "2026-06-28T16:28:58Z",
+    "updatedAt": "2026-06-29T00:50:22Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

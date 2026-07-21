@@ -1,0 +1,1473 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "Miri",
+  "kind": "pr",
+  "item": {
+    "url": "https://api.github.com/repos/KMiri-rs/miri/pulls/3",
+    "id": 3584824113,
+    "node_id": "PR_kwDORLP5es7VrBMx",
+    "html_url": "https://github.com/KMiri-rs/miri/pull/3",
+    "diff_url": "https://github.com/KMiri-rs/miri/pull/3.diff",
+    "patch_url": "https://github.com/KMiri-rs/miri/pull/3.patch",
+    "issue_url": "https://api.github.com/repos/KMiri-rs/miri/issues/3",
+    "number": 3,
+    "state": "closed",
+    "locked": false,
+    "title": "Debugger: add `t` for run-to-terminator and support count step",
+    "user": {
+      "login": "zjp-CN",
+      "id": 25300418,
+      "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/zjp-CN",
+      "html_url": "https://github.com/zjp-CN",
+      "followers_url": "https://api.github.com/users/zjp-CN/followers",
+      "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+      "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+      "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+      "repos_url": "https://api.github.com/users/zjp-CN/repos",
+      "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "This PR implements two features:\r\n* Add `t` keystroke for run-to-terminator, meaning continue to the next terminator available, and reverse step works because each reached terminator snapshot is recorded.\r\n* For quick run, press a series of numbers like `12`, following a step ` ` or a run-to-terminator `t`, the execution will continue until it hits the count. This is useful when you don't know the stackframe name, and need to run a few more times consecutively.\r\n\r\nNOTE: run-to-terminator or count step doesn't store statement states during the execution, but does store terminator states in history. We can support a new keystroke like `S` to store each state when quick run happens. But it's out of the current PR.\r\n\r\n<img width=\"1920\" height=\"840\" alt=\"run-to-terminator\" src=\"https://github.com/user-attachments/assets/84ce26f8-0173-4f09-9f3e-5980aed6c0fc\" />\r\n",
+    "created_at": "2026-04-26T02:15:12Z",
+    "updated_at": "2026-04-26T02:17:58Z",
+    "closed_at": "2026-04-26T02:16:09Z",
+    "merged_at": "2026-04-26T02:16:09Z",
+    "merge_commit_sha": "67dc3b35bd21c7829558ae55ae0e49bcb861960f",
+    "assignees": [],
+    "requested_reviewers": [],
+    "requested_teams": [],
+    "labels": [],
+    "milestone": null,
+    "draft": false,
+    "commits_url": "https://api.github.com/repos/KMiri-rs/miri/pulls/3/commits",
+    "review_comments_url": "https://api.github.com/repos/KMiri-rs/miri/pulls/3/comments",
+    "review_comment_url": "https://api.github.com/repos/KMiri-rs/miri/pulls/comments{/number}",
+    "comments_url": "https://api.github.com/repos/KMiri-rs/miri/issues/3/comments",
+    "statuses_url": "https://api.github.com/repos/KMiri-rs/miri/statuses/926ada291b0bbae4977d525056b43a46702b0f24",
+    "head": {
+      "label": "KMiri-rs:debugger-run-to-terminator",
+      "ref": "debugger-run-to-terminator",
+      "sha": "926ada291b0bbae4977d525056b43a46702b0f24",
+      "user": {
+        "login": "KMiri-rs",
+        "id": 257443784,
+        "node_id": "O_kgDOD1hHyA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/257443784?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/KMiri-rs",
+        "html_url": "https://github.com/KMiri-rs",
+        "followers_url": "https://api.github.com/users/KMiri-rs/followers",
+        "following_url": "https://api.github.com/users/KMiri-rs/following{/other_user}",
+        "gists_url": "https://api.github.com/users/KMiri-rs/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/KMiri-rs/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/KMiri-rs/subscriptions",
+        "organizations_url": "https://api.github.com/users/KMiri-rs/orgs",
+        "repos_url": "https://api.github.com/users/KMiri-rs/repos",
+        "events_url": "https://api.github.com/users/KMiri-rs/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/KMiri-rs/received_events",
+        "type": "Organization",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "repo": {
+        "id": 1152645498,
+        "node_id": "R_kgDORLP5eg",
+        "name": "miri",
+        "full_name": "KMiri-rs/miri",
+        "private": false,
+        "owner": {
+          "login": "KMiri-rs",
+          "id": 257443784,
+          "node_id": "O_kgDOD1hHyA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/257443784?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/KMiri-rs",
+          "html_url": "https://github.com/KMiri-rs",
+          "followers_url": "https://api.github.com/users/KMiri-rs/followers",
+          "following_url": "https://api.github.com/users/KMiri-rs/following{/other_user}",
+          "gists_url": "https://api.github.com/users/KMiri-rs/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/KMiri-rs/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/KMiri-rs/subscriptions",
+          "organizations_url": "https://api.github.com/users/KMiri-rs/orgs",
+          "repos_url": "https://api.github.com/users/KMiri-rs/repos",
+          "events_url": "https://api.github.com/users/KMiri-rs/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/KMiri-rs/received_events",
+          "type": "Organization",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/KMiri-rs/miri",
+        "description": "[A forked miri for OS] An interpreter for Rust's mid-level intermediate representation",
+        "fork": true,
+        "url": "https://api.github.com/repos/KMiri-rs/miri",
+        "forks_url": "https://api.github.com/repos/KMiri-rs/miri/forks",
+        "keys_url": "https://api.github.com/repos/KMiri-rs/miri/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/KMiri-rs/miri/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/KMiri-rs/miri/teams",
+        "hooks_url": "https://api.github.com/repos/KMiri-rs/miri/hooks",
+        "issue_events_url": "https://api.github.com/repos/KMiri-rs/miri/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/KMiri-rs/miri/events",
+        "assignees_url": "https://api.github.com/repos/KMiri-rs/miri/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/KMiri-rs/miri/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/KMiri-rs/miri/tags",
+        "blobs_url": "https://api.github.com/repos/KMiri-rs/miri/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/KMiri-rs/miri/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/KMiri-rs/miri/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/KMiri-rs/miri/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/KMiri-rs/miri/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/KMiri-rs/miri/languages",
+        "stargazers_url": "https://api.github.com/repos/KMiri-rs/miri/stargazers",
+        "contributors_url": "https://api.github.com/repos/KMiri-rs/miri/contributors",
+        "subscribers_url": "https://api.github.com/repos/KMiri-rs/miri/subscribers",
+        "subscription_url": "https://api.github.com/repos/KMiri-rs/miri/subscription",
+        "commits_url": "https://api.github.com/repos/KMiri-rs/miri/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/KMiri-rs/miri/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/KMiri-rs/miri/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/KMiri-rs/miri/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/KMiri-rs/miri/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/KMiri-rs/miri/merges",
+        "archive_url": "https://api.github.com/repos/KMiri-rs/miri/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/KMiri-rs/miri/downloads",
+        "issues_url": "https://api.github.com/repos/KMiri-rs/miri/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/KMiri-rs/miri/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/KMiri-rs/miri/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/KMiri-rs/miri/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/KMiri-rs/miri/labels{/name}",
+        "releases_url": "https://api.github.com/repos/KMiri-rs/miri/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/KMiri-rs/miri/deployments",
+        "created_at": "2026-02-08T07:34:16Z",
+        "updated_at": "2026-07-19T14:46:04Z",
+        "pushed_at": "2026-07-20T12:59:54Z",
+        "git_url": "git://github.com/KMiri-rs/miri.git",
+        "ssh_url": "git@github.com:KMiri-rs/miri.git",
+        "clone_url": "https://github.com/KMiri-rs/miri.git",
+        "svn_url": "https://github.com/KMiri-rs/miri",
+        "homepage": "",
+        "size": 33055,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "language": "Rust",
+        "has_issues": false,
+        "has_projects": true,
+        "has_downloads": true,
+        "has_wiki": false,
+        "has_pages": false,
+        "has_discussions": false,
+        "forks_count": 0,
+        "mirror_url": null,
+        "archived": false,
+        "disabled": false,
+        "open_issues_count": 0,
+        "license": {
+          "key": "apache-2.0",
+          "name": "Apache License 2.0",
+          "spdx_id": "Apache-2.0",
+          "url": "https://api.github.com/licenses/apache-2.0",
+          "node_id": "MDc6TGljZW5zZTI="
+        },
+        "allow_forking": true,
+        "is_template": false,
+        "web_commit_signoff_required": false,
+        "has_pull_requests": true,
+        "pull_request_creation_policy": "all",
+        "topics": [],
+        "visibility": "public",
+        "forks": 0,
+        "open_issues": 0,
+        "watchers": 0,
+        "default_branch": "kmiri"
+      }
+    },
+    "base": {
+      "label": "KMiri-rs:kmiri",
+      "ref": "kmiri",
+      "sha": "94dcb57a3e10286564bb81420b92511920ccf36c",
+      "user": {
+        "login": "KMiri-rs",
+        "id": 257443784,
+        "node_id": "O_kgDOD1hHyA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/257443784?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/KMiri-rs",
+        "html_url": "https://github.com/KMiri-rs",
+        "followers_url": "https://api.github.com/users/KMiri-rs/followers",
+        "following_url": "https://api.github.com/users/KMiri-rs/following{/other_user}",
+        "gists_url": "https://api.github.com/users/KMiri-rs/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/KMiri-rs/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/KMiri-rs/subscriptions",
+        "organizations_url": "https://api.github.com/users/KMiri-rs/orgs",
+        "repos_url": "https://api.github.com/users/KMiri-rs/repos",
+        "events_url": "https://api.github.com/users/KMiri-rs/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/KMiri-rs/received_events",
+        "type": "Organization",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "repo": {
+        "id": 1152645498,
+        "node_id": "R_kgDORLP5eg",
+        "name": "miri",
+        "full_name": "KMiri-rs/miri",
+        "private": false,
+        "owner": {
+          "login": "KMiri-rs",
+          "id": 257443784,
+          "node_id": "O_kgDOD1hHyA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/257443784?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/KMiri-rs",
+          "html_url": "https://github.com/KMiri-rs",
+          "followers_url": "https://api.github.com/users/KMiri-rs/followers",
+          "following_url": "https://api.github.com/users/KMiri-rs/following{/other_user}",
+          "gists_url": "https://api.github.com/users/KMiri-rs/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/KMiri-rs/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/KMiri-rs/subscriptions",
+          "organizations_url": "https://api.github.com/users/KMiri-rs/orgs",
+          "repos_url": "https://api.github.com/users/KMiri-rs/repos",
+          "events_url": "https://api.github.com/users/KMiri-rs/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/KMiri-rs/received_events",
+          "type": "Organization",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/KMiri-rs/miri",
+        "description": "[A forked miri for OS] An interpreter for Rust's mid-level intermediate representation",
+        "fork": true,
+        "url": "https://api.github.com/repos/KMiri-rs/miri",
+        "forks_url": "https://api.github.com/repos/KMiri-rs/miri/forks",
+        "keys_url": "https://api.github.com/repos/KMiri-rs/miri/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/KMiri-rs/miri/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/KMiri-rs/miri/teams",
+        "hooks_url": "https://api.github.com/repos/KMiri-rs/miri/hooks",
+        "issue_events_url": "https://api.github.com/repos/KMiri-rs/miri/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/KMiri-rs/miri/events",
+        "assignees_url": "https://api.github.com/repos/KMiri-rs/miri/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/KMiri-rs/miri/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/KMiri-rs/miri/tags",
+        "blobs_url": "https://api.github.com/repos/KMiri-rs/miri/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/KMiri-rs/miri/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/KMiri-rs/miri/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/KMiri-rs/miri/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/KMiri-rs/miri/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/KMiri-rs/miri/languages",
+        "stargazers_url": "https://api.github.com/repos/KMiri-rs/miri/stargazers",
+        "contributors_url": "https://api.github.com/repos/KMiri-rs/miri/contributors",
+        "subscribers_url": "https://api.github.com/repos/KMiri-rs/miri/subscribers",
+        "subscription_url": "https://api.github.com/repos/KMiri-rs/miri/subscription",
+        "commits_url": "https://api.github.com/repos/KMiri-rs/miri/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/KMiri-rs/miri/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/KMiri-rs/miri/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/KMiri-rs/miri/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/KMiri-rs/miri/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/KMiri-rs/miri/merges",
+        "archive_url": "https://api.github.com/repos/KMiri-rs/miri/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/KMiri-rs/miri/downloads",
+        "issues_url": "https://api.github.com/repos/KMiri-rs/miri/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/KMiri-rs/miri/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/KMiri-rs/miri/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/KMiri-rs/miri/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/KMiri-rs/miri/labels{/name}",
+        "releases_url": "https://api.github.com/repos/KMiri-rs/miri/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/KMiri-rs/miri/deployments",
+        "created_at": "2026-02-08T07:34:16Z",
+        "updated_at": "2026-07-19T14:46:04Z",
+        "pushed_at": "2026-07-20T12:59:54Z",
+        "git_url": "git://github.com/KMiri-rs/miri.git",
+        "ssh_url": "git@github.com:KMiri-rs/miri.git",
+        "clone_url": "https://github.com/KMiri-rs/miri.git",
+        "svn_url": "https://github.com/KMiri-rs/miri",
+        "homepage": "",
+        "size": 33055,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "language": "Rust",
+        "has_issues": false,
+        "has_projects": true,
+        "has_downloads": true,
+        "has_wiki": false,
+        "has_pages": false,
+        "has_discussions": false,
+        "forks_count": 0,
+        "mirror_url": null,
+        "archived": false,
+        "disabled": false,
+        "open_issues_count": 0,
+        "license": {
+          "key": "apache-2.0",
+          "name": "Apache License 2.0",
+          "spdx_id": "Apache-2.0",
+          "url": "https://api.github.com/licenses/apache-2.0",
+          "node_id": "MDc6TGljZW5zZTI="
+        },
+        "allow_forking": true,
+        "is_template": false,
+        "web_commit_signoff_required": false,
+        "has_pull_requests": true,
+        "pull_request_creation_policy": "all",
+        "topics": [],
+        "visibility": "public",
+        "forks": 0,
+        "open_issues": 0,
+        "watchers": 0,
+        "default_branch": "kmiri"
+      }
+    },
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/KMiri-rs/miri/pulls/3"
+      },
+      "html": {
+        "href": "https://github.com/KMiri-rs/miri/pull/3"
+      },
+      "issue": {
+        "href": "https://api.github.com/repos/KMiri-rs/miri/issues/3"
+      },
+      "comments": {
+        "href": "https://api.github.com/repos/KMiri-rs/miri/issues/3/comments"
+      },
+      "review_comments": {
+        "href": "https://api.github.com/repos/KMiri-rs/miri/pulls/3/comments"
+      },
+      "review_comment": {
+        "href": "https://api.github.com/repos/KMiri-rs/miri/pulls/comments{/number}"
+      },
+      "commits": {
+        "href": "https://api.github.com/repos/KMiri-rs/miri/pulls/3/commits"
+      },
+      "statuses": {
+        "href": "https://api.github.com/repos/KMiri-rs/miri/statuses/926ada291b0bbae4977d525056b43a46702b0f24"
+      }
+    },
+    "author_association": "MEMBER",
+    "auto_merge": null,
+    "assignee": null,
+    "active_lock_reason": null,
+    "merged": true,
+    "mergeable": null,
+    "rebaseable": null,
+    "mergeable_state": "unknown",
+    "merged_by": {
+      "login": "zjp-CN",
+      "id": 25300418,
+      "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/zjp-CN",
+      "html_url": "https://github.com/zjp-CN",
+      "followers_url": "https://api.github.com/users/zjp-CN/followers",
+      "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+      "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+      "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+      "repos_url": "https://api.github.com/users/zjp-CN/repos",
+      "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "comments": 0,
+    "review_comments": 0,
+    "maintainer_can_modify": false,
+    "commits": 11,
+    "additions": 204,
+    "deletions": 139,
+    "changed_files": 7
+  },
+  "issue": {
+    "url": "https://api.github.com/repos/KMiri-rs/miri/issues/3",
+    "repository_url": "https://api.github.com/repos/KMiri-rs/miri",
+    "labels_url": "https://api.github.com/repos/KMiri-rs/miri/issues/3/labels{/name}",
+    "comments_url": "https://api.github.com/repos/KMiri-rs/miri/issues/3/comments",
+    "events_url": "https://api.github.com/repos/KMiri-rs/miri/issues/3/events",
+    "html_url": "https://github.com/KMiri-rs/miri/pull/3",
+    "id": 4329817167,
+    "node_id": "PR_kwDORLP5es7VrBMx",
+    "number": 3,
+    "title": "Debugger: add `t` for run-to-terminator and support count step",
+    "user": {
+      "login": "zjp-CN",
+      "id": 25300418,
+      "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/zjp-CN",
+      "html_url": "https://github.com/zjp-CN",
+      "followers_url": "https://api.github.com/users/zjp-CN/followers",
+      "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+      "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+      "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+      "repos_url": "https://api.github.com/users/zjp-CN/repos",
+      "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "labels": [],
+    "state": "closed",
+    "locked": false,
+    "assignees": [],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2026-04-26T02:15:12Z",
+    "updated_at": "2026-04-26T02:17:58Z",
+    "closed_at": "2026-04-26T02:16:09Z",
+    "assignee": null,
+    "author_association": "MEMBER",
+    "issue_field_values": [],
+    "type": null,
+    "active_lock_reason": null,
+    "draft": false,
+    "pull_request": {
+      "url": "https://api.github.com/repos/KMiri-rs/miri/pulls/3",
+      "html_url": "https://github.com/KMiri-rs/miri/pull/3",
+      "diff_url": "https://github.com/KMiri-rs/miri/pull/3.diff",
+      "patch_url": "https://github.com/KMiri-rs/miri/pull/3.patch",
+      "merged_at": "2026-04-26T02:16:09Z"
+    },
+    "body": "This PR implements two features:\r\n* Add `t` keystroke for run-to-terminator, meaning continue to the next terminator available, and reverse step works because each reached terminator snapshot is recorded.\r\n* For quick run, press a series of numbers like `12`, following a step ` ` or a run-to-terminator `t`, the execution will continue until it hits the count. This is useful when you don't know the stackframe name, and need to run a few more times consecutively.\r\n\r\nNOTE: run-to-terminator or count step doesn't store statement states during the execution, but does store terminator states in history. We can support a new keystroke like `S` to store each state when quick run happens. But it's out of the current PR.\r\n\r\n<img width=\"1920\" height=\"840\" alt=\"run-to-terminator\" src=\"https://github.com/user-attachments/assets/84ce26f8-0173-4f09-9f3e-5980aed6c0fc\" />\r\n",
+    "closed_by": {
+      "login": "zjp-CN",
+      "id": 25300418,
+      "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/zjp-CN",
+      "html_url": "https://github.com/zjp-CN",
+      "followers_url": "https://api.github.com/users/zjp-CN/followers",
+      "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+      "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+      "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+      "repos_url": "https://api.github.com/users/zjp-CN/repos",
+      "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/KMiri-rs/miri/issues/3/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "timeline_url": "https://api.github.com/repos/KMiri-rs/miri/issues/3/timeline",
+    "performed_via_github_app": null,
+    "state_reason": null
+  },
+  "issue_comments": [],
+  "review_comments": [],
+  "reviews": [],
+  "files": [
+    {
+      "sha": "dd72e0c6dcdca9b9ff73bf52ccb5294f60eee9ba",
+      "filename": "src/concurrency/thread.rs",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 3,
+      "changes": 5,
+      "blob_url": "https://github.com/KMiri-rs/miri/blob/926ada291b0bbae4977d525056b43a46702b0f24/src%2Fconcurrency%2Fthread.rs",
+      "raw_url": "https://github.com/KMiri-rs/miri/raw/926ada291b0bbae4977d525056b43a46702b0f24/src%2Fconcurrency%2Fthread.rs",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/src%2Fconcurrency%2Fthread.rs?ref=926ada291b0bbae4977d525056b43a46702b0f24",
+      "patch": "@@ -1457,10 +1457,9 @@ pub trait EvalContextExt<'tcx>: crate::MiriInterpCxExt<'tcx> {\n                     if let Some(handle) = &this.machine.debugger {\n                         let stack = this.active_thread_stack();\n                         if !stack.is_empty() {\n-                            let state = DebuggerState::capture(this);\n-                            handle.send(state);\n+                            handle.send(this);\n \n-                            match handle.wait_for_continue() {\n+                            match handle.wait_for_continue(this) {\n                                 DebuggerCommand::Quit => {\n                                     this.machine.handle_abnormal_termination();\n                                     throw_machine_stop!(TerminationInfo::Interrupted)"
+    },
+    {
+      "sha": "f4fc6795d25b324c3b94fd7b55a2ae05e8f6893f",
+      "filename": "src/debugger/channel.rs",
+      "status": "modified",
+      "additions": 9,
+      "deletions": 2,
+      "changes": 11,
+      "blob_url": "https://github.com/KMiri-rs/miri/blob/926ada291b0bbae4977d525056b43a46702b0f24/src%2Fdebugger%2Fchannel.rs",
+      "raw_url": "https://github.com/KMiri-rs/miri/raw/926ada291b0bbae4977d525056b43a46702b0f24/src%2Fdebugger%2Fchannel.rs",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/src%2Fdebugger%2Fchannel.rs?ref=926ada291b0bbae4977d525056b43a46702b0f24",
+      "patch": "@@ -1,12 +1,19 @@\n use std::sync::mpsc::{self, Receiver, Sender};\n \n+use crossterm::event::Event;\n+\n use super::{DebuggerCommand, DebuggerState};\n \n-pub type StateSender = Sender<DebuggerState>;\n-pub type StateReceiver = Receiver<DebuggerState>;\n+pub type StateSender = Sender<StateOrEvent>;\n+pub type StateReceiver = Receiver<StateOrEvent>;\n pub type CommandSender = Sender<DebuggerCommand>;\n pub type CommandReceiver = Receiver<DebuggerCommand>;\n \n+pub enum StateOrEvent {\n+    State(DebuggerState),\n+    Event(Event),\n+}\n+\n pub fn state_channel() -> (StateSender, StateReceiver) {\n     mpsc::channel()\n }"
+    },
+    {
+      "sha": "cecd5da5ad0436b68d2b3311301ed6596876ca73",
+      "filename": "src/debugger/mod.rs",
+      "status": "modified",
+      "additions": 112,
+      "deletions": 44,
+      "changes": 156,
+      "blob_url": "https://github.com/KMiri-rs/miri/blob/926ada291b0bbae4977d525056b43a46702b0f24/src%2Fdebugger%2Fmod.rs",
+      "raw_url": "https://github.com/KMiri-rs/miri/raw/926ada291b0bbae4977d525056b43a46702b0f24/src%2Fdebugger%2Fmod.rs",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/src%2Fdebugger%2Fmod.rs?ref=926ada291b0bbae4977d525056b43a46702b0f24",
+      "patch": "@@ -6,12 +6,16 @@ use std::cell::RefCell;\n \n use self::channel::{CommandReceiver, StateSender};\n pub use self::state::DebuggerState;\n+use crate::MiriInterpCx;\n+use crate::concurrency::thread::EvalContextExt;\n+use crate::debugger::channel::StateOrEvent;\n \n #[derive(Clone, Debug, PartialEq, Eq)]\n pub enum DebuggerCommand {\n     Continue,\n-    StepOver,\n+    StepOver(u32),\n     StepBack,\n+    RunToTerminator(u32),\n     RunToFrame(String),\n     RunToMain,\n     RunToEnd,\n@@ -21,8 +25,9 @@ pub enum DebuggerCommand {\n \n #[derive(Clone, Debug, PartialEq, Eq)]\n enum DebuggerMode {\n-    Step,\n+    Step(u32),\n     Continue,\n+    RunToTerminator(u32),\n     RunToFrame(String),\n     RunToMain,\n     RunToEnd,\n@@ -36,71 +41,134 @@ pub struct MiriDebuggerHandle {\n \n impl MiriDebuggerHandle {\n     pub fn new(state_tx: StateSender, cmd_rx: CommandReceiver) -> Self {\n-        Self { state_tx, cmd_rx, mode: RefCell::new(DebuggerMode::Step) }\n+        let handle =\n+            std::thread::Builder::new().name(\"miri-debugger-tui-event\".to_string()).spawn({\n+                let state_tx = state_tx.clone();\n+                move || {\n+                    while let Ok(event) = crossterm::event::read() {\n+                        state_tx.send(StateOrEvent::Event(event));\n+                    }\n+                }\n+            });\n+        // Make the thread run on the background and never die.\n+        drop(handle);\n+\n+        Self { state_tx, cmd_rx, mode: RefCell::new(DebuggerMode::Step(1)) }\n+    }\n+\n+    fn current_mode(&self) -> DebuggerMode {\n+        self.mode.borrow().clone()\n     }\n \n-    pub fn send(&self, state: DebuggerState) {\n-        let current_mode = self.mode.borrow().clone();\n-        match current_mode {\n-            DebuggerMode::Step => {\n-                let _ = self.state_tx.send(state);\n+    fn set_current_mode(&self, mode: DebuggerMode) {\n+        *self.mode.borrow_mut() = mode;\n+    }\n+\n+    pub fn send(&self, ecx: &MiriInterpCx<'_>) {\n+        match self.current_mode() {\n+            DebuggerMode::Step(2 | 0) => self.set_current_mode(DebuggerMode::Step(1)),\n+            DebuggerMode::Step(n) if n > 1 => {\n+                self.set_current_mode(DebuggerMode::Step(n - 1));\n+                return;\n             }\n-            DebuggerMode::Continue => {}\n+            DebuggerMode::RunToTerminator(n) =>\n+                if reached_terminator(ecx) {\n+                    let n = if n > 1 { n - 1 } else { 1 };\n+                    // Only decrement when reaching a terminator.\n+                    self.set_current_mode(DebuggerMode::RunToTerminator(n));\n+                } else {\n+                    return;\n+                },\n+            DebuggerMode::Continue => return,\n+            _ => (),\n+        }\n+\n+        let state = DebuggerState::capture(ecx);\n+        match self.current_mode() {\n+            DebuggerMode::Step(_) | DebuggerMode::RunToTerminator(_) | DebuggerMode::RunToEnd => (),\n             DebuggerMode::RunToFrame(ref target) => {\n                 let target_lc = target.to_ascii_lowercase();\n                 if state\n                     .stack_frames\n                     .iter()\n                     .any(|frame| frame.fn_name.to_ascii_lowercase().contains(&target_lc))\n                 {\n-                    *self.mode.borrow_mut() = DebuggerMode::Step;\n+                    self.set_current_mode(DebuggerMode::Step(1));\n                 }\n-                let _ = self.state_tx.send(state);\n+                return;\n             }\n             DebuggerMode::RunToMain => {\n                 if state.in_user_code {\n-                    *self.mode.borrow_mut() = DebuggerMode::Step;\n+                    self.set_current_mode(DebuggerMode::Step(1));\n                 }\n-                let _ = self.state_tx.send(state);\n-            }\n-            DebuggerMode::RunToEnd => {\n-                let _ = self.state_tx.send(state);\n+                return;\n             }\n+            DebuggerMode::Continue => unreachable!(),\n         }\n+\n+        self.state_tx.send(StateOrEvent::State(state)).unwrap();\n     }\n \n-    pub fn wait_for_continue(&self) -> DebuggerCommand {\n-        if !matches!(&*self.mode.borrow(), DebuggerMode::Step) {\n+    fn reached_terminator_or_step(&self, ecx: &MiriInterpCx<'_>) -> bool {\n+        match self.current_mode() {\n+            DebuggerMode::RunToTerminator(1) => reached_terminator(ecx),\n+            DebuggerMode::Step(1) => true,\n+            _ => false,\n+        }\n+    }\n+\n+    pub fn wait_for_continue(&self, ecx: &MiriInterpCx<'_>) -> DebuggerCommand {\n+        if !self.reached_terminator_or_step(ecx) {\n             return DebuggerCommand::Continue;\n         }\n \n-        match self.cmd_rx.recv().unwrap_or(DebuggerCommand::Continue) {\n-            DebuggerCommand::Continue => {\n-                *self.mode.borrow_mut() = DebuggerMode::Continue;\n-                DebuggerCommand::Continue\n-            }\n-            DebuggerCommand::StepOver => {\n-                *self.mode.borrow_mut() = DebuggerMode::Step;\n-                DebuggerCommand::StepOver\n-            }\n-            DebuggerCommand::StepBack => {\n+        let cmd = self.cmd_rx.recv().unwrap_or(DebuggerCommand::Continue);\n+        'm: {\n+            // The step or run count is intentionally added with 1, because the count decrements\n+            // before send happens.\n+            *self.mode.borrow_mut() = match cmd {\n+                DebuggerCommand::Continue => DebuggerMode::Continue,\n+                DebuggerCommand::StepOver(n) => DebuggerMode::Step(n + 1),\n                 // Reverse stepping is handled entirely in the TUI thread.\n-                DebuggerCommand::Continue\n-            }\n-            DebuggerCommand::RunToFrame(target) => {\n-                *self.mode.borrow_mut() = DebuggerMode::RunToFrame(target);\n-                DebuggerCommand::Continue\n-            }\n-            DebuggerCommand::RunToMain => {\n-                *self.mode.borrow_mut() = DebuggerMode::RunToMain;\n-                DebuggerCommand::Continue\n-            }\n-            DebuggerCommand::RunToEnd => {\n-                *self.mode.borrow_mut() = DebuggerMode::RunToEnd;\n-                DebuggerCommand::Continue\n+                DebuggerCommand::StepBack => DebuggerMode::Continue,\n+                DebuggerCommand::RunToTerminator(n) => DebuggerMode::RunToTerminator(n + 1),\n+                DebuggerCommand::RunToFrame(_) => DebuggerMode::Continue,\n+                DebuggerCommand::RunToMain => DebuggerMode::Continue,\n+                DebuggerCommand::RunToEnd => DebuggerMode::Continue,\n+                DebuggerCommand::Quit => break 'm,\n+                DebuggerCommand::QuitWithErr(_) => break 'm,\n             }\n-            DebuggerCommand::Quit => DebuggerCommand::Quit,\n-            DebuggerCommand::QuitWithErr(err) => DebuggerCommand::QuitWithErr(err),\n-        }\n+        };\n+        cmd\n     }\n }\n+\n+fn reached_terminator(ecx: &MiriInterpCx<'_>) -> bool {\n+    if let Some(frame) = ecx.active_thread_stack().last()\n+        && let Some(loc) = frame.current_loc().left()\n+        && loc.statement_index >= frame.body().basic_blocks[loc.block].statements.len()\n+    {\n+        return true;\n+    }\n+    false\n+}\n+\n+pub fn debugger_log(s: String) {\n+    use std::fs::OpenOptions;\n+    use std::io::Write;\n+    use std::sync::atomic::{AtomicBool, Ordering};\n+\n+    static OPENED: AtomicBool = AtomicBool::new(false);\n+    let opened = OPENED.swap(true, Ordering::Relaxed);\n+    let mut opts = OpenOptions::new();\n+\n+    if opened {\n+        opts.append(true);\n+    } else {\n+        opts.create(true).write(true).truncate(true);\n+    };\n+\n+    let mut file = opts.open(\"miri_debugger.log\").unwrap();\n+    writeln!(&file, \"{s}\").unwrap();\n+    file.flush();\n+}"
+    },
+    {
+      "sha": "f79eda4dc09d97458141875378376764ad3c5106",
+      "filename": "src/debugger/state.rs",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 2,
+      "changes": 5,
+      "blob_url": "https://github.com/KMiri-rs/miri/blob/926ada291b0bbae4977d525056b43a46702b0f24/src%2Fdebugger%2Fstate.rs",
+      "raw_url": "https://github.com/KMiri-rs/miri/raw/926ada291b0bbae4977d525056b43a46702b0f24/src%2Fdebugger%2Fstate.rs",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/src%2Fdebugger%2Fstate.rs?ref=926ada291b0bbae4977d525056b43a46702b0f24",
+      "patch": "@@ -297,11 +297,12 @@ fn capture_allocs(ecx: &MiriInterpCx<'_>, locals: &[LocalInfo]) -> Vec<AllocInfo\n     }\n     fn split_locals(v: &[Local<'_>]) -> (Vec<String>, Option<usize>) {\n         let names = v.iter().map(|local| local.name.to_owned()).collect();\n-        let set: FxHashSet<_> = v.iter().map(|local| local.ptr).collect();\n+        let set: FxHashSet<_> =\n+            v.iter().map(|local| local.ptr.map(|p| p.into_raw_parts().1.bytes_usize())).collect();\n         if set.len() > 2 {\n             eprintln!(\"{v:?} has multiple pointer addrs: {set:?}\");\n         }\n-        (names, set.iter().find_map(|p| p.map(|val| val.into_raw_parts().1.bytes_usize())))\n+        (names, set.iter().find_map(|p| *p))\n     }\n \n     let alloc_map = ecx.memory.alloc_map();"
+    },
+    {
+      "sha": "c0003756944629cf5c9dfb77590fd0e133277150",
+      "filename": "src/debugger/tui/event.rs",
+      "status": "modified",
+      "additions": 28,
+      "deletions": 36,
+      "changes": 64,
+      "blob_url": "https://github.com/KMiri-rs/miri/blob/926ada291b0bbae4977d525056b43a46702b0f24/src%2Fdebugger%2Ftui%2Fevent.rs",
+      "raw_url": "https://github.com/KMiri-rs/miri/raw/926ada291b0bbae4977d525056b43a46702b0f24/src%2Fdebugger%2Ftui%2Fevent.rs",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/src%2Fdebugger%2Ftui%2Fevent.rs?ref=926ada291b0bbae4977d525056b43a46702b0f24",
+      "patch": "@@ -1,5 +1,5 @@\n-use std::io;\n use std::time::{Duration, Instant};\n+use std::{io, mem};\n \n use crossterm::event::{\n     self, Event, KeyCode, KeyEventKind, KeyModifiers, MouseEvent, MouseEventKind,\n@@ -18,19 +18,13 @@ pub enum Action {\n     Return,\n }\n \n-const EVENT_POLL_MS: u64 = 100;\n-\n pub fn handle(\n+    ev: Event,\n     panes: &mut Panes,\n-    display_state: &mut DebuggerState,\n     state: &DebuggerState,\n     ctx: &mut Context,\n     command_tx: &CommandSender,\n ) -> io::Result<Action> {\n-    if !event::poll(Duration::from_millis(EVENT_POLL_MS))? {\n-        return Ok(Action::Continue);\n-    }\n-\n     let Context {\n         mode,\n         run_target,\n@@ -39,10 +33,10 @@ pub fn handle(\n         history,\n         blink_epoch,\n         reverse_index,\n+        count,\n         ..\n     } = ctx;\n \n-    let ev = event::read()?;\n     if let Event::Key(key) = ev {\n         if key.kind != KeyEventKind::Press {\n             return Ok(Action::Continue);\n@@ -74,12 +68,12 @@ pub fn handle(\n             return Ok(Action::Continue);\n         }\n         if panes.stack.search.editing {\n-            panes.edit(display_state, key.code);\n+            panes.edit(state, key.code);\n             return Ok(Action::Continue);\n         }\n         match key.code {\n             KeyCode::Char('q') => {\n-                // let _ = command_tx.send(DebuggerCommand::Quit);\n+                let _ = command_tx.send(DebuggerCommand::Quit);\n                 return Ok(Action::Return);\n             }\n             KeyCode::Char('/') => {\n@@ -91,7 +85,7 @@ pub fn handle(\n                 run_target.query.clear();\n             }\n             KeyCode::Char('p') =>\n-                if let Some(target) = panes.stack.selected_stack_fn_name(display_state) {\n+                if let Some(target) = panes.stack.selected_stack_fn_name(state) {\n                     *reverse_index = None;\n                     *run_to_frame_target = Some(target.clone());\n                     *mode = RunMode::RunToFrame;\n@@ -115,23 +109,19 @@ pub fn handle(\n                     panes.stack.search = Default::default();\n                 },\n             KeyCode::Char('n') | KeyCode::Char(' ') => {\n-                if let Some(idx) = reverse_index {\n-                    if *idx + 1 < history.len() {\n-                        let next = *idx + 1;\n-                        if let Some(snapshot) = history.get(next) {\n-                            *display_state = snapshot.clone();\n-                            *reverse_index =\n-                                if next + 1 == history.len() { None } else { Some(next) };\n-                            panes.stack.refresh(display_state);\n-                        }\n+                if let Some(idx) = *reverse_index {\n+                    let next = idx + 1;\n+                    if let Some(snapshot) = history.get(next) {\n+                        *last_state = Some(Box::new(snapshot.clone()));\n+                        panes.stack.refresh(snapshot);\n+                        *reverse_index = Some(next);\n                         return Ok(Action::Continue);\n                     }\n                     *reverse_index = None;\n-                    *display_state = state.clone();\n-                    panes.stack.refresh(display_state);\n                 }\n                 *mode = RunMode::Step;\n-                let _ = command_tx.send(DebuggerCommand::StepOver);\n+                let n = mem::take(count).parse().unwrap_or(0);\n+                let _ = command_tx.send(DebuggerCommand::StepOver(n));\n                 return Ok(Action::Break);\n             }\n             KeyCode::Char('b') => {\n@@ -142,8 +132,8 @@ pub fn handle(\n                 };\n                 if let Some(snapshot) = history.get(next_index) {\n                     *reverse_index = Some(next_index);\n-                    *display_state = snapshot.clone();\n-                    panes.stack.refresh(display_state);\n+                    *last_state = Some(Box::new(snapshot.clone()));\n+                    panes.stack.refresh(snapshot);\n                 }\n             }\n             KeyCode::Char('c') => {\n@@ -167,6 +157,14 @@ pub fn handle(\n                 let _ = command_tx.send(DebuggerCommand::RunToMain);\n                 return Ok(Action::Break);\n             }\n+            KeyCode::Char('t') => {\n+                *reverse_index = None;\n+                *run_to_frame_target = None;\n+                *mode = RunMode::RunToTerminator;\n+                let n = mem::take(count).parse().unwrap_or(0);\n+                let _ = command_tx.send(DebuggerCommand::RunToTerminator(n));\n+                return Ok(Action::Break);\n+            }\n             KeyCode::BackTab => panes.focus = panes.focus.previous(),\n             KeyCode::Tab => {\n                 panes.focus = if key.modifiers == KeyModifiers::SHIFT {\n@@ -175,21 +173,15 @@ pub fn handle(\n                     panes.focus.next()\n                 };\n             }\n-            KeyCode::Up => panes.navigate_up(display_state),\n-            KeyCode::Down => panes.navigate_down(display_state),\n+            KeyCode::Up => panes.navigate_up(state),\n+            KeyCode::Down => panes.navigate_down(state),\n             KeyCode::Left => panes.scroll_left(),\n             KeyCode::Right => panes.scroll_right(),\n-            KeyCode::Char(c)\n-                if c.is_ascii_alphanumeric() || c == '_' || c == ':' || c == '<' || c == '>' =>\n-            {\n-                run_target.editing = true;\n-                run_target.query.clear();\n-                run_target.query.push(c);\n-            }\n+            KeyCode::Char(c) if c.is_ascii_digit() => count.push(c),\n             _ => {}\n         }\n     } else if let Event::Mouse(mouse) = ev {\n-        on_event_mouse(panes, display_state, mouse);\n+        on_event_mouse(panes, state, mouse);\n     }\n \n     Ok(Action::Continue)"
+    },
+    {
+      "sha": "a873d9a9ea1610b0d92caebb482dafa8724cefa1",
+      "filename": "src/debugger/tui/mod.rs",
+      "status": "modified",
+      "additions": 48,
+      "deletions": 50,
+      "changes": 98,
+      "blob_url": "https://github.com/KMiri-rs/miri/blob/926ada291b0bbae4977d525056b43a46702b0f24/src%2Fdebugger%2Ftui%2Fmod.rs",
+      "raw_url": "https://github.com/KMiri-rs/miri/raw/926ada291b0bbae4977d525056b43a46702b0f24/src%2Fdebugger%2Ftui%2Fmod.rs",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/src%2Fdebugger%2Ftui%2Fmod.rs?ref=926ada291b0bbae4977d525056b43a46702b0f24",
+      "patch": "@@ -1,6 +1,7 @@\n #![deny(dead_code)]\n use std::collections::VecDeque;\n use std::io;\n+use std::sync::mpsc::RecvError;\n use std::time::{Duration, Instant};\n \n use crossterm::event::{DisableMouseCapture, EnableMouseCapture};\n@@ -20,6 +21,7 @@ use ratatui::widgets::{\n use super::channel::{CommandSender, StateReceiver};\n use super::state::LocalKind;\n use super::{DebuggerCommand, DebuggerState};\n+use crate::debugger::channel::StateOrEvent;\n use crate::debugger::tui::event::Action;\n use crate::debugger::tui::pane::panes::Panes;\n \n@@ -34,6 +36,7 @@ type Terminal = ratatui::Terminal<CrosstermBackend<io::Stdout>>;\n enum RunMode {\n     Step,\n     Continue,\n+    RunToTerminator,\n     RunToFrame,\n     RunToMain,\n     RunToEnd,\n@@ -44,16 +47,17 @@ impl RunMode {\n         match self {\n             RunMode::Step => \"step\",\n             RunMode::Continue => \"continue\",\n+            RunMode::RunToTerminator => \"run-to-terminator\",\n             RunMode::RunToFrame => \"run-to-frame\",\n             RunMode::RunToMain => \"run-to-main\",\n             RunMode::RunToEnd => \"run-to-end\",\n         }\n     }\n \n-    fn is_fast_mode(self, in_user_code: bool) -> bool {\n-        (self == RunMode::RunToMain && !in_user_code)\n-            || matches!(self, RunMode::RunToFrame | RunMode::RunToEnd)\n-    }\n+    //     fn is_fast_mode(self, in_user_code: bool) -> bool {\n+    //         (self == RunMode::RunToMain && !in_user_code)\n+    //             || matches!(self, RunMode::RunToFrame | RunMode::RunToEnd)\n+    //     }\n }\n \n #[derive(Default)]\n@@ -66,11 +70,12 @@ pub struct Context {\n     mode: RunMode,\n     run_target: RunTargetState,\n     run_to_frame_target: Option<String>,\n-    last_state: Option<DebuggerState>,\n+    last_state: Option<Box<DebuggerState>>,\n     history: VecDeque<DebuggerState>,\n     blink_epoch: Instant,\n     reverse_index: Option<usize>,\n     program_finished: bool,\n+    count: String,\n }\n \n impl Context {\n@@ -84,6 +89,7 @@ impl Context {\n             blink_epoch: Instant::now(),\n             reverse_index: None,\n             program_finished: false,\n+            count: String::new(),\n         }\n     }\n \n@@ -92,7 +98,7 @@ impl Context {\n         if self.history.len() > HISTORY_CAPACITY {\n             self.history.pop_front();\n         }\n-        self.last_state = Some(state.clone());\n+        self.last_state = Some(Box::new(state.clone()));\n         self.reverse_index = None;\n     }\n \n@@ -152,53 +158,45 @@ fn tui_loop(\n     let mut panes = Panes::new(Rect::default());\n     let mut ctx = Context::new();\n \n-    while let Ok(state) = state_rx.recv() {\n-        ctx.on_new_state(&state);\n-\n-        panes.stack.refresh(&state);\n-        if !state.stack_frames.is_empty() {\n-            panes.stack.index = panes.stack.index.min(state.stack_frames.len() - 1);\n-        } else {\n-            panes.stack.index = 0;\n-        }\n-\n-        let mut display_state = state.clone();\n-\n-        if ctx.reached_target_frame(&state) {\n-            ctx.mode = RunMode::Step;\n-            ctx.run_to_frame_target = None;\n-        }\n-\n-        // In fast-forward mode, keep rendering every step without waiting for input.\n-        if ctx.mode.is_fast_mode(state.in_user_code) {\n-            terminal.draw(|frame| render(&mut panes, frame, &display_state, &ctx))?;\n-\n-            if event::fast_quit()? {\n-                let _ = command_tx.send(DebuggerCommand::Quit);\n-                return Ok(());\n+    loop {\n+        let state = match state_rx.recv() {\n+            Ok(StateOrEvent::State(state)) => {\n+                ctx.on_new_state(&state);\n+                panes.stack.refresh(&state);\n+                if !state.stack_frames.is_empty() {\n+                    panes.stack.index = panes.stack.index.min(state.stack_frames.len() - 1);\n+                } else {\n+                    panes.stack.index = 0;\n+                }\n+                if ctx.reached_target_frame(&state) {\n+                    ctx.mode = RunMode::Step;\n+                    ctx.run_to_frame_target = None;\n+                }\n+                if matches!(ctx.mode, RunMode::RunToMain) && state.in_user_code {\n+                    ctx.mode = RunMode::Step;\n+                }\n+                state\n             }\n-            continue;\n-        }\n-\n-        if matches!(ctx.mode, RunMode::RunToMain) && state.in_user_code {\n-            ctx.mode = RunMode::Step;\n-        }\n-\n-        loop {\n-            terminal.draw(|frame| render(&mut panes, frame, &display_state, &ctx))?;\n-\n-            match event::handle(&mut panes, &mut display_state, &state, &mut ctx, &command_tx)? {\n-                Action::Continue => (),\n-                Action::Break => break,\n-                Action::Return => return Ok(()),\n+            Ok(StateOrEvent::Event(event)) => {\n+                // Reuse the last state.\n+                let Some(state) = ctx.last_state.clone() else { continue };\n+                match event::handle(event, &mut panes, &state, &mut ctx, &command_tx)? {\n+                    Action::Continue | Action::Break => (),\n+                    Action::Return => return Ok(()),\n+                }\n+                let Some(state) = ctx.last_state.clone() else { continue };\n+                *state\n             }\n-        }\n+            Err(RecvError) => break,\n+        };\n+\n+        terminal.draw(|frame| render(&mut panes, frame, &state, &ctx))?;\n     }\n \n     // Program is done; keep the final snapshot visible until the user explicitly quits.\n     ctx.program_finished = true;\n     if let Some(state) = ctx.last_state.take() {\n-        finished(terminal, panes, state, ctx, command_tx)\n+        finished(terminal, panes, &state, ctx, command_tx)\n     } else {\n         finished_without_snapshot(terminal)\n     }\n@@ -207,18 +205,18 @@ fn tui_loop(\n fn finished(\n     terminal: &mut Terminal,\n     mut panes: Panes,\n-    state: DebuggerState,\n+    state: &DebuggerState,\n     mut ctx: Context,\n     command_tx: CommandSender,\n ) -> io::Result<()> {\n     ctx.mode = RunMode::Step;\n     ctx.reverse_index = None;\n     panes.stack.search.editing = false;\n-    let mut display_state = state.clone();\n     loop {\n-        terminal.draw(|frame| render(&mut panes, frame, &display_state, &ctx))?;\n+        terminal.draw(|frame| render(&mut panes, frame, state, &ctx))?;\n \n-        match event::handle(&mut panes, &mut display_state, &state, &mut ctx, &command_tx)? {\n+        let event = crossterm::event::read()?;\n+        match event::handle(event, &mut panes, state, &mut ctx, &command_tx)? {\n             Action::Continue => (),\n             Action::Break | Action::Return => return Ok(()),\n         }"
+    },
+    {
+      "sha": "b70c86bcdd7f928f84809c491118239700ae5f74",
+      "filename": "src/debugger/tui/pane/mir.rs",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 2,
+      "changes": 4,
+      "blob_url": "https://github.com/KMiri-rs/miri/blob/926ada291b0bbae4977d525056b43a46702b0f24/src%2Fdebugger%2Ftui%2Fpane%2Fmir.rs",
+      "raw_url": "https://github.com/KMiri-rs/miri/raw/926ada291b0bbae4977d525056b43a46702b0f24/src%2Fdebugger%2Ftui%2Fpane%2Fmir.rs",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/src%2Fdebugger%2Ftui%2Fpane%2Fmir.rs?ref=926ada291b0bbae4977d525056b43a46702b0f24",
+      "patch": "@@ -68,7 +68,7 @@ impl PaneMir {\n         let len = state.current_location.render_mir.len();\n         let highlighted_idx: usize = state.current_location.render_mir_highlighted_idx.into();\n         lines.extend(state.current_location.render_mir.iter().enumerate().map(|(idx, mir)| {\n-            let line = Line::from(hscroll_text(mir, self.hscroll));\n+            let line = Line::from(hscroll_text(&format!(\"[{:2}] {mir}\", idx + 1), self.hscroll));\n             if idx == highlighted_idx {\n                 line.style(if idx + 1 == len { STYLE_TERMINATOR } else { STYLE_HIGHTLIGHTED })\n             } else {\n@@ -80,7 +80,7 @@ impl PaneMir {\n         Paragraph::new(lines)\n             .block(\n                 Block::default()\n-                    .title(\"MIR\")\n+                    .title(format!(\"MIR (len={})\", state.current_location.render_mir.len()))\n                     .borders(Borders::ALL)\n                     .border_style(pane_border_style(focus)),\n             )"
+    }
+  ],
+  "commits": [
+    {
+      "sha": "4306037f0581e28477fc13bcd8d440375165e386",
+      "node_id": "C_kwDORLP5etoAKDQzMDYwMzdmMDU4MWUyODQ3N2ZjMTNiY2Q4ZDQ0MDM3NTE2NWUzODY",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-22T11:48:03Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-23T08:56:21Z"
+        },
+        "message": "debugger: add `t` for run-to-terminator",
+        "tree": {
+          "sha": "bb5cf6cab2b46f250cd0b87bf90f614c2079da1f",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/bb5cf6cab2b46f250cd0b87bf90f614c2079da1f"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/4306037f0581e28477fc13bcd8d440375165e386",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/4306037f0581e28477fc13bcd8d440375165e386",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/4306037f0581e28477fc13bcd8d440375165e386",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/4306037f0581e28477fc13bcd8d440375165e386/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "94dcb57a3e10286564bb81420b92511920ccf36c",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/94dcb57a3e10286564bb81420b92511920ccf36c",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/94dcb57a3e10286564bb81420b92511920ccf36c"
+        }
+      ]
+    },
+    {
+      "sha": "81c16e8213cdf25795bd04228a4a1c8919768ff1",
+      "node_id": "C_kwDORLP5etoAKDgxYzE2ZTgyMTNjZGYyNTc5NWJkMDQyMjhhNGExYzg5MTk3NjhmZjE",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-24T07:13:27Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-24T07:13:27Z"
+        },
+        "message": "debugger: store last_state on the heap",
+        "tree": {
+          "sha": "922b7b67575c1e30143249a959000e8657d6146c",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/922b7b67575c1e30143249a959000e8657d6146c"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/81c16e8213cdf25795bd04228a4a1c8919768ff1",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/81c16e8213cdf25795bd04228a4a1c8919768ff1",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/81c16e8213cdf25795bd04228a4a1c8919768ff1",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/81c16e8213cdf25795bd04228a4a1c8919768ff1/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "4306037f0581e28477fc13bcd8d440375165e386",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/4306037f0581e28477fc13bcd8d440375165e386",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/4306037f0581e28477fc13bcd8d440375165e386"
+        }
+      ]
+    },
+    {
+      "sha": "dc109cdd00f65da3cdd4a5d632f8287fac95a6c4",
+      "node_id": "C_kwDORLP5etoAKGRjMTA5Y2RkMDBmNjVkYTNjZGQ0YTVkNjMyZjgyODdmYWM5NWE2YzQ",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-24T14:49:15Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-24T14:49:15Z"
+        },
+        "message": "debugger: fix split_locals by unique addr instead of provenance\n\nbecause different locals can have the same addr different but borrow tags\nwhich cause provenances to be different",
+        "tree": {
+          "sha": "e557f32208b905c2d8e71398083419bb62588284",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/e557f32208b905c2d8e71398083419bb62588284"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/dc109cdd00f65da3cdd4a5d632f8287fac95a6c4",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/dc109cdd00f65da3cdd4a5d632f8287fac95a6c4",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/dc109cdd00f65da3cdd4a5d632f8287fac95a6c4",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/dc109cdd00f65da3cdd4a5d632f8287fac95a6c4/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "81c16e8213cdf25795bd04228a4a1c8919768ff1",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/81c16e8213cdf25795bd04228a4a1c8919768ff1",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/81c16e8213cdf25795bd04228a4a1c8919768ff1"
+        }
+      ]
+    },
+    {
+      "sha": "b14f6e63b6584bb00743302642fe3fceb7285179",
+      "node_id": "C_kwDORLP5etoAKGIxNGY2ZTYzYjY1ODRiYjAwNzQzMzAyNjQyZmUzZmNlYjcyODUxNzk",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-24T15:59:27Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-24T15:59:27Z"
+        },
+        "message": "debugger: Step or RunToTerminator with count; fix recv blocking bug",
+        "tree": {
+          "sha": "c319dfc4c231d71e63e0483580b464397cdb6820",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/c319dfc4c231d71e63e0483580b464397cdb6820"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/b14f6e63b6584bb00743302642fe3fceb7285179",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/b14f6e63b6584bb00743302642fe3fceb7285179",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/b14f6e63b6584bb00743302642fe3fceb7285179",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/b14f6e63b6584bb00743302642fe3fceb7285179/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "dc109cdd00f65da3cdd4a5d632f8287fac95a6c4",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/dc109cdd00f65da3cdd4a5d632f8287fac95a6c4",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/dc109cdd00f65da3cdd4a5d632f8287fac95a6c4"
+        }
+      ]
+    },
+    {
+      "sha": "99a2be90d6c1ad8e28f3703dbd4f0dbeb81ed8a1",
+      "node_id": "C_kwDORLP5etoAKDk5YTJiZTkwZDZjMWFkOGUyOGYzNzAzZGJkNGYwZGJlYjgxZWQ4YTE",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-24T16:16:10Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-24T16:16:10Z"
+        },
+        "message": "debugger: support large step count",
+        "tree": {
+          "sha": "7d25d96f084ef5b27c94b08d319096061f44d69e",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/7d25d96f084ef5b27c94b08d319096061f44d69e"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/99a2be90d6c1ad8e28f3703dbd4f0dbeb81ed8a1",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/99a2be90d6c1ad8e28f3703dbd4f0dbeb81ed8a1",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/99a2be90d6c1ad8e28f3703dbd4f0dbeb81ed8a1",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/99a2be90d6c1ad8e28f3703dbd4f0dbeb81ed8a1/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "b14f6e63b6584bb00743302642fe3fceb7285179",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/b14f6e63b6584bb00743302642fe3fceb7285179",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/b14f6e63b6584bb00743302642fe3fceb7285179"
+        }
+      ]
+    },
+    {
+      "sha": "d51a018cfc0fa3b9ef57338671feb0bab75b9fe7",
+      "node_id": "C_kwDORLP5etoAKGQ1MWEwMThjZmMwZmEzYjllZjU3MzM4NjcxZmViMGJhYjc1YjlmZTc",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-24T16:30:52Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-24T16:33:01Z"
+        },
+        "message": "debugger: add mir line number and len info",
+        "tree": {
+          "sha": "206a54359e823b123eaffcbde0f4afaa1d259b7d",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/206a54359e823b123eaffcbde0f4afaa1d259b7d"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/d51a018cfc0fa3b9ef57338671feb0bab75b9fe7",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/d51a018cfc0fa3b9ef57338671feb0bab75b9fe7",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/d51a018cfc0fa3b9ef57338671feb0bab75b9fe7",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/d51a018cfc0fa3b9ef57338671feb0bab75b9fe7/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "99a2be90d6c1ad8e28f3703dbd4f0dbeb81ed8a1",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/99a2be90d6c1ad8e28f3703dbd4f0dbeb81ed8a1",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/99a2be90d6c1ad8e28f3703dbd4f0dbeb81ed8a1"
+        }
+      ]
+    },
+    {
+      "sha": "afb50ec387d4043e7d22af8ad3904a2251bdb11e",
+      "node_id": "C_kwDORLP5etoAKGFmYjUwZWMzODdkNDA0M2U3ZDIyYWY4YWQzOTA0YTIyNTFiZGIxMWU",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-25T10:25:43Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-25T12:06:52Z"
+        },
+        "message": "debugger: auto truncate log file when the first logging happens",
+        "tree": {
+          "sha": "565be93ff72bad360129c83891a370b8ac839f35",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/565be93ff72bad360129c83891a370b8ac839f35"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/afb50ec387d4043e7d22af8ad3904a2251bdb11e",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/afb50ec387d4043e7d22af8ad3904a2251bdb11e",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/afb50ec387d4043e7d22af8ad3904a2251bdb11e",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/afb50ec387d4043e7d22af8ad3904a2251bdb11e/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "d51a018cfc0fa3b9ef57338671feb0bab75b9fe7",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/d51a018cfc0fa3b9ef57338671feb0bab75b9fe7",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/d51a018cfc0fa3b9ef57338671feb0bab75b9fe7"
+        }
+      ]
+    },
+    {
+      "sha": "87e6360510cac210458f968e01675c7fc45349cb",
+      "node_id": "C_kwDORLP5etoAKDg3ZTYzNjA1MTBjYWMyMTA0NThmOTY4ZTAxNjc1YzdmYzQ1MzQ5Y2I",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-25T13:42:36Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-25T13:42:36Z"
+        },
+        "message": "debugger: fix reverse interaction; remove display_state\n\nalso add run_immediately to force rendering the frame",
+        "tree": {
+          "sha": "04ca123d8d7c3e528b206768a35e58daf5e00638",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/04ca123d8d7c3e528b206768a35e58daf5e00638"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/87e6360510cac210458f968e01675c7fc45349cb",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/87e6360510cac210458f968e01675c7fc45349cb",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/87e6360510cac210458f968e01675c7fc45349cb",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/87e6360510cac210458f968e01675c7fc45349cb/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "afb50ec387d4043e7d22af8ad3904a2251bdb11e",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/afb50ec387d4043e7d22af8ad3904a2251bdb11e",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/afb50ec387d4043e7d22af8ad3904a2251bdb11e"
+        }
+      ]
+    },
+    {
+      "sha": "a047f6b4fb282cd322dfab6cae223098fccb7056",
+      "node_id": "C_kwDORLP5etoAKGEwNDdmNmI0ZmIyODJjZDMyMmRmYWI2Y2FlMjIzMDk4ZmNjYjcwNTY",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-25T14:45:07Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-25T14:45:07Z"
+        },
+        "message": "debugger: don't reset reverse_index if recv runs",
+        "tree": {
+          "sha": "39dfc3b14d4a16345a01ef732aa7242489a1038b",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/39dfc3b14d4a16345a01ef732aa7242489a1038b"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/a047f6b4fb282cd322dfab6cae223098fccb7056",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/a047f6b4fb282cd322dfab6cae223098fccb7056",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/a047f6b4fb282cd322dfab6cae223098fccb7056",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/a047f6b4fb282cd322dfab6cae223098fccb7056/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "87e6360510cac210458f968e01675c7fc45349cb",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/87e6360510cac210458f968e01675c7fc45349cb",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/87e6360510cac210458f968e01675c7fc45349cb"
+        }
+      ]
+    },
+    {
+      "sha": "35f2e1f972946b147db451a29d3293a0a451b371",
+      "node_id": "C_kwDORLP5etoAKDM1ZjJlMWY5NzI5NDZiMTQ3ZGI0NTFhMjlkMzI5M2EwYTQ1MWIzNzE",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-25T17:33:49Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-25T17:33:49Z"
+        },
+        "message": "debugger: refactor crossterm event by making it a channel msg",
+        "tree": {
+          "sha": "bf8662bf5fc20353ae65e6c14b1a0239a72df4b7",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/bf8662bf5fc20353ae65e6c14b1a0239a72df4b7"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/35f2e1f972946b147db451a29d3293a0a451b371",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/35f2e1f972946b147db451a29d3293a0a451b371",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/35f2e1f972946b147db451a29d3293a0a451b371",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/35f2e1f972946b147db451a29d3293a0a451b371/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "a047f6b4fb282cd322dfab6cae223098fccb7056",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/a047f6b4fb282cd322dfab6cae223098fccb7056",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/a047f6b4fb282cd322dfab6cae223098fccb7056"
+        }
+      ]
+    },
+    {
+      "sha": "926ada291b0bbae4977d525056b43a46702b0f24",
+      "node_id": "C_kwDORLP5etoAKDkyNmFkYTI5MWIwYmJhZTQ5NzdkNTI1MDU2YjQzYTQ2NzAyYjBmMjQ",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-25T17:43:01Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-25T17:44:26Z"
+        },
+        "message": "debugger: remove debugger_log and run_immediately",
+        "tree": {
+          "sha": "9259d1f596d7157f46fd0c1dd3340c7d366941e8",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/9259d1f596d7157f46fd0c1dd3340c7d366941e8"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/926ada291b0bbae4977d525056b43a46702b0f24",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/926ada291b0bbae4977d525056b43a46702b0f24",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/926ada291b0bbae4977d525056b43a46702b0f24",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/926ada291b0bbae4977d525056b43a46702b0f24/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "35f2e1f972946b147db451a29d3293a0a451b371",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/35f2e1f972946b147db451a29d3293a0a451b371",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/35f2e1f972946b147db451a29d3293a0a451b371"
+        }
+      ]
+    }
+  ]
+}

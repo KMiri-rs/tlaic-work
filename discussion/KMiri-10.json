@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4Ak0Wm",
+    "number": 10,
+    "title": "【第 1 周】阅读 Miri 代码：tracing 分析与调试；星绽贡献",
+    "body": "# 总结\r\n## 阅读 Miri 代码：tracing 分析与调试\r\n\r\n去年有人在 Miri 上集成  perfetto tracing，开启 tracing feature 会生成一个 JSON 文件，整体介绍见 [Miri 文档](https://github.com/rust-lang/miri/blob/master/doc/tracing.md)。\r\n\r\n这利用了编译器的 [`enter_trace_span`](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_const_eval/macro.enter_trace_span.html) 宏和相关抽象，基于 [tracing-chrome](https://crates.io/crates/tracing-chrome) 日志格式，但输出的功能上存在一些 bugs。\r\n\r\n[perfetto](https://perfetto.dev) 是一个谷歌开发的工业级追踪分析组件\r\n\r\n<details><summary>细节</summary>\r\n<p>\r\n\r\n* 适用于 Linux 和 Android 的系统级性能分析\r\n  * Linux 内核跟踪：捕获高频 ftrace 数据：调度活动、任务切换延迟、CPU 频率等等\r\n  * 用户空间分析器和额外探测器：原生堆性能分析、Java 堆性能分析、/proc stat 文件轮询器\r\n  * 内置于安卓系统：自 Android 9 Pie 起，它已成为该平台的一部分，也可在 Linux 上运行\r\n* 也适用于应用程序追踪\r\n  * 使用高吞吐量、低开销的高效跟踪点记录\r\n  * 结构化和可配置的事件：定义自定义 protobuf 消息来表示强类型应用程序特定的信息，仅跟踪所需内容\r\n  * 与系统级追踪功能集成：将应用的状态与同一时间线上的系统级分析数据关联起来\r\n* Trace Viewer\r\n  * 交互式使用 Perfetto 用户界面记录、查看和处理跟踪数据\r\n  * 支持常用的跟踪文件格式：TraceEvent JSON、Android systrace、ftrace 文本输出\r\n  * 完全在浏览器中运行\r\n* Trace Analysis \r\n  * 基于 SQL 的跟踪模型：跟踪处理器接收跟踪数据，并提供基于 SQLite 的接口，以便通过 shell 和 UI 访问跟踪内容\r\n  * 支持高达数十 GB 的大型跟踪数据\r\n  * 互操作性：可导入和导出常用跟踪格式：Chromium JSON 跟踪格式、Android Systrace、ftrace、CSV\r\n\r\n</p>\r\n</details> \r\n\r\n## 星绽贡献\r\n\r\n* 从 osdk 中移除不必要的 build-std 参数，可加快编译速度\r\n  * https://github.com/asterinas/asterinas/pull/3035\r\n  * 但需要排查未触及的测试为何意外失败\r\n* 初步集成 klint 的 not_using_prelude  检测；还需进一步审查和完善\r\n  * https://github.com/asterinas/asterinas/pull/3036\r\n\r\n## 其他\r\n\r\n* [【讨论】2026-03-11 线上会议](https://github.com/orgs/KMiri-rs/discussions/8)\r\n* 星绽实习面试\r\n* [【笔记】Ralf 博客文章《How to use storytelling to fit inline assembly into Rust》](https://github.com/orgs/KMiri-rs/discussions/9)\r\n\r\n# 统计\r\n\r\n本周提交 [2 个 issues 和 2 个 PRs](https://github.com/search?q=author%3Azjp-CN+created%3A2026-03-08T23%3A59%3A00%2B08%3A00..2026-03-16T00%3A59%3A00%2B08%3A00&type=pullrequests)。\r\n",
+    "bodyText": "总结\n阅读 Miri 代码：tracing 分析与调试\n去年有人在 Miri 上集成  perfetto tracing，开启 tracing feature 会生成一个 JSON 文件，整体介绍见 Miri 文档。\n这利用了编译器的 enter_trace_span 宏和相关抽象，基于 tracing-chrome 日志格式，但输出的功能上存在一些 bugs。\nperfetto 是一个谷歌开发的工业级追踪分析组件\n细节\n\n\n适用于 Linux 和 Android 的系统级性能分析\n\nLinux 内核跟踪：捕获高频 ftrace 数据：调度活动、任务切换延迟、CPU 频率等等\n用户空间分析器和额外探测器：原生堆性能分析、Java 堆性能分析、/proc stat 文件轮询器\n内置于安卓系统：自 Android 9 Pie 起，它已成为该平台的一部分，也可在 Linux 上运行\n\n\n也适用于应用程序追踪\n\n使用高吞吐量、低开销的高效跟踪点记录\n结构化和可配置的事件：定义自定义 protobuf 消息来表示强类型应用程序特定的信息，仅跟踪所需内容\n与系统级追踪功能集成：将应用的状态与同一时间线上的系统级分析数据关联起来\n\n\nTrace Viewer\n\n交互式使用 Perfetto 用户界面记录、查看和处理跟踪数据\n支持常用的跟踪文件格式：TraceEvent JSON、Android systrace、ftrace 文本输出\n完全在浏览器中运行\n\n\nTrace Analysis\n\n基于 SQL 的跟踪模型：跟踪处理器接收跟踪数据，并提供基于 SQLite 的接口，以便通过 shell 和 UI 访问跟踪内容\n支持高达数十 GB 的大型跟踪数据\n互操作性：可导入和导出常用跟踪格式：Chromium JSON 跟踪格式、Android Systrace、ftrace、CSV\n\n\n\n\n \n星绽贡献\n\n从 osdk 中移除不必要的 build-std 参数，可加快编译速度\n\nasterinas/asterinas#3035\n但需要排查未触及的测试为何意外失败\n\n\n初步集成 klint 的 not_using_prelude  检测；还需进一步审查和完善\n\nasterinas/asterinas#3036\n\n\n\n其他\n\n【讨论】2026-03-11 线上会议\n星绽实习面试\n【笔记】Ralf 博客文章《How to use storytelling to fit inline assembly into Rust》\n\n统计\n本周提交 2 个 issues 和 2 个 PRs。",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/10",
+    "createdAt": "2026-03-15T17:02:00Z",
+    "updatedAt": "2026-03-15T17:02:00Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

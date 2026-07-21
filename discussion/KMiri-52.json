@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4AnGoN",
+    "number": 52,
+    "title": "Miri 使用反汇编器和 ptrace 来运行 FFI 代码",
+    "body": "RustWeek 2026: \r\n[FFI in Miri at 8000 segfaults per second by Nia Deckers](https://www.youtube.com/watch?v=9X-ngiKo_Y0)\r\n\r\n",
+    "bodyText": "RustWeek 2026:\nFFI in Miri at 8000 segfaults per second by Nia Deckers",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/52",
+    "createdAt": "2026-06-13T08:33:16Z",
+    "updatedAt": "2026-06-13T08:33:16Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVN",
+      "name": "General",
+      "emoji": ":speech_balloon:",
+      "description": "Chat about anything and everything here"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

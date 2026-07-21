@@ -1,0 +1,52 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4AmsBS",
+    "number": 39,
+    "title": "`DedupRangeMap<Stack>` 拆分合并",
+    "body": "`DedupRangeMap<Stack>` 不是“固定只有 1 个元素的 Vec”，它是一个按区间分段的映射。\r\n\r\n核心结论：\r\n\r\n- 构造时确实只有 1 段：`DedupRangeMap::new(size, init)` 会把整个 `[0, size)` 放进一个元素里，前提是 `size > 0`。[`dedup_range_map.rs`]( /home/zjp/KMiri/kmiri/src/data_structures/dedup_range_map.rs#L20)\r\n- 之后一旦对某个**部分区间**做可变访问，`iter_mut` 会自动把被覆盖的元素拆开，必要时插入新的元素。[`dedup_range_map.rs`]( /home/zjp/KMiri/kmiri/src/data_structures/dedup_range_map.rs#L122)\r\n- 所以“新的元素”不是手工 `push` 进去的，而是通过**区间切分**产生的。[`dedup_range_map.rs`]( /home/zjp/KMiri/kmiri/src/data_structures/dedup_range_map.rs#L94)\r\n\r\n### 什么时候会增加元素\r\n对 `Stacks` 来说，新增元素通常发生在这些地方：\r\n\r\n- `Stacks::for_each(...)` 里用的是 `self.stacks.iter_mut(range.start, range.size)`，这会在访问的区间边界上切分映射。[`mod.rs`]( /home/zjp/KMiri/kmiri/src/borrow_tracker/stacked_borrows/mod.rs#L488)\r\n- `before_memory_read` / `before_memory_write` / `before_memory_deallocation` / `sb_retag_*` 等操作最终都会走到 `for_each`，所以只要某次操作只影响了部分字节，就可能把原来的单段拆成多段。[`mod.rs`]( /home/zjp/KMiri/kmiri/src/borrow_tracker/stacked_borrows/mod.rs#L532)\r\n- `iter_mut` 在开始和结束位置都可能 split 一次；如果中间经过了不同的数据，还会保留多个段。[`dedup_range_map.rs`]( /home/zjp/KMiri/kmiri/src/data_structures/dedup_range_map.rs#L122)\r\n- 相邻且数据相同的段，`iter_mut` 还会尽量合并，所以长度也可能减少。[`dedup_range_map.rs`]( /home/zjp/KMiri/kmiri/src/data_structures/dedup_range_map.rs#L122)\r\n\r\n### `DedupRangeMap<Stack>` 长度大于 1 是什么意思\r\n它表示：\r\n\r\n- 这个 allocation 的不同字节区间，当前对应的是**不同的 `Stack` 状态**。\r\n- 也就是借用栈并不是对整个 allocation 完全一致，而是被按字节区间切成了几段。\r\n- 每一段对应一份 `Stack`，并且这个 `Stack` 在该区间内相同。\r\n\r\n换句话说：\r\n\r\n- `Vec` 长度为 1：整个 allocation 目前共享同一份 borrow stack。\r\n- `Vec` 长度大于 1：allocation 已经被分成多个区间，每个区间的 borrow stack 可能不同。\r\n\r\n### 在 Stacked Borrows 里为什么会出现多段\r\n这很正常，因为很多操作只影响局部范围，比如：\r\n\r\n- 只对某个字段/局部子范围读写\r\n- 对结构体某个字段做 retag\r\n- 部分字节被访问后，borrow stack 被修改，但其他字节没变\r\n\r\n于是 `DedupRangeMap<Stack>` 会把“受影响的范围”和“未受影响的范围”拆开，分别保存。\r\n\r\n### 你看到的“只在构造时创建长度为 1 的 Vec”为什么不矛盾\r\n因为后续的增长不是在 `Stacks::new(...)` 里显式 `push`，而是隐藏在 `DedupRangeMap::iter_mut(...)` 的切分逻辑里。\r\n\r\n所以你应该把它理解成：\r\n\r\n- 初始化：一段\r\n- 局部访问后：自动拆段\r\n- 相邻同值：自动合并\r\n\r\n如果你愿意，我可以继续帮你把 `DedupRangeMap` 的“拆分/合并”过程画成一个具体例子，比如从 `[0..20]` 一段，经过两次局部写入后怎么变成 5 段。",
+    "bodyText": "DedupRangeMap<Stack> 不是“固定只有 1 个元素的 Vec”，它是一个按区间分段的映射。\n核心结论：\n\n构造时确实只有 1 段：DedupRangeMap::new(size, init) 会把整个 [0, size) 放进一个元素里，前提是 size > 0。dedup_range_map.rs\n之后一旦对某个部分区间做可变访问，iter_mut 会自动把被覆盖的元素拆开，必要时插入新的元素。dedup_range_map.rs\n所以“新的元素”不是手工 push 进去的，而是通过区间切分产生的。dedup_range_map.rs\n\n什么时候会增加元素\n对 Stacks 来说，新增元素通常发生在这些地方：\n\nStacks::for_each(...) 里用的是 self.stacks.iter_mut(range.start, range.size)，这会在访问的区间边界上切分映射。mod.rs\nbefore_memory_read / before_memory_write / before_memory_deallocation / sb_retag_* 等操作最终都会走到 for_each，所以只要某次操作只影响了部分字节，就可能把原来的单段拆成多段。mod.rs\niter_mut 在开始和结束位置都可能 split 一次；如果中间经过了不同的数据，还会保留多个段。dedup_range_map.rs\n相邻且数据相同的段，iter_mut 还会尽量合并，所以长度也可能减少。dedup_range_map.rs\n\nDedupRangeMap<Stack> 长度大于 1 是什么意思\n它表示：\n\n这个 allocation 的不同字节区间，当前对应的是不同的 Stack 状态。\n也就是借用栈并不是对整个 allocation 完全一致，而是被按字节区间切成了几段。\n每一段对应一份 Stack，并且这个 Stack 在该区间内相同。\n\n换句话说：\n\nVec 长度为 1：整个 allocation 目前共享同一份 borrow stack。\nVec 长度大于 1：allocation 已经被分成多个区间，每个区间的 borrow stack 可能不同。\n\n在 Stacked Borrows 里为什么会出现多段\n这很正常，因为很多操作只影响局部范围，比如：\n\n只对某个字段/局部子范围读写\n对结构体某个字段做 retag\n部分字节被访问后，borrow stack 被修改，但其他字节没变\n\n于是 DedupRangeMap<Stack> 会把“受影响的范围”和“未受影响的范围”拆开，分别保存。\n你看到的“只在构造时创建长度为 1 的 Vec”为什么不矛盾\n因为后续的增长不是在 Stacks::new(...) 里显式 push，而是隐藏在 DedupRangeMap::iter_mut(...) 的切分逻辑里。\n所以你应该把它理解成：\n\n初始化：一段\n局部访问后：自动拆段\n相邻同值：自动合并\n\n如果你愿意，我可以继续帮你把 DedupRangeMap 的“拆分/合并”过程画成一个具体例子，比如从 [0..20] 一段，经过两次局部写入后怎么变成 5 段。",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/39",
+    "createdAt": "2026-05-27T09:59:56Z",
+    "updatedAt": "2026-05-27T10:00:24Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVN",
+      "name": "General",
+      "emoji": ":speech_balloon:",
+      "description": "Chat about anything and everything here"
+    },
+    "answer": null
+  },
+  "comments": [
+    {
+      "id": "DC_kwDORCC-bM4BBIbQ",
+      "body": "可以把 `DedupRangeMap` 理解成“按区间压缩存储”的数组。\r\n\r\n它内部不是每个字节一个槽，而是存：\r\n\r\n- 一个范围 `range`\r\n- 这一整段范围共享的 `data`\r\n\r\n所以它的核心行为是：\r\n\r\n- 访问一个**局部子范围**时，先把边界拆开\r\n- 修改后，如果相邻两段数据一样，再把它们合并\r\n\r\n对应实现就在这里：\r\n- `iter_mut` 会在访问范围的起点和终点做切分，并顺手合并相邻相等块。[`dedup_range_map.rs`]( /home/zjp/KMiri/kmiri/src/data_structures/dedup_range_map.rs#L122)\r\n- `split_index` 负责把一个元素切成两段。[`dedup_range_map.rs`]( /home/zjp/KMiri/kmiri/src/data_structures/dedup_range_map.rs#L94)\r\n- `merge_adjacent_thorough` 是显式的全量合并函数。[`dedup_range_map.rs`]( /home/zjp/KMiri/kmiri/src/data_structures/dedup_range_map.rs#L237)\r\n\r\n## 例子 1: 从 1 段拆成 3 段\r\n\r\n初始状态：\r\n\r\n```text\r\n[0..20) -> -1\r\n```\r\n\r\n也就是 `DedupRangeMap::new(Size::from_bytes(20), -1)` 的结果，内部只有 1 个元素。\r\n\r\n现在做一次局部修改：\r\n\r\n```rust\r\nfor (_, x) in map.iter_mut(Size::from_bytes(10), Size::from_bytes(1)) {\r\n    *x = 42;\r\n}\r\n```\r\n\r\n`iter_mut(10, 1)` 会做两次切分：\r\n\r\n1. 在 `10` 处分裂：\r\n```text\r\n[0..10) -> -1\r\n[10..20) -> -1\r\n```\r\n\r\n2. 在 `11` 处分裂：\r\n```text\r\n[0..10) -> -1\r\n[10..11) -> -1\r\n[11..20) -> -1\r\n```\r\n\r\n然后只把中间那段 `[10..11)` 改成 `42`，最终变成：\r\n\r\n```text\r\n[0..10)  -> -1\r\n[10..11) -> 42\r\n[11..20) -> -1\r\n```\r\n\r\n这就是为什么原本长度 1 的 map，做一次局部写入后会变成长度 3。\r\n\r\n源码里的这个测试就是这个意思：\r\n- `basic_insert` 里修改一次 `10..11` 后，`map.v.len()` 变成 3。[`dedup_range_map.rs`]( /home/zjp/KMiri/kmiri/src/data_structures/dedup_range_map.rs#L259)\r\n\r\n## 例子 2: 再次局部修改，会继续拆\r\n\r\n如果你再修改一个不同的小范围，比如：\r\n\r\n```rust\r\nfor (_, x) in map.iter_mut(Size::from_bytes(15), Size::from_bytes(1)) {\r\n    *x = 43;\r\n}\r\n```\r\n\r\n它会在 `15` 和 `16` 附近继续拆分，于是你可能得到：\r\n\r\n```text\r\n[0..10)  -> -1\r\n[10..11) -> 42\r\n[11..15) -> -1\r\n[15..16) -> 43\r\n[16..20) -> -1\r\n```\r\n\r\n这时长度就是 5。\r\n\r\n这和测试 `gaps` 里的结果一致：两次局部写入后，`map.v.len()` 变成 5。[`dedup_range_map.rs`]( /home/zjp/KMiri/kmiri/src/data_structures/dedup_range_map.rs#L277)\r\n\r\n## 例子 3: 合并相邻相同段\r\n\r\n现在看合并。\r\n\r\n假设当前有这样的分段：\r\n\r\n```text\r\n[0..10)  -> 23\r\n[10..11) -> 42\r\n[11..15) -> 23\r\n[15..16) -> 19\r\n[16..20) -> 19\r\n```\r\n\r\n你对 `15..20` 做一次 `iter_mut`，并把里面都改成 `19`：\r\n\r\n```rust\r\nfor (_, x) in map.iter_mut(Size::from_bytes(15), Size::from_bytes(5)) {\r\n    *x = 19;\r\n}\r\n```\r\n\r\n那么原来两段：\r\n\r\n```text\r\n[15..16) -> 19\r\n[16..20) -> 19\r\n```\r\n\r\n会在扫描过程中被识别成相邻且数据相同，于是合并成一段：\r\n\r\n```text\r\n[15..20) -> 19\r\n```\r\n\r\n最终 map 变成：\r\n\r\n```text\r\n[0..10)  -> 23\r\n[10..11) -> 42\r\n[11..15) -> 23\r\n[15..20) -> 19\r\n```\r\n\r\n长度从 5 变成 4。\r\n\r\n这也是 `iter_mut` 的设计目的之一：\r\n它不仅负责“拆”，还会在遍历时尽量“顺手合”。\r\n\r\n## 放到 `Stacks` 里怎么理解\r\n\r\n在 `Stacks` 里，`DedupRangeMap<Stack>` 的每个元素代表：\r\n\r\n- 某一段字节范围\r\n- 这一段字节共享同一个 borrow stack 状态\r\n\r\n所以：\r\n\r\n- 长度 1：整个 allocation 当前都共享同一份 stack\r\n- 长度 > 1：allocation 被分成了多个区间，每个区间的 stack 状态可能不同\r\n\r\n比如某次只修改了字段 A，不影响字段 B，那么 map 就会把 A 和 B 拆成不同段保存。\r\n\r\n相关位置：\r\n- `Stacks` 持有 `DedupRangeMap<Stack>`。[`mod.rs`]( /home/zjp/KMiri/kmiri/src/borrow_tracker/stacked_borrows/mod.rs#L29)\r\n- `Stacks::for_each` 会对某个访问区间调用 `iter_mut`，因此触发拆分/合并。[`mod.rs`]( /home/zjp/KMiri/kmiri/src/borrow_tracker/stacked_borrows/mod.rs#L482)\r\n\r\n如果你愿意，我可以下一条直接把 `DedupRangeMap::iter_mut` 的源码按执行顺序逐行拆开讲一遍。",
+      "bodyText": "可以把 DedupRangeMap 理解成“按区间压缩存储”的数组。\n它内部不是每个字节一个槽，而是存：\n\n一个范围 range\n这一整段范围共享的 data\n\n所以它的核心行为是：\n\n访问一个局部子范围时，先把边界拆开\n修改后，如果相邻两段数据一样，再把它们合并\n\n对应实现就在这里：\n\niter_mut 会在访问范围的起点和终点做切分，并顺手合并相邻相等块。dedup_range_map.rs\nsplit_index 负责把一个元素切成两段。dedup_range_map.rs\nmerge_adjacent_thorough 是显式的全量合并函数。dedup_range_map.rs\n\n例子 1: 从 1 段拆成 3 段\n初始状态：\n[0..20) -> -1\n\n也就是 DedupRangeMap::new(Size::from_bytes(20), -1) 的结果，内部只有 1 个元素。\n现在做一次局部修改：\nfor (_, x) in map.iter_mut(Size::from_bytes(10), Size::from_bytes(1)) {\n    *x = 42;\n}\niter_mut(10, 1) 会做两次切分：\n\n在 10 处分裂：\n\n[0..10) -> -1\n[10..20) -> -1\n\n\n在 11 处分裂：\n\n[0..10) -> -1\n[10..11) -> -1\n[11..20) -> -1\n\n然后只把中间那段 [10..11) 改成 42，最终变成：\n[0..10)  -> -1\n[10..11) -> 42\n[11..20) -> -1\n\n这就是为什么原本长度 1 的 map，做一次局部写入后会变成长度 3。\n源码里的这个测试就是这个意思：\n\nbasic_insert 里修改一次 10..11 后，map.v.len() 变成 3。dedup_range_map.rs\n\n例子 2: 再次局部修改，会继续拆\n如果你再修改一个不同的小范围，比如：\nfor (_, x) in map.iter_mut(Size::from_bytes(15), Size::from_bytes(1)) {\n    *x = 43;\n}\n它会在 15 和 16 附近继续拆分，于是你可能得到：\n[0..10)  -> -1\n[10..11) -> 42\n[11..15) -> -1\n[15..16) -> 43\n[16..20) -> -1\n\n这时长度就是 5。\n这和测试 gaps 里的结果一致：两次局部写入后，map.v.len() 变成 5。dedup_range_map.rs\n例子 3: 合并相邻相同段\n现在看合并。\n假设当前有这样的分段：\n[0..10)  -> 23\n[10..11) -> 42\n[11..15) -> 23\n[15..16) -> 19\n[16..20) -> 19\n\n你对 15..20 做一次 iter_mut，并把里面都改成 19：\nfor (_, x) in map.iter_mut(Size::from_bytes(15), Size::from_bytes(5)) {\n    *x = 19;\n}\n那么原来两段：\n[15..16) -> 19\n[16..20) -> 19\n\n会在扫描过程中被识别成相邻且数据相同，于是合并成一段：\n[15..20) -> 19\n\n最终 map 变成：\n[0..10)  -> 23\n[10..11) -> 42\n[11..15) -> 23\n[15..20) -> 19\n\n长度从 5 变成 4。\n这也是 iter_mut 的设计目的之一：\n它不仅负责“拆”，还会在遍历时尽量“顺手合”。\n放到 Stacks 里怎么理解\n在 Stacks 里，DedupRangeMap<Stack> 的每个元素代表：\n\n某一段字节范围\n这一段字节共享同一个 borrow stack 状态\n\n所以：\n\n长度 1：整个 allocation 当前都共享同一份 stack\n长度 > 1：allocation 被分成了多个区间，每个区间的 stack 状态可能不同\n\n比如某次只修改了字段 A，不影响字段 B，那么 map 就会把 A 和 B 拆成不同段保存。\n相关位置：\n\nStacks 持有 DedupRangeMap<Stack>。mod.rs\nStacks::for_each 会对某个访问区间调用 iter_mut，因此触发拆分/合并。mod.rs\n\n如果你愿意，我可以下一条直接把 DedupRangeMap::iter_mut 的源码按执行顺序逐行拆开讲一遍。",
+      "url": "https://github.com/KMiri-rs/KMiri/discussions/39#discussioncomment-17073872",
+      "createdAt": "2026-05-27T10:00:23Z",
+      "updatedAt": "2026-05-27T10:00:23Z",
+      "author": {
+        "login": "zjp-CN",
+        "url": "https://github.com/zjp-CN"
+      },
+      "replies": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": null
+        },
+        "nodes": []
+      }
+    }
+  ],
+  "truncated_replies": []
+}

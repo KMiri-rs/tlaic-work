@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4Amqgo",
+    "number": 37,
+    "title": "基础问题列表",
+    "body": "# 什么是分配\r\n\r\n* https://github.com/rust-lang/unsafe-code-guidelines/pull/464\r\n\r\n# Rust 可以不带出处吗？\r\n\r\n* https://github.com/rust-lang/unsafe-code-guidelines/issues/287\r\n\r\n# dealloc 与 provenance\r\n\r\n* https://github.com/rust-lang/unsafe-code-guidelines/issues/316",
+    "bodyText": "什么是分配\n\nrust-lang/unsafe-code-guidelines#464\n\nRust 可以不带出处吗？\n\nrust-lang/unsafe-code-guidelines#287\n\ndealloc 与 provenance\n\nrust-lang/unsafe-code-guidelines#316",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/37",
+    "createdAt": "2026-05-26T09:39:21Z",
+    "updatedAt": "2026-05-26T12:41:53Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVN",
+      "name": "General",
+      "emoji": ":speech_balloon:",
+      "description": "Chat about anything and everything here"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4Ak99I",
+    "number": 12,
+    "title": "Unwinding",
+    "body": "* Phil blog-OS Panic Implementation: https://os.phil-opp.com/freestanding-rust-binary/#panic-implementation\r\n* nostd unwinding crate: https://docs.rs/unwinding\r\n* Rust-Lang std eh_personality: https://github.com/search?q=repo%3Arust-lang%2Frust%20eh_personality&type=code\r\n* [Bringing faster exceptions to Rust](https://purplesyringa.moe/blog/bringing-faster-exceptions-to-rust/) | [lithium](https://github.com/iex-rs/lithium)",
+    "bodyText": "Phil blog-OS Panic Implementation: https://os.phil-opp.com/freestanding-rust-binary/#panic-implementation\nnostd unwinding crate: https://docs.rs/unwinding\nRust-Lang std eh_personality: https://github.com/search?q=repo%3Arust-lang%2Frust%20eh_personality&type=code\nBringing faster exceptions to Rust | lithium",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/12",
+    "createdAt": "2026-03-19T09:22:22Z",
+    "updatedAt": "2026-03-19T09:47:45Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVN",
+      "name": "General",
+      "emoji": ":speech_balloon:",
+      "description": "Chat about anything and everything here"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

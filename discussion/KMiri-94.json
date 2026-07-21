@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4Ank3k",
+    "number": 94,
+    "title": "【第 17 周】KMiri：修复任务切换中的非线性虚拟内存映射、双周会；协助 Linux 笑傲内核活动",
+    "body": "#  KMiri：修复任务切换中的非线性虚拟内存映射\r\n\r\n* 修复任务切换中的非线性虚拟内存映射\r\n  * https://github.com/KMiri-rs/miri/pull/29\r\n* 修复多 cpu 的基地址\r\n  * https://github.com/KMiri-rs/miri/pull/27\r\n* 不解释执行 kernel_task_entry_wrapper 符号： \r\n  * https://github.com/KMiri-rs/asterinas/pull/17\r\n* 清理代码：\r\n  * https://github.com/KMiri-rs/miri/pull/26\r\n  * https://github.com/KMiri-rs/miri/pull/28\r\n  * https://github.com/KMiri-rs/asterinas/pull/18\r\n\r\n目前遇到的问题是退出任务期间发生栈溢出。\r\n\r\n# KMiri 双周会\r\n\r\n* （临时讨论）周三上午：10:30 到 11:30 \r\n  *  围绕 https://github.com/KMiri-rs/KMiri/issues/83 ，我原本以为是页表问题，但实际原因是虚拟内存发生非线性映射，解释执行采用线性映射，因此额外记录 paddr -> vaddr 的非线性映射\r\n  * 一些细节实现的理解同步（页表项、frame 分配器、boot pagetable）\r\n* 周五上午：10:00 到 10:40\r\n  * 解释周三问题的修复\r\n  * 明确先围绕物理地址作为状态记录的核心设计\r\n  * 讨论页表中的物理地址和虚拟地址非一一对应的情况\r\n  * 设想用非线性映射支持多地址指向相同物理内存的未定义行为检测\r\n\r\n# Mir Debugger：采用独立 rustc 驱动程序查询单态化实例信息\r\n\r\n* https://github.com/KMiri-rs/KMiri/pull/93\r\n\r\n\r\n# 星绽：在容器中增加 claude 和 codex\r\n\r\n* https://github.com/asterinas/asterinas/pull/3499\r\n* https://github.com/asterinas/asterinas/pull/3502\r\n\r\n# 其他\r\n\r\n中心承办了周日在五楼大会议室的 Linux 笑傲内核活动：\r\n* 周六晚上（7 点到 10 点）协助主办方布置场地和调试设备\r\n* 周日参加活动（8 点到 18 点）\r\n\r\n\r\n# 总结\r\n\r\n本周 [新提交 9 个 PR、10 个 issue](https://github.com/search?q=author%3Azjp-CN+created%3A2026-06-28T23%3A59%3A00%2B08%3A00..2026-07-05T23%3A59%3A00%2B08%3A00+org%3AKMiri-rs++org%3Aasterinas+&type=pullrequests)，[关闭 8 个 PR、6 个 issue](https://github.com/search?q=author%3Azjp-CN+closed%3A2026-06-28T23%3A59%3A00%2B08%3A00..2026-07-05T23%3A59%3A00%2B08%3A00+org%3AKMiri-rs++org%3Aasterinas+&type=pullrequests)。",
+    "bodyText": "KMiri：修复任务切换中的非线性虚拟内存映射\n\n修复任务切换中的非线性虚拟内存映射\n\nKMiri-rs/miri#29\n\n\n修复多 cpu 的基地址\n\nKMiri-rs/miri#27\n\n\n不解释执行 kernel_task_entry_wrapper 符号：\n\nKMiri-rs/asterinas#17\n\n\n清理代码：\n\nKMiri-rs/miri#26\nKMiri-rs/miri#28\nKMiri-rs/asterinas#18\n\n\n\n目前遇到的问题是退出任务期间发生栈溢出。\nKMiri 双周会\n\n（临时讨论）周三上午：10:30 到 11:30\n\n围绕 #83 ，我原本以为是页表问题，但实际原因是虚拟内存发生非线性映射，解释执行采用线性映射，因此额外记录 paddr -> vaddr 的非线性映射\n一些细节实现的理解同步（页表项、frame 分配器、boot pagetable）\n\n\n周五上午：10:00 到 10:40\n\n解释周三问题的修复\n明确先围绕物理地址作为状态记录的核心设计\n讨论页表中的物理地址和虚拟地址非一一对应的情况\n设想用非线性映射支持多地址指向相同物理内存的未定义行为检测\n\n\n\nMir Debugger：采用独立 rustc 驱动程序查询单态化实例信息\n\n#93\n\n星绽：在容器中增加 claude 和 codex\n\nasterinas/asterinas#3499\nasterinas/asterinas#3502\n\n其他\n中心承办了周日在五楼大会议室的 Linux 笑傲内核活动：\n\n周六晚上（7 点到 10 点）协助主办方布置场地和调试设备\n周日参加活动（8 点到 18 点）\n\n总结\n本周 新提交 9 个 PR、10 个 issue，关闭 8 个 PR、6 个 issue。",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/94",
+    "createdAt": "2026-07-05T15:27:55Z",
+    "updatedAt": "2026-07-05T15:29:25Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

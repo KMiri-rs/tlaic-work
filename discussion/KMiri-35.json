@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4AmkZR",
+    "number": 35,
+    "title": "【第 11 周】星绽：提交和完善 short-vis-path、增加超链接检查；KMiri：修复 panics、双周会",
+    "body": "\r\n# 星绽：提交和完善 short-vis-path\r\n\r\n* https://github.com/asterinas/asterinas/pull/3247\r\n* 更新镜像\r\n  * https://github.com/asterinas/asterinas/pull/3248\r\n  * https://github.com/asterinas/asterinas/pull/3258\r\n  * https://github.com/asterinas/asterinas/pull/3265\r\n\r\n# 星绽：修复超链接、增加超链接检查\r\n\r\n* https://github.com/asterinas/asterinas/pull/3237\r\n\r\n# KMiri：修复 panics\r\n\r\n* https://github.com/KMiri-rs/miri/pull/7\r\n* https://github.com/KMiri-rs/asterinas/pull/1\r\n\r\n# KMiri 双周会\r\n\r\n时间：周五上午 10:00 - 10:50\r\n\r\n澄钧和我围绕近期 KMiri 解决的 bug 和问题进行交流。\r\n\r\n最近我在使用字节跳动的 [Trae](https://www.trae.cn/) AI IDE，修复 KMiri 和星绽的 bug；Trae 可以很方便地了解代码库，并指出潜在的问题，而且快速自行修复代码。\r\n\r\n澄钧分享了他的 token 中转站 key 让我试用一下付费的 GPT 模型～ 🥰\r\n \r\n# 其他\r\n\r\n\r\n* 周四晚 7 点半，旁听星绽 hypervisor 会议，由北航王雷老师团队与星绽开发人员分享。\r\n\r\n# 统计\r\n\r\n本周 [新开 8 个 PR、11 个 issue](https://github.com/search?q=author%3Azjp-CN+created%3A2026-05-17T23%3A59%3A00%2B08%3A00..2026-05-24T00%3A59%3A00%2B08%3A00&type=pullrequests)，[关闭 5 个 PR、2 个 issue](https://github.com/search?q=author%3Azjp-CN+closed%3A2026-05-17T23%3A59%3A00%2B08%3A00..2026-05-24T00%3A59%3A00%2B08%3A00&type=pullrequests)。\r\n",
+    "bodyText": "星绽：提交和完善 short-vis-path\n\nasterinas/asterinas#3247\n更新镜像\n\nasterinas/asterinas#3248\nasterinas/asterinas#3258\nasterinas/asterinas#3265\n\n\n\n星绽：修复超链接、增加超链接检查\n\nasterinas/asterinas#3237\n\nKMiri：修复 panics\n\nKMiri-rs/miri#7\nKMiri-rs/asterinas#1\n\nKMiri 双周会\n时间：周五上午 10:00 - 10:50\n澄钧和我围绕近期 KMiri 解决的 bug 和问题进行交流。\n最近我在使用字节跳动的 Trae AI IDE，修复 KMiri 和星绽的 bug；Trae 可以很方便地了解代码库，并指出潜在的问题，而且快速自行修复代码。\n澄钧分享了他的 token 中转站 key 让我试用一下付费的 GPT 模型～ 🥰\n其他\n\n周四晚 7 点半，旁听星绽 hypervisor 会议，由北航王雷老师团队与星绽开发人员分享。\n\n统计\n本周 新开 8 个 PR、11 个 issue，关闭 5 个 PR、2 个 issue。",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/35",
+    "createdAt": "2026-05-22T03:20:46Z",
+    "updatedAt": "2026-05-24T15:50:37Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

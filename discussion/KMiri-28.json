@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4AmdLt",
+    "number": 28,
+    "title": "【第 10 周】星绽：修复并发布 docker、开启和修复风格检测、实现短路径重导出；KMiri：更新工具链",
+    "body": "\r\n## 星绽：修复并发布 docker\r\n\r\n* 背景：KLint 需要容器发布带有 Rust 工具链 nightly-2026-04-03，需要解决一些 nix 交叉编译问题（青松帮忙的），并发布容器版本\r\n* https://github.com/asterinas/asterinas/pull/3215\r\n* https://github.com/asterinas/asterinas/pull/3221\r\n\r\n## 星绽：开启和修复风格检测\r\n\r\n* 背景：https://github.com/asterinas/asterinas/pull/3036#issuecomment-4458156155\r\n  * 依然是集成 KLint 期间，睿涵指出 PR 未能解决更重要的风格问题\r\n* https://github.com/asterinas/asterinas/pull/3232\r\n* https://github.com/asterinas/asterinas/pull/3233\r\n\r\n## 星绽：实现短路径重导出\r\n\r\n* 背景：https://github.com/asterinas/asterinas/issues/3188\r\n* 库：https://github.com/os-checker/short_vis_path\r\n* 分支：https://github.com/os-checker/asterinas/tree/short_vis_path\r\n\r\n周五实现了一个初版，星绽会议的时候分享了思路。周末完善了一下，成功把库用到星绽上编译成功。还需清理代码，下周提交 PR。\r\n\r\n## KMiri：更新工具链\r\n\r\n由于星绽 bug，有些基本测试无法正常运行，需要更新星绽代码，于是把 Miri 和星绽都更新到 nightly-2026-04-03 工具链\r\n* https://github.com/KMiri-rs/KMiri/issues/26",
+    "bodyText": "星绽：修复并发布 docker\n\n背景：KLint 需要容器发布带有 Rust 工具链 nightly-2026-04-03，需要解决一些 nix 交叉编译问题（青松帮忙的），并发布容器版本\nasterinas/asterinas#3215\nasterinas/asterinas#3221\n\n星绽：开启和修复风格检测\n\n背景：asterinas/asterinas#3036 (comment)\n\n依然是集成 KLint 期间，睿涵指出 PR 未能解决更重要的风格问题\n\n\nasterinas/asterinas#3232\nasterinas/asterinas#3233\n\n星绽：实现短路径重导出\n\n背景：asterinas/asterinas#3188\n库：https://github.com/os-checker/short_vis_path\n分支：https://github.com/os-checker/asterinas/tree/short_vis_path\n\n周五实现了一个初版，星绽会议的时候分享了思路。周末完善了一下，成功把库用到星绽上编译成功。还需清理代码，下周提交 PR。\nKMiri：更新工具链\n由于星绽 bug，有些基本测试无法正常运行，需要更新星绽代码，于是把 Miri 和星绽都更新到 nightly-2026-04-03 工具链\n\n#26",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/28",
+    "createdAt": "2026-05-17T14:14:09Z",
+    "updatedAt": "2026-05-17T14:14:09Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

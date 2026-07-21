@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4AnRgR",
+    "number": 67,
+    "title": "【第 15 周】KMiri：处理一系列内存分配和地址问题、双周会；星绽：完善超链接检查 PR",
+    "body": "\r\n# KMiri：处理一系列内存分配和地址问题；双周会\r\n\r\n周一上午 10 点双周会，与澄钧讨论 KMiri 。\r\n\r\n之前通过扩大栈空间修复栈溢出问题，但澄钧说指标不治本。因此让我调查清楚为什么 stack pop 会引入新的栈分配。\r\n\r\n我通过 GDB 调试 KMiri 进程，确定在栈弹出期间，解释器可能分配返回值，这应该视作 caller 的栈分配。\r\n\r\n我之前用延迟释放处理这个栈踩踏问题，这造成了栈溢出，因为 callee 栈一直未释放，这泄漏了栈内存，于是循环过多导致栈耗尽。\r\n\r\n因此，我尝试将退栈的分配单独记录，但一直处理不好分配重叠的问题。我让澄钧审查了代码，他提出了更简洁的方式，在入栈的时候预留返回值的栈空间，退栈前在栈顶分配，这样代码不仅改动很小，而且很直观。\r\n\r\n* 修复栈溢出（澄钧帮助审查）\r\n  * https://github.com/KMiri-rs/miri/pull/16\r\n  * https://github.com/KMiri-rs/miri/pull/17\r\n  * https://github.com/KMiri-rs/miri/pull/18\r\n* 分配 Untype 页表（澄钧帮助审查）\r\n  *  https://github.com/KMiri-rs/miri/pull/19\r\n  * https://github.com/KMiri-rs/asterinas/pull/6\r\n  * https://github.com/KMiri-rs/miri/pull/21\r\n\r\n继续解决初始化期间的 MIR 解释问题：\r\n\r\n* 修复 cpu local 的虚拟地址\r\n  * https://github.com/KMiri-rs/miri/pull/20\r\n  * https://github.com/KMiri-rs/asterinas/pull/7\r\n* 修复星绽适配代码\r\n  * mirch 移除汇编代码：https://github.com/KMiri-rs/asterinas/pull/4\r\n  * 替换指针 add 操作：https://github.com/KMiri-rs/asterinas/pull/5\r\n* 修复 pt_checker 数组访问越界\r\n  * https://github.com/KMiri-rs/miri/pull/22\r\n* 处理星绽自定义全局分配器静态变量\r\n  * https://github.com/KMiri-rs/miri/pull/23 \r\n\r\n# 星绽：完善超链接检查 PR\r\n\r\n洪亮审查了 https://github.com/asterinas/asterinas/pull/3237 ，提出一些重构和改进意见，我对 PR 进行完善\r\n* 重构：去掉原 PR 中的 workflow 通知方式，而是强制在文档部署之后用单独一个提交更新文档链接\r\n* 改进：在 book 目录增加 `make check` 命令\r\n* 在 docker 镜像中添加 lychee \r\n  * https://github.com/asterinas/asterinas/pull/3409\r\n  * https://github.com/asterinas/asterinas/pull/3414\r\n\r\n\r\n# 其他\r\n\r\n* [第二季度工作总结](https://docs.qq.com/doc/DTGFKdGtpRnVNcG1V)\r\n* 周四下午 5 点至晚上 10 点，参加通明湖中心工作汇报会议\r\n\r\n\r\n# 统计\r\n\r\n本周 [新提交 14 个 PR、9 个 issue](https://github.com/search?q=author%3Azjp-CN+created%3A2026-06-14T23%3A59%3A00%2B08%3A00..2026-06-21T23%3A59%3A00%2B08%3A00+org%3AKMiri-rs++org%3Aasterinas+&type=pullrequests)，[关闭 14 个 PR、13 个 issue](https://github.com/search?q=author%3Azjp-CN+closed%3A2026-06-14T23%3A59%3A00%2B08%3A00..2026-06-21T23%3A59%3A00%2B08%3A00+org%3AKMiri-rs++org%3Aasterinas+&type=pullrequests)。 ",
+    "bodyText": "KMiri：处理一系列内存分配和地址问题；双周会\n周一上午 10 点双周会，与澄钧讨论 KMiri 。\n之前通过扩大栈空间修复栈溢出问题，但澄钧说指标不治本。因此让我调查清楚为什么 stack pop 会引入新的栈分配。\n我通过 GDB 调试 KMiri 进程，确定在栈弹出期间，解释器可能分配返回值，这应该视作 caller 的栈分配。\n我之前用延迟释放处理这个栈踩踏问题，这造成了栈溢出，因为 callee 栈一直未释放，这泄漏了栈内存，于是循环过多导致栈耗尽。\n因此，我尝试将退栈的分配单独记录，但一直处理不好分配重叠的问题。我让澄钧审查了代码，他提出了更简洁的方式，在入栈的时候预留返回值的栈空间，退栈前在栈顶分配，这样代码不仅改动很小，而且很直观。\n\n修复栈溢出（澄钧帮助审查）\n\nKMiri-rs/miri#16\nKMiri-rs/miri#17\nKMiri-rs/miri#18\n\n\n分配 Untype 页表（澄钧帮助审查）\n\nKMiri-rs/miri#19\nKMiri-rs/asterinas#6\nKMiri-rs/miri#21\n\n\n\n继续解决初始化期间的 MIR 解释问题：\n\n修复 cpu local 的虚拟地址\n\nKMiri-rs/miri#20\nKMiri-rs/asterinas#7\n\n\n修复星绽适配代码\n\nmirch 移除汇编代码：KMiri-rs/asterinas#4\n替换指针 add 操作：KMiri-rs/asterinas#5\n\n\n修复 pt_checker 数组访问越界\n\nKMiri-rs/miri#22\n\n\n处理星绽自定义全局分配器静态变量\n\nKMiri-rs/miri#23\n\n\n\n星绽：完善超链接检查 PR\n洪亮审查了 asterinas/asterinas#3237 ，提出一些重构和改进意见，我对 PR 进行完善\n\n重构：去掉原 PR 中的 workflow 通知方式，而是强制在文档部署之后用单独一个提交更新文档链接\n改进：在 book 目录增加 make check 命令\n在 docker 镜像中添加 lychee\n\nasterinas/asterinas#3409\nasterinas/asterinas#3414\n\n\n\n其他\n\n第二季度工作总结\n周四下午 5 点至晚上 10 点，参加通明湖中心工作汇报会议\n\n统计\n本周 新提交 14 个 PR、9 个 issue，关闭 14 个 PR、13 个 issue。",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/67",
+    "createdAt": "2026-06-21T15:05:44Z",
+    "updatedAt": "2026-06-21T15:05:44Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

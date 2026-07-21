@@ -1,0 +1,52 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4AnZ_v",
+    "number": 80,
+    "title": "Asterinas 的 frame allocator 用于哪些场景",
+    "body": "1. 启动期与全局分配器\r\n- [`FrameAllocOptions::alloc_frame_with`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/ostd/src/mm/frame/allocator.rs#L54)\r\n- [`FrameAllocOptions::alloc_segment_with`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/ostd/src/mm/frame/allocator.rs#L91)\r\n- [`init`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/ostd/src/mm/frame/allocator.rs#L216)\r\n- [`GlobalFrameAllocator`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/ostd/src/mm/frame/allocator.rs#L163)\r\n\r\n2. 页表页分配\r\n- [`PageTableNode::alloc`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/ostd/src/mm/page_table/node/mod.rs#L70)\r\n\r\n3. 缺页处理 / 匿名页 / COW\r\n- [`handle_single_page_fault`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/kernel/src/vm/vmar/vm_mapping.rs#L415)\r\n- [`prepare_page`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/kernel/src/vm/vmar/vm_mapping.rs#L521)\r\n- [`duplicate_frame`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/kernel/src/vm/vmar/vm_mapping.rs#L1005)\r\n\r\n4. Page cache\r\n- [`CachePageExt::alloc_uninit`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/kernel/src/vm/page_cache/cache_page.rs#L130)\r\n- [`CachePageExt::alloc_zero`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/kernel/src/vm/page_cache/cache_page.rs#L139)\r\n\r\n5. DMA\r\n- [`DmaCoherent::alloc`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/ostd/src/mm/dma/dma_coherent.rs#L52)\r\n- [`DmaCoherent::alloc_uninit`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/ostd/src/mm/dma/dma_coherent.rs#L66)\r\n- [`DmaStream::alloc`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/ostd/src/mm/dma/dma_stream.rs#L117)\r\n- [`DmaStream::alloc_uninit`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/ostd/src/mm/dma/dma_stream.rs#L134)\r\n- [`DmaStream::map`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/ostd/src/mm/dma/dma_stream.rs#L172)\r\n\r\n6. 堆底层\r\n- [`Slab::new`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/ostd/src/mm/heap/slab.rs#L88)\r\n- [`HeapSlot::alloc_large`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/ostd/src/mm/heap/slot.rs#L82)\r\n\r\n7. 内核栈与注入点\r\n- [`KernelStack::new_with_guard_page`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/ostd/src/task/kernel_stack.rs#L63)\r\n- [`FRAME_ALLOCATOR`](https://github.com/KMiri-rs/asterinas/blob/b9868bfbf002088be270b36700990b9635c01f3c/kernel/src/vm/mod.rs#L20)\r\n\r\n",
+    "bodyText": "启动期与全局分配器\n\n\nFrameAllocOptions::alloc_frame_with\nFrameAllocOptions::alloc_segment_with\ninit\nGlobalFrameAllocator\n\n\n页表页分配\n\n\nPageTableNode::alloc\n\n\n缺页处理 / 匿名页 / COW\n\n\nhandle_single_page_fault\nprepare_page\nduplicate_frame\n\n\nPage cache\n\n\nCachePageExt::alloc_uninit\nCachePageExt::alloc_zero\n\n\nDMA\n\n\nDmaCoherent::alloc\nDmaCoherent::alloc_uninit\nDmaStream::alloc\nDmaStream::alloc_uninit\nDmaStream::map\n\n\n堆底层\n\n\nSlab::new\nHeapSlot::alloc_large\n\n\n内核栈与注入点\n\n\nKernelStack::new_with_guard_page\nFRAME_ALLOCATOR",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/80",
+    "createdAt": "2026-06-27T14:21:28Z",
+    "updatedAt": "2026-06-27T14:29:42Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVN",
+      "name": "General",
+      "emoji": ":speech_balloon:",
+      "description": "Chat about anything and everything here"
+    },
+    "answer": null
+  },
+  "comments": [
+    {
+      "id": "DC_kwDORCC-bM4BClcU",
+      "body": "> 每次我看到内核内存分配的时候，感觉特别乱。首先直观上，不同时期有不同的分配，其次，相同时期存在多种类型的分配，最后，分配类型具有层级，比如大页套小页，小页拆小槽等等。难道内核的内存分配不应该从整体上介绍这些分配策略吗？\r\n\r\n是的，内核内存分配应该先讲“整体模型”，否则只看某个 API 会非常乱。你提到的三种混乱来源其实都对：\r\n\r\n1. 时间维度：启动期和运行期策略不同。\r\n2. 类型维度：同一时期有多套分配器并存（页、堆、小对象、DMA 等）。\r\n3. 层级维度：上层分配器建立在下层之上（页 -> 段 -> 槽）。\r\n\r\n一个更清晰的方式是用“正交三轴模型”来理解。\r\n\r\n**一、时间轴（When）**\r\n1. 早期引导：元数据和完整虚拟内存尚未就绪，只能用简化分配器（bump/early frame allocator）。\r\n2. 运行期：全局物理页分配器接管，可回收、可并发、可统计。\r\n3. 特殊上下文：中断上下文、原子上下文、睡眠上下文可用策略不同。\r\n\r\n**二、资源层级轴（What）**\r\n1. 物理页帧层：分配最基础的 frame/segment。\r\n2. 虚拟映射层：把页帧映射到页表/KVA/用户地址空间。\r\n3. 通用堆层：面向 `malloc/new` 的大小分类分配。\r\n4. 对象缓存层：slab/slot，针对固定大小对象优化。\r\n5. 专用内存层：DMA/coherent/streaming、页缓存、内核栈等。\r\n\r\n**三、约束轴（How）**\r\n1. 连续性：是否要求物理连续。\r\n2. 对齐与粒度：页、巨大页、槽大小。\r\n3. 初始化：zeroed / uninit。\r\n4. 可见性与共享：用户可见、设备可见、内核私有。\r\n5. 同步语义：是否允许阻塞，是否能在 IRQ 用。\r\n\r\n---\r\n\r\n放到 Asterinas 的语境里，你可以这样“总览”：\r\n\r\n1. 基础供给者：`frame allocator` 供应页帧（单页或连续段）。\r\n2. 基础消费者：页表、匿名页缺页、COW、page cache、kernel stack、DMA。\r\n3. 堆体系：在 frame 之上做大块分配，再往上做 slab/slot 小对象分配。\r\n4. 专用路径：DMA 不是普通 heap 的变体，而是“带设备一致性约束”的专用分配/映射路径。\r\n\r\n所以看起来“很多分配器”，本质是不同层和不同约束的组合，而不是重复造轮子。\r\n",
+      "bodyText": "每次我看到内核内存分配的时候，感觉特别乱。首先直观上，不同时期有不同的分配，其次，相同时期存在多种类型的分配，最后，分配类型具有层级，比如大页套小页，小页拆小槽等等。难道内核的内存分配不应该从整体上介绍这些分配策略吗？\n\n是的，内核内存分配应该先讲“整体模型”，否则只看某个 API 会非常乱。你提到的三种混乱来源其实都对：\n\n时间维度：启动期和运行期策略不同。\n类型维度：同一时期有多套分配器并存（页、堆、小对象、DMA 等）。\n层级维度：上层分配器建立在下层之上（页 -> 段 -> 槽）。\n\n一个更清晰的方式是用“正交三轴模型”来理解。\n一、时间轴（When）\n\n早期引导：元数据和完整虚拟内存尚未就绪，只能用简化分配器（bump/early frame allocator）。\n运行期：全局物理页分配器接管，可回收、可并发、可统计。\n特殊上下文：中断上下文、原子上下文、睡眠上下文可用策略不同。\n\n二、资源层级轴（What）\n\n物理页帧层：分配最基础的 frame/segment。\n虚拟映射层：把页帧映射到页表/KVA/用户地址空间。\n通用堆层：面向 malloc/new 的大小分类分配。\n对象缓存层：slab/slot，针对固定大小对象优化。\n专用内存层：DMA/coherent/streaming、页缓存、内核栈等。\n\n三、约束轴（How）\n\n连续性：是否要求物理连续。\n对齐与粒度：页、巨大页、槽大小。\n初始化：zeroed / uninit。\n可见性与共享：用户可见、设备可见、内核私有。\n同步语义：是否允许阻塞，是否能在 IRQ 用。\n\n\n放到 Asterinas 的语境里，你可以这样“总览”：\n\n基础供给者：frame allocator 供应页帧（单页或连续段）。\n基础消费者：页表、匿名页缺页、COW、page cache、kernel stack、DMA。\n堆体系：在 frame 之上做大块分配，再往上做 slab/slot 小对象分配。\n专用路径：DMA 不是普通 heap 的变体，而是“带设备一致性约束”的专用分配/映射路径。\n\n所以看起来“很多分配器”，本质是不同层和不同约束的组合，而不是重复造轮子。",
+      "url": "https://github.com/KMiri-rs/KMiri/discussions/80#discussioncomment-17454868",
+      "createdAt": "2026-06-27T14:29:42Z",
+      "updatedAt": "2026-06-27T14:29:42Z",
+      "author": {
+        "login": "zjp-CN",
+        "url": "https://github.com/zjp-CN"
+      },
+      "replies": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": null
+        },
+        "nodes": []
+      }
+    }
+  ],
+  "truncated_replies": []
+}

@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4AlUvB",
+    "number": 14,
+    "title": "【第 2-3 周】GDB 调试星绽和 KMiri",
+    "body": "#  GDB 调试星绽：build-std 的必要性与 unwind 行为\r\n\r\n背景：我注意到 osdk 创建的框内核会重新编译 libcore，但这貌似不太必要，因此移除了 `-Zbuild-std` 构建参数，但引发 CI 的[测试失败](https://github.com/asterinas/asterinas/pull/3035#issuecomment-4062822731)。\r\n\r\n过程：\r\n* 首先在 ostd 中加入一些打印信息，快速缩小出现问题的代码行号，发现是 begin_panic 返回 EndOfStack 并让 Qemu 关机，从而未正常处理 `#[should_panic]` 的测试\r\n* 然后阅读了一下 unwinding 的代码，并构造一个 no-std 的例子（帮助我理解 unwinding 的执行流，并辅助对照）\r\n* 进一步阅读 Makefile 和 osdk 的一些构建代码，减少测试范围 （通过添加参数）、与 GDB 交互\r\n* 确定使用 GDB 动态跟踪一下执行流和中途的状态，但对 GDB - Qemu 的调试步骤不熟悉（比如远程调试不能直接拉起 ELF，而需要 target remote 连接之后加载符号）\r\n* 虽然阅读源码已经可以大致知道如何执行，但 GDB 可以确认执行过程，并且很清楚地看到内部的变量状态。确认执行过程花了好几天的时间，一行行代码运行跟踪，然后反复观察和对照 backtrace 的变化（幸好有可以工作和出错的两份结果来对照排查）\r\n* 确定 stack frame 丢失的地方（来自 libcore 的 panic_fmt），然后结合 ELF 的符号和 FDE 等信息，弄清楚为什么 gimli （DWARF 解析器）没找到 FDE。\r\n* 症结：裸机编译目标根据 target spec 对 libcore 默认采用 panic abort 方案，因此有些 FDE 放在 .debug_frame 段，而开启 -Zbuild-std 并结合 -Cpanic=unwind，让 libcore 的所有 FDE 正确放到了 .eh_frame 段\r\n* [记录](https://os-checker.github.io/book/checker/KernMiri/dev-logs/unwinding.html) 一些调试和工具输出 \r\n* 顺便看了一下 rust-lang 中编译器和标准库的 unwind 实现（比如神奇的 __rust_try 符号），并查看了  build-std 的 [panic 策略讨论](https://github.com/rust-lang/wg-cargo-std-aware/issues/29)\r\n* Arceos 应该可以从星绽借鉴如何依赖 unwind 处理线程 panic 导致系统退出问题 [#320](https://github.com/arceos-org/arceos/issues/320)\r\n\r\n# GDB 调试 KMiri：子进程调试与自动化插件\r\n\r\n一些调试命令和输出扔在 [#13](https://github.com/KMiri-rs/KMiri/issues/13)，文档总结在 [book](https://os-checker.github.io/book/checker/KernMiri/dev-logs/gdb-python.html)。\r\n\r\n很少有人尝试用 GDB 调试过 Miri。虽然从 2018 年以来时常有人询问如何做，但其作者和维护者通常表示没尝试过这件事。\r\n\r\n我用了 1 个多小时学习 GDB 在多进程应用内如何切换子进程调试，并手工在 exec catch point 切换 32 次后，成功进入了 Miri 进程。\r\n然后花了两天时间研究怎么让这件事更加自动化，主要是梳理零散的命令和编写 GDB 的 python 插件脚本（目前还是不够好用，得继续边用边打磨）。\r\n\r\n[managed-to-gdb]: https://rust-lang.zulipchat.com/#narrow/channel/269128-miri/topic/Managed.20to.20debug.20miri.20with.20gdb/with/582296758\r\n\r\n<details><summary>Snapshots</summary>\r\n<p>\r\n\r\n![](https://github.com/user-attachments/assets/ff1e83b5-a3c4-4932-af51-e18758488333)\r\n\r\n![](https://github.com/user-attachments/assets/0d22d09b-6323-4d71-8180-fda93c0397f1)\r\n\r\n\r\n</p>\r\n</details> ",
+    "bodyText": "GDB 调试星绽：build-std 的必要性与 unwind 行为\n背景：我注意到 osdk 创建的框内核会重新编译 libcore，但这貌似不太必要，因此移除了 -Zbuild-std 构建参数，但引发 CI 的测试失败。\n过程：\n\n首先在 ostd 中加入一些打印信息，快速缩小出现问题的代码行号，发现是 begin_panic 返回 EndOfStack 并让 Qemu 关机，从而未正常处理 #[should_panic] 的测试\n然后阅读了一下 unwinding 的代码，并构造一个 no-std 的例子（帮助我理解 unwinding 的执行流，并辅助对照）\n进一步阅读 Makefile 和 osdk 的一些构建代码，减少测试范围 （通过添加参数）、与 GDB 交互\n确定使用 GDB 动态跟踪一下执行流和中途的状态，但对 GDB - Qemu 的调试步骤不熟悉（比如远程调试不能直接拉起 ELF，而需要 target remote 连接之后加载符号）\n虽然阅读源码已经可以大致知道如何执行，但 GDB 可以确认执行过程，并且很清楚地看到内部的变量状态。确认执行过程花了好几天的时间，一行行代码运行跟踪，然后反复观察和对照 backtrace 的变化（幸好有可以工作和出错的两份结果来对照排查）\n确定 stack frame 丢失的地方（来自 libcore 的 panic_fmt），然后结合 ELF 的符号和 FDE 等信息，弄清楚为什么 gimli （DWARF 解析器）没找到 FDE。\n症结：裸机编译目标根据 target spec 对 libcore 默认采用 panic abort 方案，因此有些 FDE 放在 .debug_frame 段，而开启 -Zbuild-std 并结合 -Cpanic=unwind，让 libcore 的所有 FDE 正确放到了 .eh_frame 段\n记录 一些调试和工具输出\n顺便看了一下 rust-lang 中编译器和标准库的 unwind 实现（比如神奇的 __rust_try 符号），并查看了  build-std 的 panic 策略讨论\nArceos 应该可以从星绽借鉴如何依赖 unwind 处理线程 panic 导致系统退出问题 #320\n\nGDB 调试 KMiri：子进程调试与自动化插件\n一些调试命令和输出扔在 #13，文档总结在 book。\n很少有人尝试用 GDB 调试过 Miri。虽然从 2018 年以来时常有人询问如何做，但其作者和维护者通常表示没尝试过这件事。\n我用了 1 个多小时学习 GDB 在多进程应用内如何切换子进程调试，并手工在 exec catch point 切换 32 次后，成功进入了 Miri 进程。\n然后花了两天时间研究怎么让这件事更加自动化，主要是梳理零散的命令和编写 GDB 的 python 插件脚本（目前还是不够好用，得继续边用边打磨）。\nSnapshots",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/14",
+    "createdAt": "2026-03-29T17:03:48Z",
+    "updatedAt": "2026-03-30T02:10:51Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

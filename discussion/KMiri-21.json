@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4Alruq",
+    "number": 21,
+    "title": "【GDB 记录】调试内联的函数",
+    "body": "像 [miri::machine::{impl#16}::before_memory_deallocation](https://github.com/KMiri-rs/miri/blob/e25fd598d2dca75cab622df23a76efd532ae7272/src/machine.rs#L1718) 这样的函数，是找不到符号的。比如通过 nm 或者 GDB 的函数名查找，只存在 borrow_tracker 模块内的 before_memory_deallocation，而不是我们关心的 machine 模块内的 before_memory_deallocation：\r\n\r\n```\r\n>>> i functions before_memory_deallocation\r\nAll functions matching regular expression \"before_memory_deallocation\":\r\n\r\nFile src/borrow_tracker/mod.rs:\r\n467:    fn miri::borrow_tracker::AllocState::before_memory_deallocation(*mut miri::borrow_tracker::AllocState, rustc_middle::mir::interpret::AllocId, miri::machine::ProvenanceExtra, rustc_abi::Size, *mut miri::machine::MiriMachine) -> rustc_middle::mir::interpret::error::InterpResult<()>;\r\n```\r\n\r\n这说明，即使在 debug 模式下，编译器依然会内联一些代码（比如这些函数只被全局调用一次）。\r\n\r\n我们需要别的方式找这些函数的地址来打断点。\r\n\r\n1. [`info line`](https://sourceware.org/gdb/current/onlinedocs/gdb.html/Machine-Code.html) 可以在源码位置和加载地址之间转换。before_memory_deallocation 的源码位置在 src/machine.rs:1718，因此用该命令查看它（和附近的代码）加载到的内存位置是 0x5dc34007c61e \r\n\r\n```\r\n>>> i line src/machine.rs:1718\r\nLine 1718 of \"src/machine.rs\"\r\n   is at address 0x5dc34007c61e <rustc_const_eval::interpret::eval_context::InterpCx<miri::machine::MiriMachine>::deallocate_ptr<miri::machine::MiriMachine>+1022> but contains no code.\r\nLine 1718 of \"src/machine.rs\"\r\n   is at address 0x5dc34007c61e <rustc_const_eval::interpret::eval_context::InterpCx<miri::machine::MiriMachine>::deallocate_ptr<miri::machine::MiriMachine>+1022> but contains no code.\r\n...\r\n```\r\n\r\n2. `disassemble /sr 0x5dc34007c61e` 命令可以自动处理地址所处的栈帧，并打印汇编相应的源码\r\n\r\n```\r\n/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/lib/rustlib/rustc-src/rust/compiler/rustc_const_eval/src/interpret/memory.rs:\r\n363\t    pub fn deallocate_ptr(\r\n   0x00005dc34007c220 <+0>:\t55                 \tpush   rbp\r\n...\r\n\r\nsrc/machine.rs:\r\n1723\t        (alloc_id, prove_extra): (AllocId, Self::ProvenanceExtra),\r\n   0x00005dc34007c61e <+1022>:\t48 89 44 24 30     \tmov    QWORD PTR [rsp+0x30],rax\r\n\r\n1724\t        size: Size,\r\n1725\t        align: Align,\r\n1726\t        kind: MemoryKind,\r\n1727\t    ) -> InterpResult<'tcx> {\r\n1728\t        if machine.tracked_alloc_ids.contains(&alloc_id) {\r\n   0x00005dc34007c623 <+1027>:\t49 8d be c0 02 00 00\tlea    rdi,[r14+0x2c0]\r\n   0x00005dc34007c62a <+1034>:\t48 8d 74 24 30     \tlea    rsi,[rsp+0x30]\r\n...\r\n```\r\n\r\n这可以证实 before_memory_deallocation 被内联进 deallocate_ptr 函数。\r\n\r\n3. 由于上面的 deallocate_ptr 函数的反汇编过长，超越了终端设置的最大容纳行数，那么我们需要将输出复制到文件中来方便查看\r\n\r\n```\r\n# 指定输出文件\r\nset logging file before_memory_deallocation.txt\r\n# 开启日志\r\nset logging enabled on\r\n\r\n# 如果你不想在 GDB 内看到结果，而是直接重定向输出到文件，则开启这个\r\n# set logging redirect on \r\n\r\n# 之后的输出将同步到文件上\r\ndisassemble /sr 0x5dc34007c61e\r\n\r\n# 关闭日志\r\nset logging enabled off\r\n```\r\n\r\n示例 [before_memory_deallocation.txt](https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests/os/before_memory_deallocation.txt#L2085) 文件。\r\n",
+    "bodyText": "像 miri::machine::{impl#16}::before_memory_deallocation 这样的函数，是找不到符号的。比如通过 nm 或者 GDB 的函数名查找，只存在 borrow_tracker 模块内的 before_memory_deallocation，而不是我们关心的 machine 模块内的 before_memory_deallocation：\n>>> i functions before_memory_deallocation\nAll functions matching regular expression \"before_memory_deallocation\":\n\nFile src/borrow_tracker/mod.rs:\n467:    fn miri::borrow_tracker::AllocState::before_memory_deallocation(*mut miri::borrow_tracker::AllocState, rustc_middle::mir::interpret::AllocId, miri::machine::ProvenanceExtra, rustc_abi::Size, *mut miri::machine::MiriMachine) -> rustc_middle::mir::interpret::error::InterpResult<()>;\n\n这说明，即使在 debug 模式下，编译器依然会内联一些代码（比如这些函数只被全局调用一次）。\n我们需要别的方式找这些函数的地址来打断点。\n\ninfo line 可以在源码位置和加载地址之间转换。before_memory_deallocation 的源码位置在 src/machine.rs:1718，因此用该命令查看它（和附近的代码）加载到的内存位置是 0x5dc34007c61e\n\n>>> i line src/machine.rs:1718\nLine 1718 of \"src/machine.rs\"\n   is at address 0x5dc34007c61e <rustc_const_eval::interpret::eval_context::InterpCx<miri::machine::MiriMachine>::deallocate_ptr<miri::machine::MiriMachine>+1022> but contains no code.\nLine 1718 of \"src/machine.rs\"\n   is at address 0x5dc34007c61e <rustc_const_eval::interpret::eval_context::InterpCx<miri::machine::MiriMachine>::deallocate_ptr<miri::machine::MiriMachine>+1022> but contains no code.\n...\n\n\ndisassemble /sr 0x5dc34007c61e 命令可以自动处理地址所处的栈帧，并打印汇编相应的源码\n\n/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/lib/rustlib/rustc-src/rust/compiler/rustc_const_eval/src/interpret/memory.rs:\n363\t    pub fn deallocate_ptr(\n   0x00005dc34007c220 <+0>:\t55                 \tpush   rbp\n...\n\nsrc/machine.rs:\n1723\t        (alloc_id, prove_extra): (AllocId, Self::ProvenanceExtra),\n   0x00005dc34007c61e <+1022>:\t48 89 44 24 30     \tmov    QWORD PTR [rsp+0x30],rax\n\n1724\t        size: Size,\n1725\t        align: Align,\n1726\t        kind: MemoryKind,\n1727\t    ) -> InterpResult<'tcx> {\n1728\t        if machine.tracked_alloc_ids.contains(&alloc_id) {\n   0x00005dc34007c623 <+1027>:\t49 8d be c0 02 00 00\tlea    rdi,[r14+0x2c0]\n   0x00005dc34007c62a <+1034>:\t48 8d 74 24 30     \tlea    rsi,[rsp+0x30]\n...\n\n这可以证实 before_memory_deallocation 被内联进 deallocate_ptr 函数。\n\n由于上面的 deallocate_ptr 函数的反汇编过长，超越了终端设置的最大容纳行数，那么我们需要将输出复制到文件中来方便查看\n\n# 指定输出文件\nset logging file before_memory_deallocation.txt\n# 开启日志\nset logging enabled on\n\n# 如果你不想在 GDB 内看到结果，而是直接重定向输出到文件，则开启这个\n# set logging redirect on \n\n# 之后的输出将同步到文件上\ndisassemble /sr 0x5dc34007c61e\n\n# 关闭日志\nset logging enabled off\n\n示例 before_memory_deallocation.txt 文件。",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/21",
+    "createdAt": "2026-04-14T04:05:29Z",
+    "updatedAt": "2026-04-14T04:05:29Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVQ",
+      "name": "Show and tell",
+      "emoji": ":raised_hands:",
+      "description": "Show off something you've made"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

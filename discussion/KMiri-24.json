@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4Al97Y",
+    "number": 24,
+    "title": "【第 7 周】KMiri: 改进 MIR 调试器、尝试修复栈踩踏 bug",
+    "body": "# KMiri: 改进 MIR 调试器\r\n\r\n* 更丰富的分配信息面板：https://github.com/KMiri-rs/miri/pull/2\r\n* 运行至控制流跳转、一次多步执行：https://github.com/KMiri-rs/miri/pull/3\r\n* 按需/总是存储栈快照：https://github.com/KMiri-rs/miri/pull/4\r\n* 隐藏已销毁的分配：https://github.com/KMiri-rs/miri/pull/5\r\n\r\n同时把 TUI 线程中获取键盘事件的阻塞操作放到另一个新线程上，把事件作为 TUI 消息进行跨线程传递，从而避免事件循环出现意外阻塞，TUI 绘制滞后。\r\n\r\n# KMiri: 尝试修复栈踩踏 bug\r\n\r\n现象：目前不同的栈分配可能对应相同的栈地址，这导致一些断言 panic，比如打破  base addr 插入 int_to_ptr_map 时地址与 AllocId 是唯一关联的假设、释放栈变量/分配出现问题。\r\n\r\n利用 MIR 调试器，更加直观地理解和追踪当前 KernMiri 在内核栈内存模拟期间的 bug（ https://github.com/KMiri-rs/KMiri/issues/19 ）。\r\n\r\n![](https://github.com/user-attachments/assets/d6b4e4d9-30ae-4275-a630-05e93680793d)\r\n\r\n比如从上面的调试信息可以看到 _11 和 _13 两个栈变量具有相同的 base addr 栈地址，但实际是不同的分配（用于 fmt 的两个插值变量）。\r\n\r\n解决方式：严格控制栈指针和栈分配的正确性，尤其退栈之后，栈指针可能需要重新调整。可能 MIR 会长时间让栈变量停留，经过多次出栈入栈之后栈指针不正确地放置，从而出现踩踏，目前修复了一些栈指针代码（从 16 次 terminator 触发到 121 次触发 ），但仍然需要更深入的栈指针跟踪和调试才能解决。\r\n\r\n# 其他\r\n\r\n* 徐老师那边的 safety-tags 论文已继续投稿\r\n* 准备通明湖中心的复试",
+    "bodyText": "KMiri: 改进 MIR 调试器\n\n更丰富的分配信息面板：KMiri-rs/miri#2\n运行至控制流跳转、一次多步执行：KMiri-rs/miri#3\n按需/总是存储栈快照：KMiri-rs/miri#4\n隐藏已销毁的分配：KMiri-rs/miri#5\n\n同时把 TUI 线程中获取键盘事件的阻塞操作放到另一个新线程上，把事件作为 TUI 消息进行跨线程传递，从而避免事件循环出现意外阻塞，TUI 绘制滞后。\nKMiri: 尝试修复栈踩踏 bug\n现象：目前不同的栈分配可能对应相同的栈地址，这导致一些断言 panic，比如打破  base addr 插入 int_to_ptr_map 时地址与 AllocId 是唯一关联的假设、释放栈变量/分配出现问题。\n利用 MIR 调试器，更加直观地理解和追踪当前 KernMiri 在内核栈内存模拟期间的 bug（ #19 ）。\n\n比如从上面的调试信息可以看到 _11 和 _13 两个栈变量具有相同的 base addr 栈地址，但实际是不同的分配（用于 fmt 的两个插值变量）。\n解决方式：严格控制栈指针和栈分配的正确性，尤其退栈之后，栈指针可能需要重新调整。可能 MIR 会长时间让栈变量停留，经过多次出栈入栈之后栈指针不正确地放置，从而出现踩踏，目前修复了一些栈指针代码（从 16 次 terminator 触发到 121 次触发 ），但仍然需要更深入的栈指针跟踪和调试才能解决。\n其他\n\n徐老师那边的 safety-tags 论文已继续投稿\n准备通明湖中心的复试",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/24",
+    "createdAt": "2026-04-26T16:08:38Z",
+    "updatedAt": "2026-04-27T00:34:18Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

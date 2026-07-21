@@ -1,0 +1,52 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4AmtV_",
+    "number": 42,
+    "title": "Miri 中的 exposed provenance",
+    "body": "可以把它理解成三层关系：\r\n\r\n```text\r\n                具体 provenance\r\n        +-------------------------------+\r\n        | Concrete { alloc_id, tag }    |\r\n        +-------------------------------+\r\n                     |\r\n                     | 经过 ptr -> usize / 其他“暴露”相关操作\r\n                     v\r\n        +-------------------------------+\r\n        | Exposed concrete provenance    |\r\n        | - alloc_id 被记为 exposed      |\r\n        | - tag 被记入 exposed_tags      |\r\n        +-------------------------------+\r\n                     |\r\n                     | 后续如果只剩下地址信息，或用 wildcard 访问\r\n                     v\r\n        +-------------------------------+\r\n        | Wildcard provenance           |\r\n        | - 不是具体 tag                |\r\n        | - 访问时保守地匹配已 exposed 的 |\r\n        |   tag / allocation             |\r\n        +-------------------------------+\r\n```\r\n\r\n**再把 SB 里的实际行为画得更具体一点**\r\n\r\n```text\r\nptr with concrete provenance\r\n        |\r\n        | expose_provenance(concrete)\r\n        v\r\n+----------------------------------+\r\n| global.alloc_addresses.exposed   |\r\n| contains alloc_id                |\r\n+----------------------------------+\r\n        |\r\n        | borrow tracker enabled\r\n        v\r\n+----------------------------------+\r\n| sb_expose_tag(alloc_id, tag)     |\r\n| exposed_tags.insert(tag)         |\r\n+----------------------------------+\r\n        |\r\n        | later wildcard access\r\n        v\r\n+----------------------------------+\r\n| find_granting() scans stack      |\r\n| for item.tag() in exposed_tags   |\r\n+----------------------------------+\r\n```\r\n\r\n**关键点**\r\n\r\n```text\r\nConcrete:\r\n  有明确的 alloc_id + tag\r\n\r\nExposed:\r\n  不是新的 provenance 类型\r\n  而是“这个 concrete provenance 曾经被暴露过”的状态\r\n\r\nWildcard:\r\n  是 provenance 的另一种取值\r\n  表示当前没有具体 tag，只能保守地依赖 previously exposed 的信息\r\n```\r\n\r\n**一句话总结**\r\n\r\n```text\r\nexposed 不是 Wildcard；\r\nexposed 是 concrete provenance 的一个“被公开过”的状态，\r\nWildcard 是一种“没有具体 provenance，只能保守匹配”的 provenance 形式。\r\n```\r\n\r\n如果你愿意，我还可以继续画一张 `SB` 和 `TB` 各自如何处理 `expose_tag` 的对照图。",
+    "bodyText": "可以把它理解成三层关系：\n                具体 provenance\n        +-------------------------------+\n        | Concrete { alloc_id, tag }    |\n        +-------------------------------+\n                     |\n                     | 经过 ptr -> usize / 其他“暴露”相关操作\n                     v\n        +-------------------------------+\n        | Exposed concrete provenance    |\n        | - alloc_id 被记为 exposed      |\n        | - tag 被记入 exposed_tags      |\n        +-------------------------------+\n                     |\n                     | 后续如果只剩下地址信息，或用 wildcard 访问\n                     v\n        +-------------------------------+\n        | Wildcard provenance           |\n        | - 不是具体 tag                |\n        | - 访问时保守地匹配已 exposed 的 |\n        |   tag / allocation             |\n        +-------------------------------+\n\n再把 SB 里的实际行为画得更具体一点\nptr with concrete provenance\n        |\n        | expose_provenance(concrete)\n        v\n+----------------------------------+\n| global.alloc_addresses.exposed   |\n| contains alloc_id                |\n+----------------------------------+\n        |\n        | borrow tracker enabled\n        v\n+----------------------------------+\n| sb_expose_tag(alloc_id, tag)     |\n| exposed_tags.insert(tag)         |\n+----------------------------------+\n        |\n        | later wildcard access\n        v\n+----------------------------------+\n| find_granting() scans stack      |\n| for item.tag() in exposed_tags   |\n+----------------------------------+\n\n关键点\nConcrete:\n  有明确的 alloc_id + tag\n\nExposed:\n  不是新的 provenance 类型\n  而是“这个 concrete provenance 曾经被暴露过”的状态\n\nWildcard:\n  是 provenance 的另一种取值\n  表示当前没有具体 tag，只能保守地依赖 previously exposed 的信息\n\n一句话总结\nexposed 不是 Wildcard；\nexposed 是 concrete provenance 的一个“被公开过”的状态，\nWildcard 是一种“没有具体 provenance，只能保守匹配”的 provenance 形式。\n\n如果你愿意，我还可以继续画一张 SB 和 TB 各自如何处理 expose_tag 的对照图。",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/42",
+    "createdAt": "2026-05-28T03:17:43Z",
+    "updatedAt": "2026-05-28T03:40:35Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVN",
+      "name": "General",
+      "emoji": ":speech_balloon:",
+      "description": "Chat about anything and everything here"
+    },
+    "answer": null
+  },
+  "comments": [
+    {
+      "id": "DC_kwDORCC-bM4BBK0t",
+      "body": "# Retag 在 creation 的时候，何时出现 orig_tag 是 Wildcard?\r\n\r\n`orig_tag` 在 creation 里变成 `Wildcard`，条件很明确：\r\n\r\n- **当这次 retag 的来源指针本身就是 `Provenance::Wildcard` 时**\r\n- 但 Miri 仍然能把它对应到某个具体 `AllocId` / 地址区间，所以还能记录一次 creation\r\n\r\n这不是“新 tag 是 wildcard”，而是“**旧 provenance / 来源 provenance 是 wildcard**”。\r\n\r\n**代码链路**\r\n- `orig_tag` 在 SB 里来自 [`sb_reborrow`]( /home/zjp/KMiri/kmiri/src/borrow_tracker/stacked_borrows/mod.rs#L621 ) 里的 `loc: Option<(AllocId, Size, ProvenanceExtra)>`\r\n- 这个 `ProvenanceExtra` 是通过 `ptr_try_get_alloc_id` 或 `ptr_get_alloc_id` 拿到的\r\n- `ptr_get_alloc` 会把：\r\n  - `Provenance::Concrete { tag, .. }` 映射成 `ProvenanceExtra::Concrete(tag)`\r\n  - `Provenance::Wildcard` 映射成 `ProvenanceExtra::Wildcard`\r\n  见 [`ptr_get_alloc`]( /home/zjp/KMiri/kmiri/src/machine.rs#L1536 ) 到 [`machine.rs#L1547`]( /home/zjp/KMiri/kmiri/src/machine.rs#L1547 )\r\n\r\n**所以，什么时候会出现 `orig_tag = Wildcard`**\r\n- 当你拿一个 **wildcard provenance 的指针** 去做 retag\r\n- 例如最典型的来源是 `usize as ptr` 得到的 wildcard pointer，见 [`ptr_from_addr_cast`]( /home/zjp/KMiri/kmiri/src/alloc_addresses/mod.rs#L652 ) 到 [`alloc_addresses/mod.rs#L679`]( /home/zjp/KMiri/kmiri/src/alloc_addresses/mod.rs#L679 )\r\n- 后续如果对这个 wildcard pointer 做 `&*p`、`retag`、或者任何需要记录 creation 的操作，只要它能定位到 live allocation，`orig_tag` 就会记成 `Wildcard`\r\n\r\n**在 SB 里，creation 分两种情况**\r\n- `size == 0`：\r\n  - 如果能 `ptr_try_get_alloc_id(...)` 成功，就会记录 creation\r\n  - 这时 `orig_tag` 仍然可能是 `Wildcard`\r\n  - 见 [`sb_reborrow`]( /home/zjp/KMiri/kmiri/src/borrow_tracker/stacked_borrows/mod.rs#L694 ) 到 [`sb_reborrow`]( /home/zjp/KMiri/kmiri/src/borrow_tracker/stacked_borrows/mod.rs#L721 )\r\n- `size > 0`：\r\n  - 一定会 `ptr_get_alloc_id(...)`\r\n  - 如果原指针 provenance 是 wildcard，`orig_tag` 也会是 `Wildcard`\r\n  - 见 [`sb_reborrow`]( /home/zjp/KMiri/kmiri/src/borrow_tracker/stacked_borrows/mod.rs#L725 ) 到 [`sb_reborrow`]( /home/zjp/KMiri/kmiri/src/borrow_tracker/stacked_borrows/mod.rs#L729 )\r\n\r\n**一句话总结**\r\n- `orig_tag = Wildcard` 的唯一原因是：**这次 retag 的来源 provenance 是 wildcard**\r\n- 它和“是否 exposed”不是一回事\r\n- 它表示“我知道这次 creation 来自哪个地址/alloc，但不知道具体是哪一个 `BorTag`”\r\n\r\n",
+      "bodyText": "Retag 在 creation 的时候，何时出现 orig_tag 是 Wildcard?\norig_tag 在 creation 里变成 Wildcard，条件很明确：\n\n当这次 retag 的来源指针本身就是 Provenance::Wildcard 时\n但 Miri 仍然能把它对应到某个具体 AllocId / 地址区间，所以还能记录一次 creation\n\n这不是“新 tag 是 wildcard”，而是“旧 provenance / 来源 provenance 是 wildcard”。\n代码链路\n\norig_tag 在 SB 里来自 sb_reborrow 里的 loc: Option<(AllocId, Size, ProvenanceExtra)>\n这个 ProvenanceExtra 是通过 ptr_try_get_alloc_id 或 ptr_get_alloc_id 拿到的\nptr_get_alloc 会把：\n\nProvenance::Concrete { tag, .. } 映射成 ProvenanceExtra::Concrete(tag)\nProvenance::Wildcard 映射成 ProvenanceExtra::Wildcard\n见 ptr_get_alloc 到 machine.rs#L1547\n\n\n\n所以，什么时候会出现 orig_tag = Wildcard\n\n当你拿一个 wildcard provenance 的指针 去做 retag\n例如最典型的来源是 usize as ptr 得到的 wildcard pointer，见 ptr_from_addr_cast 到 alloc_addresses/mod.rs#L679\n后续如果对这个 wildcard pointer 做 &*p、retag、或者任何需要记录 creation 的操作，只要它能定位到 live allocation，orig_tag 就会记成 Wildcard\n\n在 SB 里，creation 分两种情况\n\nsize == 0：\n\n如果能 ptr_try_get_alloc_id(...) 成功，就会记录 creation\n这时 orig_tag 仍然可能是 Wildcard\n见 sb_reborrow 到 sb_reborrow\n\n\nsize > 0：\n\n一定会 ptr_get_alloc_id(...)\n如果原指针 provenance 是 wildcard，orig_tag 也会是 Wildcard\n见 sb_reborrow 到 sb_reborrow\n\n\n\n一句话总结\n\norig_tag = Wildcard 的唯一原因是：这次 retag 的来源 provenance 是 wildcard\n它和“是否 exposed”不是一回事\n它表示“我知道这次 creation 来自哪个地址/alloc，但不知道具体是哪一个 BorTag”",
+      "url": "https://github.com/KMiri-rs/KMiri/discussions/42#discussioncomment-17083693",
+      "createdAt": "2026-05-28T03:40:35Z",
+      "updatedAt": "2026-05-28T03:40:52Z",
+      "author": {
+        "login": "zjp-CN",
+        "url": "https://github.com/zjp-CN"
+      },
+      "replies": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": null
+        },
+        "nodes": []
+      }
+    }
+  ],
+  "truncated_replies": []
+}

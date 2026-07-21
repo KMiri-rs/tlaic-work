@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4AmeJV",
+    "number": 29,
+    "title": "5 月工作待办清单",
+    "body": "- [ ] short-vis-path\r\n- [ ] once & rate limit log\r\n- [ ] kmiri 初始化\r\n- [ ] kmiri 多 CPU",
+    "bodyText": "short-vis-path\n once & rate limit log\n kmiri 初始化\n kmiri 多 CPU",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/29",
+    "createdAt": "2026-05-18T09:46:36Z",
+    "updatedAt": "2026-05-18T09:46:36Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVN",
+      "name": "General",
+      "emoji": ":speech_balloon:",
+      "description": "Chat about anything and everything here"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

@@ -1,0 +1,2284 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "pr",
+  "item": {
+    "url": "https://api.github.com/repos/KMiri-rs/KMiri/pulls/22",
+    "id": 3544427766,
+    "node_id": "PR_kwDORCC-bM7TQ6z2",
+    "html_url": "https://github.com/KMiri-rs/KMiri/pull/22",
+    "diff_url": "https://github.com/KMiri-rs/KMiri/pull/22.diff",
+    "patch_url": "https://github.com/KMiri-rs/KMiri/pull/22.patch",
+    "issue_url": "https://api.github.com/repos/KMiri-rs/KMiri/issues/22",
+    "number": 22,
+    "state": "closed",
+    "locked": false,
+    "title": "Feat: add GDB support of script and docker image",
+    "user": {
+      "login": "zjp-CN",
+      "id": 25300418,
+      "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/zjp-CN",
+      "html_url": "https://github.com/zjp-CN",
+      "followers_url": "https://api.github.com/users/zjp-CN/followers",
+      "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+      "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+      "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+      "repos_url": "https://api.github.com/users/zjp-CN/repos",
+      "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "This PR mainly adds GDB scripts and dockerfile to debug miri easily. \r\n\r\nThe GDB version is locked to a fairly new version at `18.0.50.20260403-git`, because `miri.py` script needs the `on_selected_context` event callback which is only available since Jan, 2026.\r\n\r\nSo there is a dockerfile to install GDB from source code, and `tool/run_docker.sh` to start the evironment.\r\n\r\nIn the container, we can run `tool/install_miri_osdk.sh` to install miri & osdk, and test GDB as follows:\r\n\r\n```bash\r\ncd KMiri/tests/os/\r\nOSDK_LOCAL_DEV=1 rust-gdb -x miri.gdb --args cargo osdk miri test\r\n```\r\n\r\n\r\nGDB session will continue to the breakpoints; adjust breakpoints.gdb at will.\r\n\r\n<img width=\"1920\" height=\"1130\" alt=\"miri-gdb\" src=\"https://github.com/user-attachments/assets/c2811ddf-6836-48d3-a3d3-28e64a6fa29e\" />\r\n\r\nSubmodules of KMiri and Asterinas has been updated, and several bugs are fixed\r\n* https://github.com/KMiri-rs/KMiri/issues/6\r\n* https://github.com/KMiri-rs/KMiri/issues/17\r\n* https://github.com/KMiri-rs/KMiri/issues/18",
+    "created_at": "2026-04-17T09:47:45Z",
+    "updated_at": "2026-04-17T09:48:02Z",
+    "closed_at": "2026-04-17T09:48:00Z",
+    "merged_at": "2026-04-17T09:48:00Z",
+    "merge_commit_sha": "f3545f73596e40c91437a58c0e74c9bb2f79957d",
+    "assignees": [],
+    "requested_reviewers": [],
+    "requested_teams": [],
+    "labels": [],
+    "milestone": null,
+    "draft": false,
+    "commits_url": "https://api.github.com/repos/KMiri-rs/KMiri/pulls/22/commits",
+    "review_comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/pulls/22/comments",
+    "review_comment_url": "https://api.github.com/repos/KMiri-rs/KMiri/pulls/comments{/number}",
+    "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/issues/22/comments",
+    "statuses_url": "https://api.github.com/repos/KMiri-rs/KMiri/statuses/bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+    "head": {
+      "label": "KMiri-rs:kmiri",
+      "ref": "kmiri",
+      "sha": "bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "user": {
+        "login": "KMiri-rs",
+        "id": 257443784,
+        "node_id": "O_kgDOD1hHyA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/257443784?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/KMiri-rs",
+        "html_url": "https://github.com/KMiri-rs",
+        "followers_url": "https://api.github.com/users/KMiri-rs/followers",
+        "following_url": "https://api.github.com/users/KMiri-rs/following{/other_user}",
+        "gists_url": "https://api.github.com/users/KMiri-rs/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/KMiri-rs/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/KMiri-rs/subscriptions",
+        "organizations_url": "https://api.github.com/users/KMiri-rs/orgs",
+        "repos_url": "https://api.github.com/users/KMiri-rs/repos",
+        "events_url": "https://api.github.com/users/KMiri-rs/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/KMiri-rs/received_events",
+        "type": "Organization",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "repo": {
+        "id": 1142996588,
+        "node_id": "R_kgDORCC-bA",
+        "name": "KMiri",
+        "full_name": "KMiri-rs/KMiri",
+        "private": false,
+        "owner": {
+          "login": "KMiri-rs",
+          "id": 257443784,
+          "node_id": "O_kgDOD1hHyA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/257443784?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/KMiri-rs",
+          "html_url": "https://github.com/KMiri-rs",
+          "followers_url": "https://api.github.com/users/KMiri-rs/followers",
+          "following_url": "https://api.github.com/users/KMiri-rs/following{/other_user}",
+          "gists_url": "https://api.github.com/users/KMiri-rs/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/KMiri-rs/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/KMiri-rs/subscriptions",
+          "organizations_url": "https://api.github.com/users/KMiri-rs/orgs",
+          "repos_url": "https://api.github.com/users/KMiri-rs/repos",
+          "events_url": "https://api.github.com/users/KMiri-rs/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/KMiri-rs/received_events",
+          "type": "Organization",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/KMiri-rs/KMiri",
+        "description": null,
+        "fork": false,
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri",
+        "forks_url": "https://api.github.com/repos/KMiri-rs/KMiri/forks",
+        "keys_url": "https://api.github.com/repos/KMiri-rs/KMiri/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/KMiri-rs/KMiri/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/KMiri-rs/KMiri/teams",
+        "hooks_url": "https://api.github.com/repos/KMiri-rs/KMiri/hooks",
+        "issue_events_url": "https://api.github.com/repos/KMiri-rs/KMiri/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/KMiri-rs/KMiri/events",
+        "assignees_url": "https://api.github.com/repos/KMiri-rs/KMiri/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/KMiri-rs/KMiri/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/KMiri-rs/KMiri/tags",
+        "blobs_url": "https://api.github.com/repos/KMiri-rs/KMiri/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/KMiri-rs/KMiri/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/KMiri-rs/KMiri/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/KMiri-rs/KMiri/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/KMiri-rs/KMiri/languages",
+        "stargazers_url": "https://api.github.com/repos/KMiri-rs/KMiri/stargazers",
+        "contributors_url": "https://api.github.com/repos/KMiri-rs/KMiri/contributors",
+        "subscribers_url": "https://api.github.com/repos/KMiri-rs/KMiri/subscribers",
+        "subscription_url": "https://api.github.com/repos/KMiri-rs/KMiri/subscription",
+        "commits_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/KMiri-rs/KMiri/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/KMiri-rs/KMiri/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/KMiri-rs/KMiri/merges",
+        "archive_url": "https://api.github.com/repos/KMiri-rs/KMiri/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/KMiri-rs/KMiri/downloads",
+        "issues_url": "https://api.github.com/repos/KMiri-rs/KMiri/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/KMiri-rs/KMiri/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/KMiri-rs/KMiri/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/KMiri-rs/KMiri/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/KMiri-rs/KMiri/labels{/name}",
+        "releases_url": "https://api.github.com/repos/KMiri-rs/KMiri/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/KMiri-rs/KMiri/deployments",
+        "created_at": "2026-01-27T04:15:25Z",
+        "updated_at": "2026-07-20T13:27:57Z",
+        "pushed_at": "2026-07-20T13:27:02Z",
+        "git_url": "git://github.com/KMiri-rs/KMiri.git",
+        "ssh_url": "git@github.com:KMiri-rs/KMiri.git",
+        "clone_url": "https://github.com/KMiri-rs/KMiri.git",
+        "svn_url": "https://github.com/KMiri-rs/KMiri",
+        "homepage": null,
+        "size": 139,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "language": "Rust",
+        "has_issues": true,
+        "has_projects": false,
+        "has_downloads": true,
+        "has_wiki": false,
+        "has_pages": false,
+        "has_discussions": true,
+        "forks_count": 0,
+        "mirror_url": null,
+        "archived": false,
+        "disabled": false,
+        "open_issues_count": 17,
+        "license": null,
+        "allow_forking": true,
+        "is_template": false,
+        "web_commit_signoff_required": false,
+        "has_pull_requests": true,
+        "pull_request_creation_policy": "all",
+        "topics": [],
+        "visibility": "public",
+        "forks": 0,
+        "open_issues": 17,
+        "watchers": 0,
+        "default_branch": "main"
+      }
+    },
+    "base": {
+      "label": "KMiri-rs:main",
+      "ref": "main",
+      "sha": "af2b2f602e0c5443959cb780671446550ae7e90b",
+      "user": {
+        "login": "KMiri-rs",
+        "id": 257443784,
+        "node_id": "O_kgDOD1hHyA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/257443784?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/KMiri-rs",
+        "html_url": "https://github.com/KMiri-rs",
+        "followers_url": "https://api.github.com/users/KMiri-rs/followers",
+        "following_url": "https://api.github.com/users/KMiri-rs/following{/other_user}",
+        "gists_url": "https://api.github.com/users/KMiri-rs/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/KMiri-rs/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/KMiri-rs/subscriptions",
+        "organizations_url": "https://api.github.com/users/KMiri-rs/orgs",
+        "repos_url": "https://api.github.com/users/KMiri-rs/repos",
+        "events_url": "https://api.github.com/users/KMiri-rs/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/KMiri-rs/received_events",
+        "type": "Organization",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "repo": {
+        "id": 1142996588,
+        "node_id": "R_kgDORCC-bA",
+        "name": "KMiri",
+        "full_name": "KMiri-rs/KMiri",
+        "private": false,
+        "owner": {
+          "login": "KMiri-rs",
+          "id": 257443784,
+          "node_id": "O_kgDOD1hHyA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/257443784?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/KMiri-rs",
+          "html_url": "https://github.com/KMiri-rs",
+          "followers_url": "https://api.github.com/users/KMiri-rs/followers",
+          "following_url": "https://api.github.com/users/KMiri-rs/following{/other_user}",
+          "gists_url": "https://api.github.com/users/KMiri-rs/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/KMiri-rs/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/KMiri-rs/subscriptions",
+          "organizations_url": "https://api.github.com/users/KMiri-rs/orgs",
+          "repos_url": "https://api.github.com/users/KMiri-rs/repos",
+          "events_url": "https://api.github.com/users/KMiri-rs/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/KMiri-rs/received_events",
+          "type": "Organization",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/KMiri-rs/KMiri",
+        "description": null,
+        "fork": false,
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri",
+        "forks_url": "https://api.github.com/repos/KMiri-rs/KMiri/forks",
+        "keys_url": "https://api.github.com/repos/KMiri-rs/KMiri/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/KMiri-rs/KMiri/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/KMiri-rs/KMiri/teams",
+        "hooks_url": "https://api.github.com/repos/KMiri-rs/KMiri/hooks",
+        "issue_events_url": "https://api.github.com/repos/KMiri-rs/KMiri/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/KMiri-rs/KMiri/events",
+        "assignees_url": "https://api.github.com/repos/KMiri-rs/KMiri/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/KMiri-rs/KMiri/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/KMiri-rs/KMiri/tags",
+        "blobs_url": "https://api.github.com/repos/KMiri-rs/KMiri/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/KMiri-rs/KMiri/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/KMiri-rs/KMiri/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/KMiri-rs/KMiri/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/KMiri-rs/KMiri/languages",
+        "stargazers_url": "https://api.github.com/repos/KMiri-rs/KMiri/stargazers",
+        "contributors_url": "https://api.github.com/repos/KMiri-rs/KMiri/contributors",
+        "subscribers_url": "https://api.github.com/repos/KMiri-rs/KMiri/subscribers",
+        "subscription_url": "https://api.github.com/repos/KMiri-rs/KMiri/subscription",
+        "commits_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/KMiri-rs/KMiri/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/KMiri-rs/KMiri/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/KMiri-rs/KMiri/merges",
+        "archive_url": "https://api.github.com/repos/KMiri-rs/KMiri/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/KMiri-rs/KMiri/downloads",
+        "issues_url": "https://api.github.com/repos/KMiri-rs/KMiri/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/KMiri-rs/KMiri/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/KMiri-rs/KMiri/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/KMiri-rs/KMiri/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/KMiri-rs/KMiri/labels{/name}",
+        "releases_url": "https://api.github.com/repos/KMiri-rs/KMiri/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/KMiri-rs/KMiri/deployments",
+        "created_at": "2026-01-27T04:15:25Z",
+        "updated_at": "2026-07-20T13:27:57Z",
+        "pushed_at": "2026-07-20T13:27:02Z",
+        "git_url": "git://github.com/KMiri-rs/KMiri.git",
+        "ssh_url": "git@github.com:KMiri-rs/KMiri.git",
+        "clone_url": "https://github.com/KMiri-rs/KMiri.git",
+        "svn_url": "https://github.com/KMiri-rs/KMiri",
+        "homepage": null,
+        "size": 139,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "language": "Rust",
+        "has_issues": true,
+        "has_projects": false,
+        "has_downloads": true,
+        "has_wiki": false,
+        "has_pages": false,
+        "has_discussions": true,
+        "forks_count": 0,
+        "mirror_url": null,
+        "archived": false,
+        "disabled": false,
+        "open_issues_count": 17,
+        "license": null,
+        "allow_forking": true,
+        "is_template": false,
+        "web_commit_signoff_required": false,
+        "has_pull_requests": true,
+        "pull_request_creation_policy": "all",
+        "topics": [],
+        "visibility": "public",
+        "forks": 0,
+        "open_issues": 17,
+        "watchers": 0,
+        "default_branch": "main"
+      }
+    },
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/KMiri-rs/KMiri/pulls/22"
+      },
+      "html": {
+        "href": "https://github.com/KMiri-rs/KMiri/pull/22"
+      },
+      "issue": {
+        "href": "https://api.github.com/repos/KMiri-rs/KMiri/issues/22"
+      },
+      "comments": {
+        "href": "https://api.github.com/repos/KMiri-rs/KMiri/issues/22/comments"
+      },
+      "review_comments": {
+        "href": "https://api.github.com/repos/KMiri-rs/KMiri/pulls/22/comments"
+      },
+      "review_comment": {
+        "href": "https://api.github.com/repos/KMiri-rs/KMiri/pulls/comments{/number}"
+      },
+      "commits": {
+        "href": "https://api.github.com/repos/KMiri-rs/KMiri/pulls/22/commits"
+      },
+      "statuses": {
+        "href": "https://api.github.com/repos/KMiri-rs/KMiri/statuses/bd8d6ba2d2cd24236168fbf2f02597dc898184c2"
+      }
+    },
+    "author_association": "MEMBER",
+    "auto_merge": null,
+    "assignee": null,
+    "active_lock_reason": null,
+    "merged": true,
+    "mergeable": null,
+    "rebaseable": null,
+    "mergeable_state": "unknown",
+    "merged_by": {
+      "login": "zjp-CN",
+      "id": 25300418,
+      "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/zjp-CN",
+      "html_url": "https://github.com/zjp-CN",
+      "followers_url": "https://api.github.com/users/zjp-CN/followers",
+      "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+      "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+      "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+      "repos_url": "https://api.github.com/users/zjp-CN/repos",
+      "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "comments": 0,
+    "review_comments": 0,
+    "maintainer_can_modify": false,
+    "commits": 19,
+    "additions": 3924,
+    "deletions": 3,
+    "changed_files": 21
+  },
+  "issue": {
+    "url": "https://api.github.com/repos/KMiri-rs/KMiri/issues/22",
+    "repository_url": "https://api.github.com/repos/KMiri-rs/KMiri",
+    "labels_url": "https://api.github.com/repos/KMiri-rs/KMiri/issues/22/labels{/name}",
+    "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/issues/22/comments",
+    "events_url": "https://api.github.com/repos/KMiri-rs/KMiri/issues/22/events",
+    "html_url": "https://github.com/KMiri-rs/KMiri/pull/22",
+    "id": 4281658574,
+    "node_id": "PR_kwDORCC-bM7TQ6z2",
+    "number": 22,
+    "title": "Feat: add GDB support of script and docker image",
+    "user": {
+      "login": "zjp-CN",
+      "id": 25300418,
+      "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/zjp-CN",
+      "html_url": "https://github.com/zjp-CN",
+      "followers_url": "https://api.github.com/users/zjp-CN/followers",
+      "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+      "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+      "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+      "repos_url": "https://api.github.com/users/zjp-CN/repos",
+      "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "labels": [],
+    "state": "closed",
+    "locked": false,
+    "assignees": [],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2026-04-17T09:47:45Z",
+    "updated_at": "2026-04-17T09:48:02Z",
+    "closed_at": "2026-04-17T09:48:00Z",
+    "assignee": null,
+    "author_association": "MEMBER",
+    "issue_field_values": [],
+    "type": null,
+    "active_lock_reason": null,
+    "draft": false,
+    "pull_request": {
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/pulls/22",
+      "html_url": "https://github.com/KMiri-rs/KMiri/pull/22",
+      "diff_url": "https://github.com/KMiri-rs/KMiri/pull/22.diff",
+      "patch_url": "https://github.com/KMiri-rs/KMiri/pull/22.patch",
+      "merged_at": "2026-04-17T09:48:00Z"
+    },
+    "body": "This PR mainly adds GDB scripts and dockerfile to debug miri easily. \r\n\r\nThe GDB version is locked to a fairly new version at `18.0.50.20260403-git`, because `miri.py` script needs the `on_selected_context` event callback which is only available since Jan, 2026.\r\n\r\nSo there is a dockerfile to install GDB from source code, and `tool/run_docker.sh` to start the evironment.\r\n\r\nIn the container, we can run `tool/install_miri_osdk.sh` to install miri & osdk, and test GDB as follows:\r\n\r\n```bash\r\ncd KMiri/tests/os/\r\nOSDK_LOCAL_DEV=1 rust-gdb -x miri.gdb --args cargo osdk miri test\r\n```\r\n\r\n\r\nGDB session will continue to the breakpoints; adjust breakpoints.gdb at will.\r\n\r\n<img width=\"1920\" height=\"1130\" alt=\"miri-gdb\" src=\"https://github.com/user-attachments/assets/c2811ddf-6836-48d3-a3d3-28e64a6fa29e\" />\r\n\r\nSubmodules of KMiri and Asterinas has been updated, and several bugs are fixed\r\n* https://github.com/KMiri-rs/KMiri/issues/6\r\n* https://github.com/KMiri-rs/KMiri/issues/17\r\n* https://github.com/KMiri-rs/KMiri/issues/18",
+    "closed_by": {
+      "login": "zjp-CN",
+      "id": 25300418,
+      "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/zjp-CN",
+      "html_url": "https://github.com/zjp-CN",
+      "followers_url": "https://api.github.com/users/zjp-CN/followers",
+      "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+      "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+      "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+      "repos_url": "https://api.github.com/users/zjp-CN/repos",
+      "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/issues/22/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "timeline_url": "https://api.github.com/repos/KMiri-rs/KMiri/issues/22/timeline",
+    "performed_via_github_app": null,
+    "state_reason": null
+  },
+  "issue_comments": [],
+  "review_comments": [],
+  "reviews": [],
+  "files": [
+    {
+      "sha": "17e3200d7a032e2dc624321577b8ef411ecfafe6",
+      "filename": ".github/workflows/gdb.yaml",
+      "status": "added",
+      "additions": 16,
+      "deletions": 0,
+      "changes": 16,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/.github%2Fworkflows%2Fgdb.yaml",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/.github%2Fworkflows%2Fgdb.yaml",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/.github%2Fworkflows%2Fgdb.yaml?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -0,0 +1,16 @@\n+name: GDB\n+\n+on:\n+  push:\n+\n+jobs:\n+  GDB:\n+    runs-on: ubuntu-latest\n+    steps:\n+      - uses: actions/checkout@v6\n+\n+      - name: Build GDB Image\n+        run: podman build -t gdb tool/gdb\n+\n+      - name: Run GDB container\n+        run: podman run -it localhost/gdb gdb --version"
+    },
+    {
+      "sha": "839abc4ccfe773751a8c208dfd41d0cb602ab580",
+      "filename": ".github/workflows/kmiri.yaml",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 0,
+      "changes": 4,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/.github%2Fworkflows%2Fkmiri.yaml",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/.github%2Fworkflows%2Fkmiri.yaml",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/.github%2Fworkflows%2Fkmiri.yaml?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -58,3 +58,7 @@ jobs:\n           VDSO_LIBRARY_DIR: $GITHUB_WORKSPACE/env/linux_vdso\n           RUSTFLAGS: --cfg=miri\n         run: echo $VDSO_LIBRARY_DIR && make test\n+\n+      - name: make check-ostd\n+        working-directory: asterinas\n+        run: make check-ostd"
+    },
+    {
+      "sha": "2f7896d1d1365eafb0da03d9fe456fac81408487",
+      "filename": ".gitignore",
+      "status": "added",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/.gitignore",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/.gitignore",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/.gitignore?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -0,0 +1 @@\n+target/"
+    },
+    {
+      "sha": "6bca292340ce9e41e0ae94d4ca1a9166ca778d61",
+      "filename": "asterinas",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": null,
+      "raw_url": null,
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/asterinas?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -1 +1 @@\n-Subproject commit ea47dca295aa2760a028a584d2ef9b8b13292549\n+Subproject commit 6bca292340ce9e41e0ae94d4ca1a9166ca778d61"
+    },
+    {
+      "sha": "e25fd598d2dca75cab622df23a76efd532ae7272",
+      "filename": "kmiri",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": null,
+      "raw_url": null,
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/kmiri?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -1 +1 @@\n-Subproject commit cc2d666003657a5adf4b5dc7e742888310295e97\n+Subproject commit e25fd598d2dca75cab622df23a76efd532ae7272"
+    },
+    {
+      "sha": "ad5f746f41ffdf91077789db3823721bacb72dee",
+      "filename": "old/miri-cchanging",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": null,
+      "raw_url": null,
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/old%2Fmiri-cchanging?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -1 +1 @@\n-Subproject commit 874a114c0d2935f5e63e015696433bed7ef91954\n+Subproject commit ad5f746f41ffdf91077789db3823721bacb72dee"
+    },
+    {
+      "sha": "4472ca6fa331a634d32370bcd42ab0a07e50d39a",
+      "filename": "tests/os/.gdb_history",
+      "status": "added",
+      "additions": 256,
+      "deletions": 0,
+      "changes": 256,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2F.gdb_history",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2F.gdb_history",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/tests%2Fos%2F.gdb_history?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -0,0 +1,256 @@\n+tui enable \n+tui disable \n+fin\n+p kind\n+p ptr\n+fin\n+tui enable \n+tui disable \n+fin\n+p ptr\n+n\n+p ptr\n+p/x ptr\n+i variables ptr\n+da\n+fin\n+p arg_pl\n+p arg_place\n+n\n+p arg_place\n+n\n+p arg_place\n+da\n+p/x arg_place\n+s\n+c\n+miri\n+miri \n+i inferiors \n+miri\n+c\n+p offset\n+n\n+p base_paddr\n+p/x base_paddr\n+p kind\n+n\n+p allocation\n+n\n+p/x base_ptr\n+fin\n+p ptr\n+record\n+n\n+miri\n+n\n+s\n+fin\n+s\n+fin\n+s\n+n\n+s\n+n\n+s\n+n\n+s\n+n\n+n\n+s\n+n\n+s\n+m\n+n\n+tui enable \n+n\n+s\n+n\n+p base_addr\n+n\n+p/x base_paddr\n+n\n+p base_ptr\n+miri\n+c\n+c\n+miri\n+c\n+miri\n+c\n+n\n+n\n+n 4\n+p base_ptr\n+p base_paddr \n+fin\n+p ptr\n+miri\n+c\n+n 10\n+n\n+p allocation\n+reverse-next\n+miri\n+c\n+advance 686\n+c\n+miri\n+c\n+advance 686\n+da\n+tui enable \n+fin\n+n\n+p ptr\n+n\n+p arg_place\n+tui disable \n+p arg_place\n+p/x arg_place\n+miri\n+c\n+n\n+show args\n+i proc\n+miri\n+c\n+n 10\n+n\n+n\n+p base_paddr \n+p/x base_paddr \n+c\n+n\n+p arg_place\n+p/x arg_place\n+s\n+n\n+s\n+n\n+s\n+s\n+n\n+s\n+n\n+miri\n+miri\n+n\n+s\n+n\n+s\n+s\n+p/x vaddr\n+p 0x555556302408\n+p *0x555556302408\n+p/x miri::mirch::config::PHYSICAL_MEM_CONFIG \n+p/x miri::mirch::config::PHYSICAL_MEM_CONFIG.kernel_code_base_vaddr\n+p config\n+,iri\n+miri\n+n\n+p base_addr\n+p/x base_addr\n+p this.machine.alloc_addresses\n+p this\n+p/x addr\n+miri\n+n\n+p tag\n+p addr\n+p/x addr\n+n\n+n\n+p/x base_addr\n+p/x base_addr addr\n+p/x addr\n+miri\n+p addr\n+n\n+tui enable \n+p actual_addr\n+c\n+n\n+p addr\n+n\n+[/x addr\n+p/x addr\n+n\n+p offset\n+n\n+c\n+i b\n+delete 2\n+c\n+miri\n+n\n+b b src/alloc_addresses/mod.rs:617\n+miri\n+miri\n+p/x offset\n+n\n+s\n+fin\n+n\n+n\n+p/x base_vaddr\n+s\n+n\n+s\n+p/x vaddr\n+fin\n+fin\n+p/x base_addr\n+n\n+p/x base_addr\n+i functions addr_from_alloc_id_uncached\n+i functions addr_from_alloc_id\n+i functions miri::alloc_addresses::EvalContextExt\n+i functions EvalContextExtPriv\n+miri\n+n\n+s\n+fin\n+n\n+s\n+i functions addr_from_alloc_id_uncached\n+i functions miri::alloc_addresses::EvalContextExt::addr_from_alloc_id\n+da\n+source dash.gdb \n+n\n+n\n+p base_vaddr \n+p/x base_vaddr \n+n\n+miri\n+n\n+s\n+fin\n+n\n+s\n+n\n+si\n+x/gx $rbx+0x6e0\n+si\n+p this\n+n\n+n\n+da\n+s\n+n\n+b\n+c\n+s\n+n\n+n 5\n+b\n+delete 3\n+n\n+b\n+delete 4\n+i nb\n+i n\n+i b\n+b 1432\n+c\n+c"
+    },
+    {
+      "sha": "29c6801bdb7954c06e12c906d240d84415e9249a",
+      "filename": "tests/os/Cargo.toml",
+      "status": "added",
+      "additions": 10,
+      "deletions": 0,
+      "changes": 10,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2FCargo.toml",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2FCargo.toml",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/tests%2Fos%2FCargo.toml?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -0,0 +1,10 @@\n+[package]\n+name = \"os\"\n+version = \"0.1.0\"\n+edition = \"2024\"\n+\n+[dependencies.ostd]\n+path = \"../../asterinas/ostd\"\n+\n+[workspace]\n+exclude = [\"target/osdk/base\", \"target/osdk/test-base\"]"
+    },
+    {
+      "sha": "4a38b1eb861d0d12d3d6546f1c36d45b7cfef5ca",
+      "filename": "tests/os/OSDK.toml",
+      "status": "added",
+      "additions": 21,
+      "deletions": 0,
+      "changes": 21,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2FOSDK.toml",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2FOSDK.toml",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/tests%2Fos%2FOSDK.toml?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -0,0 +1,21 @@\n+project_type = \"kernel\"\n+\n+[boot]\n+method = \"grub-rescue-iso\"\n+\n+[qemu]\n+args = \"\"\"\\\n+    -machine q35,kernel-irqchip=split \\\n+    -cpu Icelake-Server,+x2apic \\\n+    --no-reboot \\\n+    -m 8G \\\n+    -smp 1 \\\n+    -nographic \\\n+    -serial chardev:mux \\\n+    -monitor chardev:mux \\\n+    -chardev stdio,id=mux,mux=on,signal=off \\\n+    -display none \\\n+    -device isa-debug-exit,iobase=0xf4,iosize=0x04 \\\n+    -drive if=pflash,format=raw,unit=0,readonly=on,file=/root/ovmf/release/OVMF.fd \\\n+    -drive if=pflash,format=raw,unit=1,file=/root/ovmf/release/OVMF_VARS.fd \\\n+\"\"\"\n\\ No newline at end of file"
+    },
+    {
+      "sha": "3b6410af7fdfae630f1c2c4b809ac8143e52a92c",
+      "filename": "tests/os/before_memory_deallocation.txt",
+      "status": "added",
+      "additions": 3224,
+      "deletions": 0,
+      "changes": 3224,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2Fbefore_memory_deallocation.txt",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2Fbefore_memory_deallocation.txt",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/tests%2Fos%2Fbefore_memory_deallocation.txt?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2"
+    },
+    {
+      "sha": "ebb177d083bd3f4a50e89b20d323d16ffd590608",
+      "filename": "tests/os/breakpoints.gdb",
+      "status": "added",
+      "additions": 25,
+      "deletions": 0,
+      "changes": 25,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2Fbreakpoints.gdb",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2Fbreakpoints.gdb",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/tests%2Fos%2Fbreakpoints.gdb?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -0,0 +1,25 @@\n+# b miri::main\n+# b src/bin/miri.rs:754\n+# b miri::eval::create_ecx\n+\n+# eval_entry\n+# b src/eval.rs:486\n+\n+# adjust_alloc_root_pointer\n+# b src/alloc_addresses/mod.rs:617\n+#\n+# b miri::alloc_addresses::EvalContextExt::addr_from_alloc_id\n+# b src/alloc_addresses/mod.rs:250\n+\n+# eval_entry\n+b src/eval.rs:489\n+\n+# schedule\n+b src/concurrency/thread.rs:849\n+\n+b miri::borrow_tracker::AllocState::before_memory_deallocation\n+\n+# b src/shims/os_str.rs:76\n+# b src/alloc_addresses/mod.rs:739\n+# b src/mirch/physical_mem.rs:185\n+# b src/alloc_addresses/mod.rs:741"
+    },
+    {
+      "sha": "c22ddf56d4ba4c3c0bcf263f7038262e3977c5b9",
+      "filename": "tests/os/dash.gdb",
+      "status": "added",
+      "additions": 19,
+      "deletions": 0,
+      "changes": 19,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2Fdash.gdb",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2Fdash.gdb",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/tests%2Fos%2Fdash.gdb?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -0,0 +1,19 @@\n+# dashboard styling\n+dash -layout assembly source stack variables\n+dash source -style highlight-line True\n+dash source -style height 20\n+dash source -style path True\n+dash stack -style limit 3\n+dash assembly -style height 5\n+dash assembly -style function False\n+dash assembly -style opcodes True\n+dash assembly -style highlight-line True\n+dash variables -style align True\n+dash variables -style compact False\n+dash variables -style sort True\n+dash -enabled on\n+\n+# 设置汇编语法\n+set disassembly-flavor intel\n+# 显示人类可读的函数名（这个貌似需要在 GDB 运行之后执行）\n+set print asm-demangle on"
+    },
+    {
+      "sha": "7d3ae7b2cfb658ce00a7265bf88c4ae1d4c90983",
+      "filename": "tests/os/miri.gdb",
+      "status": "added",
+      "additions": 19,
+      "deletions": 0,
+      "changes": 19,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2Fmiri.gdb",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2Fmiri.gdb",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/tests%2Fos%2Fmiri.gdb?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -0,0 +1,19 @@\n+# Disable dashboard.\n+dash -enabled off\n+\n+# Run multiple subprocesses concurrently.\n+set schedule-multiple on\n+# Capture subprocesses.\n+set detach-on-fork off\n+\n+# Don't download libc debug info.\n+set debuginfod enabled off\n+\n+# Don't stop at these signals.\n+handle SIGUSR1 noprint nostop pass\n+handle SIGCHLD nostop noprint pass\n+\n+# Register the `hi` command.\n+source miri.py\n+miri run\n+"
+    },
+    {
+      "sha": "30f84055a4a880a0e02232286252619e0ee520d4",
+      "filename": "tests/os/miri.py",
+      "status": "added",
+      "additions": 207,
+      "deletions": 0,
+      "changes": 207,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2Fmiri.py",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2Fmiri.py",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/tests%2Fos%2Fmiri.py?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -0,0 +1,207 @@\n+from __future__ import annotations\n+from dataclasses import dataclass, field\n+from typing import Dict\n+from pprint import pp\n+import textwrap\n+import gdb\n+\n+@dataclass\n+class ProcessStatus:\n+    exited: bool\n+    cmdline: CmdLine\n+    parent: int | None = None\n+\n+CMD = \"miri\"\n+ARG_RUN = \"run\"\n+ARG_DISCONNECT = \"disconnect\"\n+ARG_SET_BREAKPOINTS = \"set-breakpoints\"\n+\n+class Miri(gdb.Command):\n+    def __init__(self):\n+        # The command name is `miri`.\n+        super().__init__(CMD, gdb.COMMAND_USER)\n+        # inferior number as the key and parent\n+        self.child_to_parent: Dict[int, ProcessStatus] = {}\n+\n+        # Register event callbacks.\n+        gdb.events.stop.connect(self.stop_handler)\n+        gdb.events.exited.connect(self.exit_handler)\n+        gdb.events.selected_context.connect(self.on_selected_context)\n+\n+    def invoke(self, arg, from_tty):\n+        # The entry point `miri run` in GDB.\n+        if arg == ARG_RUN:\n+            gdb.execute(\"catch exec\")\n+            gdb.execute(\"run\")\n+            return\n+\n+        # Unregister event callbacks.\n+        if arg == ARG_DISCONNECT:\n+            gdb.events.stop.disconnect(self.stop_handler)\n+            gdb.events.exited.disconnect(self.exit_handler)\n+            gdb.events.selected_context.disconnect(self.on_selected_context)\n+            return\n+        \n+        if arg == ARG_SET_BREAKPOINTS:\n+            gdb.execute(\"source breakpoints.gdb\")\n+            return\n+\n+        # Just run `miri` in GDB to start debuging.\n+        if not arg:\n+            gdb.execute(f\"{CMD} {ARG_DISCONNECT}\")\n+            gdb.execute(f\"{CMD} {ARG_SET_BREAKPOINTS}\")\n+            gdb.execute(\"source dash.gdb\")\n+            gdb.execute(\"continue\")\n+\n+    def complete(self, text, word):\n+        word = word or \"\"\n+        candidates = [ARG_RUN, ARG_DISCONNECT, ARG_SET_BREAKPOINTS]\n+        return [c for c in candidates if c.startswith(word)]\n+\n+    def run_continue(self):\n+        cmdline = CmdLine.new(gdb.selected_inferior().pid)\n+        if cmdline.is_miri_interested(\"os_osdk_bin\"):\n+            print(f\"😎 Reached miri: {pp(cmdline)}\")\n+            gdb.execute(\"miri\")\n+            return \n+        try:\n+            gdb.execute(\"continue\")\n+        except gdb.error as e:\n+            print(f\"[continue error] {e}\")\n+\n+    def stop_handler(self, event):\n+        printInferior(\"stop_handler\")\n+        # Execute `continue` in the stop event callback doesn't work.\n+        # We need to run `continue` in post_event.\n+        gdb.post_event(lambda: self.run_continue())\n+\n+    def exit_handler(self, event):\n+        printInferior(\"exit_handler\")\n+        # We don't need to remove-inferiors, because follow-exec-mode defaults \n+        # to same, meaning dead process will be overridden or cleaned up during exec by GDB.\n+        # But we do need to return to a parent or proper process.\n+        gdb.post_event(lambda: self.exit_to_another_inferior())\n+\n+    def exit_to_another_inferior(self):\n+        self.update_inferiors()\n+\n+        child = gdb.selected_inferior().num\n+        target = None\n+        if (val := self.inferior_to_be_returned(child)):\n+            target = val \n+        elif (val := self.miri_inferior()):\n+            target = val\n+        else:\n+            target = self.newest_alive_inferior()\n+        if not target:\n+            print(f\"[No target inferior to jump back for child {child}]\")\n+            return\n+        \n+        cmdline = self.child_to_parent[target].cmdline\n+        print(f\"back to {target}\")\n+        # pp(self.child_to_parent, sort_dicts=True)\n+        gdb.execute(f\"inferior {target}\")\n+\n+    def update_inferiors(self):\n+        present = set()\n+        for inf in gdb.inferiors():\n+            num = inf.num\n+            present.add(num)\n+            item = self.child_to_parent.get(num)\n+            exited = not inf.is_valid() or inf.pid == 0\n+            if item:\n+                item.exited = exited\n+            else:\n+                self.child_to_parent[num] = ProcessStatus(exited, cmdline=CmdLine.new(inf.pid))\n+\n+        remove = []\n+        for num in self.child_to_parent:\n+            if num not in present: remove.append(num)\n+        for num in remove:\n+            del self.child_to_parent[num]\n+\n+    def inferior_to_be_returned(self, num: int) -> int | None:\n+        child = self.child_to_parent.get(num)\n+        if child is None: return None\n+\n+        parentNum = child.parent\n+        parent = self.child_to_parent.get(parentNum)\n+        if parent is None: return None\n+        return self.inferior_to_be_returned(parentNum) if parent.exited else parentNum\n+\n+    def newest_alive_inferior(self) -> int | None:\n+        \"\"\"Choose the largest alive inferior.\"\"\"\n+        alive = []\n+        for num, status in self.child_to_parent.items():\n+            if not status.exited: alive.append(num)\n+        return max(alive) if alive else None\n+\n+    def miri_inferior(self) -> int | None:\n+        \"\"\"Return the living miri or cargo-miri inferior number\"\"\"\n+        miri = []\n+        cargo_miri = []\n+        for num, status in self.child_to_parent.items():\n+            if status.exited:\n+                continue\n+            if status.cmdline.is_cargo_miri():\n+                cargo_miri.append(num)\n+                continue\n+            if status.cmdline.is_miri():\n+                miri.append(num)\n+        print(f\"miri={miri}\\tcargo-miri={cargo_miri}\")\n+        if miri:\n+            return max(miri)\n+        else:\n+            return num if cargo_miri and (num := max(cargo_miri)) else None\n+\n+    def on_selected_context(self, event):\n+        print(f\"[on_selected_context] current inferior: {event.inferior.num}, thread: {event.thread.num} frame: {event.frame.name}\")\n+        self.run_continue()\n+\n+def filename(inf) -> str:\n+    return fname if (fname := inf.progspace.filename) else \"Unknown\"\n+\n+def printInferior(s):\n+    inf = gdb.selected_inferior()\n+    num = inf.num\n+    pid = inf.pid\n+    print(f\"[inferior={num} pid={pid}] [{s}] {filename(inf)}\")\n+\n+# cat /proc/2850975/cmdline | xargs -0\n+# `/home/gh-zjp-CN/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/cargo-miri runner /home/gh-zjp-CN/KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/os-osdk-bin`\n+@dataclass\n+class CmdLine:\n+    cmdline: str\n+    exe: str\n+\n+    @classmethod\n+    def new(cls, pid: int) -> CmdLine | None:\n+        if pid == 0:\n+            print(\"Process not started\")\n+            return None\n+        \n+        cmdline = \"\"\n+        # 直接读系统文件，不需要 GDB 暂停程序\n+        try:\n+            with open(f\"/proc/{pid}/cmdline\", \"r\") as f:\n+                # 替换 null 字符为空格\n+                cmdline = f.read().replace('\\x00', ' ')\n+        except Exception as e:\n+            print(e)\n+            return None\n+\n+        return cls(cmdline, exe=cmdline.split(\" \")[0].strip())\n+\n+    def is_miri_interested(self, crate: str) -> bool:\n+        # /home/gh-zjp-CN/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri --sysroot /home/gh-zjp-CN/.cache/miri\n+        # --crate-name os_osdk_bin ...\n+        return self.is_miri() and crate in self.cmdline\n+\n+    def is_miri(self) -> bool:\n+        return self.exe.endswith(\"/miri\")\n+\n+    def is_cargo_miri(self) -> bool:\n+        return self.exe.endswith(\"/cargo-miri\")\n+\n+# Register the command.\n+Miri()"
+    },
+    {
+      "sha": "421a17e84df7efa99ef7cd92758a09b739747479",
+      "filename": "tests/os/miri.sh",
+      "status": "added",
+      "additions": 26,
+      "deletions": 0,
+      "changes": 26,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2Fmiri.sh",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2Fmiri.sh",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/tests%2Fos%2Fmiri.sh?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -0,0 +1,26 @@\n+# Some instances of Cargo & miri subprocess\n+/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/cargo-miri miri run --features --target-dir /KMiri/tests/os/target -Zbuild-std=core,alloc,compiler_builtins -Zbuild-std-features=compiler-builtins-mem --profile=dev\n+/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/cargo-miri miri run --features --target-dir /KMiri/tests/os/target -Zbuild-std=core,alloc,compiler_builtins -Zbuild-std-features=compiler-builtins-mem --profile=dev\n+/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/cargo run --target x86_64-unknown-linux-gnu --config target.'cfg(all())'.runner=[\"/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/cargo-miri\", 'runner'] --target-dir /KMiri/tests/os/target/miri --features -Zbuild-std=core,alloc,compiler_builtins -Zbuild-std-features=compiler-builtins-mem --profile=dev\n+/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri - --crate-name ___ --print=file-names --crate-type bin --crate-type rlib --crate-type dylib --crate-type cdylib --crate-type staticlib --crate-type proc-macro --print=sysroot --print=split-debuginfo --print=crate-name --print=cfg -Wwarnings\n+/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri --print=target-spec-json -Zunstable-options\n+/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/cargo-miri /root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri - --crate-name ___ --print=file-names --cfg ktest -C link-arg=-Tmiri.ld -C relocation-model=static -C relro-level=off -C force-unwind-tables=yes --check-cfg cfg(ktest) -C no-redzone=y -C target-feature=+ermsb --target x86_64-unknown-linux-gnu --crate-type bin --crate-type rlib --crate-type dylib --crate-type cdylib --crate-type staticlib --crate-type proc-macro --print=sysroot --print=split-debuginfo --print=crate-name --print=cfg -Wwarnings\n+/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri --sysroot /root/.cache/miri - --crate-name ___ --print=file-names --cfg ktest -C link-arg=-Tmiri.ld -C relocation-model=static -C relro-level=off -C force-unwind-tables=yes --check-cfg cfg(ktest) -C no-redzone=y -C target-feature=+ermsb --target x86_64-unknown-linux-gnu --crate-type bin --crate-type rlib --crate-type dylib --crate-type cdylib --crate-type staticlib --crate-type proc-macro --print=sysroot --print=split-debuginfo --print=crate-name --print=cfg -Wwarnings\n+/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri --sysroot /root/.cache/miri --print=target-spec-json -Zunstable-options --cfg ktest -C link-arg=-Tmiri.ld -C relocation-model=static -C relro-level=off -C force-unwind-tables=yes --check-cfg cfg(ktest) -C no-redzone=y -C target-feature=+ermsb --target x86_64-unknown-linux-gnu\n+/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/cargo-miri /root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri -vV\n+/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri -vV\n+/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/cargo-miri /root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri --crate-name core --edition=2024 /root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --diagnostic-width=160 --crate-type lib --emit=dep-info,metadata,link -C embed-bitcode=no -C debuginfo=2 --warn=unexpected_cfgs --check-cfg cfg(no_fp_fmt_parse) --check-cfg cfg(feature, values(any())) --check-cfg cfg(target_has_reliable_f16) --check-cfg cfg(target_has_reliable_f16_math) --check-cfg cfg(target_has_reliable_f128) --check-cfg cfg(target_has_reliable_f128_math) --check-cfg cfg(llvm_enzyme) --check-cfg cfg(docsrs,test) --check-cfg cfg(feature, values(\"debug_refcell\", \"llvm_enzyme\", \"optimize_for_size\", \"panic_immediate_abort\")) -C metadata=ef6fe3f059612669 -C extra-filename=-c06e9e878cc0a338 --out-dir /KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/deps --target x86_64-unknown-linux-gnu -Z force-unstable-if-unmarked -L dependency=/KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/deps -L dependency=/KMiri/tests/os/target/miri/debug/deps --cap-lints allow --cfg ktest -C link-arg=-Tmiri.ld -C relocation-model=static -C relro-level=off -C force-unwind-tables=yes --check-cfg cfg(ktest) -C no-redzone=y -C target-feature=+ermsb\n+/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/cargo-miri /root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri --crate-name build_script_build --edition=2024 /root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/compiler-builtins/compiler-builtins/build.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --diagnostic-width=160 --crate-type bin --emit=dep-info,link -C embed-bitcode=no -C debuginfo=2 --cfg feature=\"compiler-builtins\" --cfg feature=\"default\" --cfg feature=\"mem\" --cfg feature=\"rustc-dep-of-std\" --check-cfg cfg(docsrs,test) --check-cfg cfg(feature, values(\"c\", \"compiler-builtins\", \"default\", \"mangled-names\", \"mem\", \"no-asm\", \"no-f16-f128\", \"rustc-dep-of-std\", \"unstable-public-internals\")) -C metadata=d83307d617167ae3 -C extra-filename=-f6fb91fede64f633 --out-dir /KMiri/tests/os/target/miri/debug/build/compiler_builtins-f6fb91fede64f633 -Z force-unstable-if-unmarked -L dependency=/KMiri/tests/os/target/miri/debug/deps --cap-lints allow\n+/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri --sysroot /root/.cache/miri --crate-name core --edition=2024 /root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --diagnostic-width=160 --crate-type lib --emit=dep-info,metadata,link -C embed-bitcode=no -C debuginfo=2 --warn=unexpected_cfgs --check-cfg cfg(no_fp_fmt_parse) --check-cfg cfg(feature, values(any())) --check-cfg cfg(target_has_reliable_f16) --check-cfg cfg(target_has_reliable_f16_math) --check-cfg cfg(target_has_reliable_f128) --check-cfg cfg(target_has_reliable_f128_math) --check-cfg cfg(llvm_enzyme) --check-cfg cfg(docsrs,test) --check-cfg cfg(feature, values(\"debug_refcell\", \"llvm_enzyme\", \"optimize_for_size\", \"panic_immediate_abort\")) -C metadata=ef6fe3f059612669 -C extra-filename=-c06e9e878cc0a338 --out-dir /KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/deps --target x86_64-unknown-linux-gnu -Z force-unstable-if-unmarked -L dependency=/KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/deps -L dependency=/KMiri/tests/os/target/miri/debug/deps --cap-lints allow --cfg ktest -C link-arg=-Tmiri.ld -C relocation-model=static -C relro-level=off -C force-unwind-tables=yes --check-cfg cfg(ktest) -C no-redzone=y -C target-feature=+ermsb\n+\n+\n+   Compiling libc v0.2.184\n+process 18631 is executing new program: /root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/cargo-miri\n+[Switching to process 18631]\n+                                                                                                                                                                Thread 24.1 \"cargo-miri\" hit Catchpoint 1 (exec'd /root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/cargo-miri), 0x000073b012936540 in ??    () from /lib64/ld-linux-x86-64.so.2\n+[inferior=24 pid=18631] [stop_handler] /root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/cargo-miri\n+>>> i proc cmdline\n+process 18631\n+cmdline = '/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/cargo-miri /root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri --crate-name build_script_build --edition=2021 /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.45/build.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --diagnostic-width=160 --crate-type bin --emit=dep-info,link -C embed-bitcode=no -C debuginfo=2 --cfg feature=\"default\" --cfg feature=\"proc-macro\" --check-cfg cfg(docsrs,test) --check-cfg cfg(feature, values(\"default\", \"proc-macro\")) -C metadata=e65c8405da662b61 -C extra-filename=-6bf14492c6bdd53d --out-dir /KMiri/tests/os/target/miri/debug/build/quote-6bf14492c6bdd53d -L dependency=/KMiri/tests/os/target/miri/debug/deps --cap-lints allow'\n+\n+/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri --sysroot /root/.cache/miri --crate-name core --edition=2024 /root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --diagnostic-width=160 --crate-type lib --emit=dep-info,metadata,link -C embed-bitcode=no -C debuginfo=2 --warn=unexpected_cfgs --check-cfg cfg(no_fp_fmt_parse) --check-cfg cfg(feature, values(any())) --check-cfg cfg(target_has_reliable_f16) --check-cfg cfg(target_has_reliable_f16_math) --check-cfg cfg(target_has_reliable_f128) --check-cfg cfg(target_has_reliable_f128_math) --check-cfg cfg(llvm_enzyme) --check-cfg cfg(docsrs,test) --check-cfg cfg(feature, values(\"debug_refcell\", \"llvm_enzyme\", \"optimize_for_size\", \"panic_immediate_abort\")) -C metadata=ef6fe3f059612669 -C extra-filename=-c06e9e878cc0a338 --out-dir /KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/deps --target x86_64-unknown-linux-gnu -Z force-unstable-if-unmarked -L dependency=/KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/deps -L dependency=/KMiri/tests/os/target/miri/debug/deps --cap-lints allow --cfg ktest -C link-arg=-Tmiri.ld -C relocation-model=static -C relro-level=off -C force-unwind-tables=yes --check-cfg cfg(ktest) -C no-redzone=y -C target-feature=+ermsb"
+    },
+    {
+      "sha": "924515c4a856607ffeff10e3c4ffafd24c4b8b23",
+      "filename": "tests/os/rust-toolchain.toml",
+      "status": "added",
+      "additions": 3,
+      "deletions": 0,
+      "changes": 3,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2Frust-toolchain.toml",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2Frust-toolchain.toml",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/tests%2Fos%2Frust-toolchain.toml?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -0,0 +1,3 @@\n+[toolchain]\n+channel = \"nightly-2025-12-06\"\n+components = [\"rust-src\", \"rustc-dev\", \"llvm-tools-preview\"]\n\\ No newline at end of file"
+    },
+    {
+      "sha": "bb5486add995589be42031771e60d55d05daf984",
+      "filename": "tests/os/src/lib.rs",
+      "status": "added",
+      "additions": 9,
+      "deletions": 0,
+      "changes": 9,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2Fsrc%2Flib.rs",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tests%2Fos%2Fsrc%2Flib.rs",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/tests%2Fos%2Fsrc%2Flib.rs?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -0,0 +1,9 @@\n+#![no_std]\n+#![deny(unsafe_code)]\n+\n+use ostd::prelude::*;\n+\n+#[ostd::main]\n+fn kernel_main() {\n+    println!(\"Hello world from guest kernel!\");\n+}"
+    },
+    {
+      "sha": "fd9aa4b5377e49ade973df0b980c8403445ebe39",
+      "filename": "tool/README.md",
+      "status": "added",
+      "additions": 10,
+      "deletions": 0,
+      "changes": 10,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tool%2FREADME.md",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tool%2FREADME.md",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/tool%2FREADME.md?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -0,0 +1,10 @@\n+# Commands to debug kmiri\n+\n+```bash\n+# Build and run the kmiri docker image.\n+tool/run_docker.sh\n+\n+# Install miri and osdk in the container.\n+cd /KMiri\n+tool/install_miri_osdk.sh\n+```"
+    },
+    {
+      "sha": "76e0f650848ce8493a4c66f95d8b813c371a51a0",
+      "filename": "tool/gdb/Dockerfile",
+      "status": "added",
+      "additions": 40,
+      "deletions": 0,
+      "changes": 40,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tool%2Fgdb%2FDockerfile",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tool%2Fgdb%2FDockerfile",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/tool%2Fgdb%2FDockerfile?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -0,0 +1,40 @@\n+FROM ubuntu:latest AS builder\n+ENV DEBIAN_FRONTEND=noninteractive\n+\n+# Prepare gdb enviroment.\n+RUN apt-get update \\\n+    && apt-get install -y \\\n+        build-essential git bison flex texinfo libgmp-dev libmpfr-dev \\\n+        libmpc-dev libexpat1-dev libncurses5-dev python3-dev zlib1g-dev guile-3.0-dev \\\n+    && rm -rf /var/lib/apt/lists/*\n+\n+# Install latest gdb from source code.\n+WORKDIR /gdb\n+RUN git clone --depth 1 https://sourceware.org/git/binutils-gdb.git . \\\n+    && mkdir build && cd build \\\n+    && ../configure \\\n+        --prefix=/usr/local \\\n+        --enable-gold \\\n+        --enable-plugins \\\n+        --enable-targets=all \\\n+        --enable-64-bit-bfd \\\n+        --enable-sim \\\n+        --with-python=python3 \\\n+        --with-guile \\\n+        --enable-tui \\\n+        --with-source-highlight \\\n+        --with-expat \\\n+        --disable-werror \\\n+    && make -j$(nproc) \\\n+    && make install \\\n+    && cd / && rm /gdb -rf\n+\n+WORKDIR /\n+# Install Rust and dev tools.\n+RUN apt update && apt install -y fish less vim curl wget \\\n+    && wget -P ~ https://github.com/cyrus-and/gdb-dashboard/raw/master/.gdbinit \\\n+    && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain none -y \\\n+    && . \"$HOME/.cargo/env\" \\\n+    && rustup default nightly-2025-12-06 \\\n+    && rustup component add miri \\\n+"
+    },
+    {
+      "sha": "07da5183657be3bd978aa95f8f63101688d17341",
+      "filename": "tool/install_miri_osdk.sh",
+      "status": "added",
+      "additions": 18,
+      "deletions": 0,
+      "changes": 18,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tool%2Finstall_miri_osdk.sh",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tool%2Finstall_miri_osdk.sh",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/tool%2Finstall_miri_osdk.sh?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -0,0 +1,18 @@\n+#!/bin/bash\n+\n+set -eoux pipefail\n+\n+# Install miri.\n+cd /KMiri/kmiri\n+cargo clean\n+./miri install --debug --features=tracing\n+\n+# Install osdk.\n+cd /KMiri/asterinas\n+cargo clean\n+OSDK_LOCAL_DEV=1 make install_osdk\n+\n+# Test if gdb works.\n+cd /KMiri/tests/os\n+OSDK_LOCAL_DEV=1 cargo osdk miri test\n+OSDK_LOCAL_DEV=1 rust-gdb -x miri.gdb --args cargo osdk miri test"
+    },
+    {
+      "sha": "e7ab020c3a98fd4d6b0f17ebc6a8cc46b351881d",
+      "filename": "tool/run_docker.sh",
+      "status": "added",
+      "additions": 13,
+      "deletions": 0,
+      "changes": 13,
+      "blob_url": "https://github.com/KMiri-rs/KMiri/blob/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tool%2Frun_docker.sh",
+      "raw_url": "https://github.com/KMiri-rs/KMiri/raw/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/tool%2Frun_docker.sh",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/KMiri/contents/tool%2Frun_docker.sh?ref=bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "patch": "@@ -0,0 +1,13 @@\n+#!/bin/bash\n+\n+set -eoux pipefail\n+\n+podman build -t gdb tool/gdb\n+\n+# Map current local directory to /KMiri in the container.\n+# Allow to disable ASLR (address space randomization) by GDB.\n+podman run -d -v .:/KMiri \\\n+  --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \\\n+  --replace --name kmiri localhost/gdb sleep infinity\n+\n+podman exec -it kmiri fish"
+    }
+  ],
+  "commits": [
+    {
+      "sha": "2f2c5be21e2c8923d0c3ac1ce0d94d79fd1ffe59",
+      "node_id": "C_kwDORCC-bNoAKDJmMmM1YmUyMWUyYzg5MjNkMGMzYWMxY2UwZDk0ZDc5ZmQxZmZlNTk",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-02-12T09:36:36Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-02-12T09:36:36Z"
+        },
+        "message": "ci(asterinas): make check-ostd",
+        "tree": {
+          "sha": "bad584ef7a6734942030e4eae5c34ce6d0202133",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/bad584ef7a6734942030e4eae5c34ce6d0202133"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/2f2c5be21e2c8923d0c3ac1ce0d94d79fd1ffe59",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/2f2c5be21e2c8923d0c3ac1ce0d94d79fd1ffe59",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/2f2c5be21e2c8923d0c3ac1ce0d94d79fd1ffe59",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/2f2c5be21e2c8923d0c3ac1ce0d94d79fd1ffe59/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "4fda442d53a35e8010f0d3a78e58bbf051d6e63c",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/4fda442d53a35e8010f0d3a78e58bbf051d6e63c",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/4fda442d53a35e8010f0d3a78e58bbf051d6e63c"
+        }
+      ]
+    },
+    {
+      "sha": "3750ded90769d6f6c3b5b85f5fb8e8917ea0885b",
+      "node_id": "C_kwDORCC-bNoAKDM3NTBkZWQ5MDc2OWQ2ZjZjM2I1Yjg1ZjVmYjhlODkxN2VhMDg4NWI",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-03-10T10:19:15Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-03-10T10:19:15Z"
+        },
+        "message": "submodule: update kmiri",
+        "tree": {
+          "sha": "274d865a5f970697125f3b6586e2e8f12470687d",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/274d865a5f970697125f3b6586e2e8f12470687d"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/3750ded90769d6f6c3b5b85f5fb8e8917ea0885b",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/3750ded90769d6f6c3b5b85f5fb8e8917ea0885b",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/3750ded90769d6f6c3b5b85f5fb8e8917ea0885b",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/3750ded90769d6f6c3b5b85f5fb8e8917ea0885b/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "2f2c5be21e2c8923d0c3ac1ce0d94d79fd1ffe59",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/2f2c5be21e2c8923d0c3ac1ce0d94d79fd1ffe59",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/2f2c5be21e2c8923d0c3ac1ce0d94d79fd1ffe59"
+        }
+      ]
+    },
+    {
+      "sha": "019ebd6539529bd1056407a89a4401c2e4361d0e",
+      "node_id": "C_kwDORCC-bNoAKDAxOWViZDY1Mzk1MjliZDEwNTY0MDdhODlhNDQwMWMyZTQzNjFkMGU",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-03-10T10:21:48Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-03-10T10:21:48Z"
+        },
+        "message": "submodule: update miri-cchanging",
+        "tree": {
+          "sha": "dc2f82677ba394c49ef880c02efaa991a59b8e1d",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/dc2f82677ba394c49ef880c02efaa991a59b8e1d"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/019ebd6539529bd1056407a89a4401c2e4361d0e",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/019ebd6539529bd1056407a89a4401c2e4361d0e",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/019ebd6539529bd1056407a89a4401c2e4361d0e",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/019ebd6539529bd1056407a89a4401c2e4361d0e/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "3750ded90769d6f6c3b5b85f5fb8e8917ea0885b",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/3750ded90769d6f6c3b5b85f5fb8e8917ea0885b",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/3750ded90769d6f6c3b5b85f5fb8e8917ea0885b"
+        }
+      ]
+    },
+    {
+      "sha": "3ff5469a542f77fbe7c42fa08dbfdf40cc82e121",
+      "node_id": "C_kwDORCC-bNoAKDNmZjU0NjlhNTQyZjc3ZmJlN2M0MmZhMDhkYmZkZjQwY2M4MmUxMjE",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-03-29T02:10:55Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-03-29T02:12:17Z"
+        },
+        "message": "tests/os: gdb scripts to stop at miri subprocess",
+        "tree": {
+          "sha": "5a2f3cd2b525d34e7db898d858d585cb8668a8e9",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/5a2f3cd2b525d34e7db898d858d585cb8668a8e9"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/3ff5469a542f77fbe7c42fa08dbfdf40cc82e121",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/3ff5469a542f77fbe7c42fa08dbfdf40cc82e121",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/3ff5469a542f77fbe7c42fa08dbfdf40cc82e121",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/3ff5469a542f77fbe7c42fa08dbfdf40cc82e121/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "019ebd6539529bd1056407a89a4401c2e4361d0e",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/019ebd6539529bd1056407a89a4401c2e4361d0e",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/019ebd6539529bd1056407a89a4401c2e4361d0e"
+        }
+      ]
+    },
+    {
+      "sha": "05fe19fc352a876a4f63bafe80aa7b648e9cd215",
+      "node_id": "C_kwDORCC-bNoAKDA1ZmUxOWZjMzUyYTg3NmE0ZjYzYmFmZTgwYWE3YjY0OGU5Y2QyMTU",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-03-29T06:30:13Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-03-29T06:30:13Z"
+        },
+        "message": "gdb: switch to inferior that doesn't exit",
+        "tree": {
+          "sha": "5ba8b7000944c91685f920d001b9d9b72eb22b70",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/5ba8b7000944c91685f920d001b9d9b72eb22b70"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/05fe19fc352a876a4f63bafe80aa7b648e9cd215",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/05fe19fc352a876a4f63bafe80aa7b648e9cd215",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/05fe19fc352a876a4f63bafe80aa7b648e9cd215",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/05fe19fc352a876a4f63bafe80aa7b648e9cd215/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "3ff5469a542f77fbe7c42fa08dbfdf40cc82e121",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/3ff5469a542f77fbe7c42fa08dbfdf40cc82e121",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/3ff5469a542f77fbe7c42fa08dbfdf40cc82e121"
+        }
+      ]
+    },
+    {
+      "sha": "9e46b97f4baf73fe8d6e731965975829c58536c6",
+      "node_id": "C_kwDORCC-bNoAKDllNDZiOTdmNGJhZjczZmU4ZDZlNzMxOTY1OTc1ODI5YzU4NTM2YzY",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-03-29T08:40:32Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-03-29T08:40:32Z"
+        },
+        "message": "gdb: stop at miri or cargo-miri",
+        "tree": {
+          "sha": "71767f502d63a13e459ef8f7cc8ce60c013f2e84",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/71767f502d63a13e459ef8f7cc8ce60c013f2e84"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/9e46b97f4baf73fe8d6e731965975829c58536c6",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/9e46b97f4baf73fe8d6e731965975829c58536c6",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/9e46b97f4baf73fe8d6e731965975829c58536c6",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/9e46b97f4baf73fe8d6e731965975829c58536c6/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "05fe19fc352a876a4f63bafe80aa7b648e9cd215",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/05fe19fc352a876a4f63bafe80aa7b648e9cd215",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/05fe19fc352a876a4f63bafe80aa7b648e9cd215"
+        }
+      ]
+    },
+    {
+      "sha": "af0fa9b82c05fd9a4bdaddb654971b3fc37c946f",
+      "node_id": "C_kwDORCC-bNoAKGFmMGZhOWI4MmMwNWZkOWE0YmRhZGRiNjU0OTcxYjNmYzM3Yzk0NmY",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-03-29T10:15:55Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-03-29T10:21:42Z"
+        },
+        "message": "gdb: managed to directly reach to miri process, but can't move on\n\n>>> c\nContinuing.\n[New Thread 0x7fffe63ff6c0 (LWP 2880273)]\n[New Thread 0x7fffe61fe6c0 (LWP 2880274)]\n[New Thread 0x7fffe59fd6c0 (LWP 2880275)]\nwarning: unstable feature specified for `-Ctarget-feature`: `ermsb`\n  |\n  = note: this feature is not stably supported; its behavior can change in the future\n\nThread 48.3 \"rustc\" hit Breakpoint 4.5, miri::eval::create_ecx (tcx=..., entry_id=..., entry_type=..., config=0x7fffe616fa98, genmc_ctx=...) at src/eval.rs:288\n288         let layout_cx = LayoutCx::new(tcx, typing_env);\n>>> c\nCannot execute this command while the selected thread is running.\n\n>>> i threads\n  Id   Target Id                                        Frame\n  3.1  Thread 0x7ffff7e9ad80 (LWP 2879732) \"cargo-osdk\" (running)\n* 48.1 Thread 0x7ffff7f536c0 (LWP 2880002) \"miri\"       (running)\n  48.2 Thread 0x7fffe63ff6c0 (LWP 2880273) \"ctrl-c\"     (running)\n  48.3 Thread 0x7fffe61fe6c0 (LWP 2880274) \"rustc\"      miri::eval::create_ecx (tcx=..., entry_id=..., entry_type=..., config=0x7fffe616fa98, genmc_ctx=...)\n    at src/eval.rs:288\n  48.4 Thread 0x7fffe59fd6c0 (LWP 2880275) \"rustc\"      (running)\n\n>>> interrupt -a\n\nFatal signal: Segmentation fault\n----- Backtrace -----\n0x6421d50adbc6 ???\n0x6421d51d0ecd ???\n0x6421d51d10a3 ???\n0x758fc004532f ???\n        ./signal/../sysdeps/unix/sysv/linux/x86_64/libc_sigaction.c:0\n0x6421d5439ee4 ???\n0x6421d523b1ae ???\n0x6421d50e6464 ???\n0x6421d5450727 ???\n0x6421d51d1967 ???\n0x6421d51d3143 ???\n0x6421d51d2332 ???\n0x758fc140e9e4 ???\n0x6421d51d2495 ???\n0x6421d51d2663 ???\n0x6421d5493a5c ???\n0x6421d565e975 ???\n0x6421d565f4f7 ???\n0x6421d52adea9 ???\n0x6421d52b0f04 ???\n0x6421d4ff7dab ???\n0x758fc002a1c9 __libc_start_call_main\n        ../sysdeps/nptl/libc_start_call_main.h:58\n0x758fc002a28a __libc_start_main_impl\n        ../csu/libc-start.c:360\n0x6421d50061f4 ???\n0xffffffffffffffff ???\n---------------------\nA fatal error internal to GDB has been detected, further\ndebugging is not possible.  GDB will now terminate.",
+        "tree": {
+          "sha": "3d8d7c5e8ee9bf068794a04e7d81d041439242c3",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/3d8d7c5e8ee9bf068794a04e7d81d041439242c3"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/af0fa9b82c05fd9a4bdaddb654971b3fc37c946f",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/af0fa9b82c05fd9a4bdaddb654971b3fc37c946f",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/af0fa9b82c05fd9a4bdaddb654971b3fc37c946f",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/af0fa9b82c05fd9a4bdaddb654971b3fc37c946f/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "9e46b97f4baf73fe8d6e731965975829c58536c6",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/9e46b97f4baf73fe8d6e731965975829c58536c6",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/9e46b97f4baf73fe8d6e731965975829c58536c6"
+        }
+      ]
+    },
+    {
+      "sha": "3e8b3af2f2c71a7a1f21c5c81103e7c54f6fe979",
+      "node_id": "C_kwDORCC-bNoAKDNlOGIzYWYyZjJjNzFhN2ExZjIxYzVjODExMDNlN2M1NGY2ZmU5Nzk",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-03-31T15:01:56Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-03-31T15:09:28Z"
+        },
+        "message": "ci(GDB): build from latest git source and test in podman",
+        "tree": {
+          "sha": "86d90f20e1cb574e23d7c564e6e0f07e7910021e",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/86d90f20e1cb574e23d7c564e6e0f07e7910021e"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/3e8b3af2f2c71a7a1f21c5c81103e7c54f6fe979",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/3e8b3af2f2c71a7a1f21c5c81103e7c54f6fe979",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/3e8b3af2f2c71a7a1f21c5c81103e7c54f6fe979",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/3e8b3af2f2c71a7a1f21c5c81103e7c54f6fe979/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "af0fa9b82c05fd9a4bdaddb654971b3fc37c946f",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/af0fa9b82c05fd9a4bdaddb654971b3fc37c946f",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/af0fa9b82c05fd9a4bdaddb654971b3fc37c946f"
+        }
+      ]
+    },
+    {
+      "sha": "1abee24eca892b3572e1a6ba2fb588c1d46c861d",
+      "node_id": "C_kwDORCC-bNoAKDFhYmVlMjRlY2E4OTJiMzU3MmUxYTZiYTJmYjU4OGMxZDQ2Yzg2MWQ",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-03T08:47:48Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-03T08:47:48Z"
+        },
+        "message": "script: install rust, kmiri, and osdk in docker",
+        "tree": {
+          "sha": "a02e591ce58a34938e3dc87ccd447fc63b85c005",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/a02e591ce58a34938e3dc87ccd447fc63b85c005"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/1abee24eca892b3572e1a6ba2fb588c1d46c861d",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/1abee24eca892b3572e1a6ba2fb588c1d46c861d",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/1abee24eca892b3572e1a6ba2fb588c1d46c861d",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/1abee24eca892b3572e1a6ba2fb588c1d46c861d/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "3e8b3af2f2c71a7a1f21c5c81103e7c54f6fe979",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/3e8b3af2f2c71a7a1f21c5c81103e7c54f6fe979",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/3e8b3af2f2c71a7a1f21c5c81103e7c54f6fe979"
+        }
+      ]
+    },
+    {
+      "sha": "85270e6c7a6b7349b6954b69e72a1aa238cb9ba1",
+      "node_id": "C_kwDORCC-bNoAKDg1MjcwZTZjN2E2YjczNDliNjk1NGI2OWU3MmExYWEyMzhjYjliYTE",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-04T16:19:49Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-04T16:19:49Z"
+        },
+        "message": "gdb: hi can directly reach to the os_osdk_bin miri",
+        "tree": {
+          "sha": "c573be7b357b35bc910ecfeaca274e617c1627e6",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/c573be7b357b35bc910ecfeaca274e617c1627e6"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/85270e6c7a6b7349b6954b69e72a1aa238cb9ba1",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/85270e6c7a6b7349b6954b69e72a1aa238cb9ba1",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/85270e6c7a6b7349b6954b69e72a1aa238cb9ba1",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/85270e6c7a6b7349b6954b69e72a1aa238cb9ba1/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "1abee24eca892b3572e1a6ba2fb588c1d46c861d",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/1abee24eca892b3572e1a6ba2fb588c1d46c861d",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/1abee24eca892b3572e1a6ba2fb588c1d46c861d"
+        }
+      ]
+    },
+    {
+      "sha": "77657d5ca0c02c54438750e1735c103db87088cb",
+      "node_id": "C_kwDORCC-bNoAKDc3NjU3ZDVjYTBjMDJjNTQ0Mzg3NTBlMTczNWMxMDNkYjg3MDg4Y2I",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-04T17:06:49Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-04T17:11:06Z"
+        },
+        "message": "gdb: clean up hi command code",
+        "tree": {
+          "sha": "056e86828bec979b42f1397b3c540c6cccb1aee7",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/056e86828bec979b42f1397b3c540c6cccb1aee7"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/77657d5ca0c02c54438750e1735c103db87088cb",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/77657d5ca0c02c54438750e1735c103db87088cb",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/77657d5ca0c02c54438750e1735c103db87088cb",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/77657d5ca0c02c54438750e1735c103db87088cb/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "85270e6c7a6b7349b6954b69e72a1aa238cb9ba1",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/85270e6c7a6b7349b6954b69e72a1aa238cb9ba1",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/85270e6c7a6b7349b6954b69e72a1aa238cb9ba1"
+        }
+      ]
+    },
+    {
+      "sha": "916ac9d5a883a66deff2d7481eef456d3d94fa32",
+      "node_id": "C_kwDORCC-bNoAKDkxNmFjOWQ1YTg4M2E2NmRlZmYyZDc0ODFlZWY0NTZkM2Q5NGZhMzI",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-04T17:13:46Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-04T17:13:46Z"
+        },
+        "message": "gdb: fix docker",
+        "tree": {
+          "sha": "036a269d49663168332f91e639babf93808c19cf",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/036a269d49663168332f91e639babf93808c19cf"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/916ac9d5a883a66deff2d7481eef456d3d94fa32",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/916ac9d5a883a66deff2d7481eef456d3d94fa32",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/916ac9d5a883a66deff2d7481eef456d3d94fa32",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/916ac9d5a883a66deff2d7481eef456d3d94fa32/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "77657d5ca0c02c54438750e1735c103db87088cb",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/77657d5ca0c02c54438750e1735c103db87088cb",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/77657d5ca0c02c54438750e1735c103db87088cb"
+        }
+      ]
+    },
+    {
+      "sha": "2777abe7d77099806e896cbfdb716589006aab6e",
+      "node_id": "C_kwDORCC-bNoAKDI3NzdhYmU3ZDc3MDk5ODA2ZTg5NmNiZmRiNzE2NTg5MDA2YWFiNmU",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-04T17:26:13Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-04T17:26:13Z"
+        },
+        "message": "gdb: rename hi to miri; add `miri run` as the staring command\n\n$ OSDK_LOCAL_DEV=1 rust-gdb -x miri.gdb --args cargo osdk miri test\n\n[inferior=11 pid=24546] [stop_handler] /root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri\nCmdLine(cmdline='/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri '\n                '--sysroot /root/.cache/miri --crate-name os_osdk_bin '\n                '--edition=2024 src/main.rs --diagnostic-width=160 '\n                '--crate-type bin --emit=dep-info,link -C embed-bitcode=no -C '\n                'debuginfo=2 --check-cfg cfg(docsrs,test) --check-cfg '\n                'cfg(feature, values()) -C metadata=3c55ea96a279459d -C '\n                'extra-filename=-8dc6884ab917371a --out-dir '\n                '/KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/deps '\n                '--target x86_64-unknown-linux-gnu -C '\n                'incremental=/KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/incremental '\n                '-L '\n                'dependency=/KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/deps '\n                '-L dependency=/KMiri/tests/os/target/miri/debug/deps --extern '\n                'noprelude:alloc=/KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/deps/liballoc-5948990b7399f447.rlib '\n                '--extern '\n                'noprelude:compiler_builtins=/KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/deps/libcompiler_builtins-71d74021048da112.rlib '\n                '--extern '\n                'noprelude:core=/KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/deps/libcore-c06e9e878cc0a338.rlib '\n                '--extern '\n                'os=/KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/deps/libos-7481199661742493.rlib '\n                '--extern '\n                'osdk_frame_allocator=/KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/deps/libosdk_frame_allocator-9272120b690dac3f.rlib '\n                '--extern '\n                'osdk_heap_allocator=/KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/deps/libosdk_heap_allocator-2b88bcb05529d8ae.rlib '\n                '--extern '\n                'osdk_test_kernel=/KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/deps/libosdk_test_kernel-d1fa7507f2bd8d2f.rlib '\n                '--extern '\n                'ostd=/KMiri/tests/os/target/miri/x86_64-unknown-linux-gnu/debug/deps/libostd-4a82d7d6f9c5165c.rlib '\n                '-Z unstable-options --cfg ktest -C link-arg=-Tmiri.ld -C '\n                'relocation-model=static -C relro-level=off -C '\n                'force-unwind-tables=yes --check-cfg cfg(ktest) -C '\n                'no-redzone=y -C target-feature=+ermsb -- ',\n        exe='/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri')\n😎 Reached miri: None\nmiri\ndisconnect       run              set-breakpoints\n>>> miri run\nBreakpoint 2 at 0x5e41f22792f9: file src/bin/miri.rs, line 440.\nBreakpoint 3 at 0x5e41f227ff16: file src/eval.rs, line 288.\n>>> i b\nNum     Type           Disp Enb Address            What\n1       catchpoint     keep y                      exec, program \"/root/.rustup/toolchains/nightly-2025-12-06-x86_64-unknown-linux-gnu/bin/miri\"\n        catchpoint already hit 32 times\n2       breakpoint     keep y   0x00005e41f22792f9 in miri::main at src/bin/miri.rs:440 inf 11\n3       breakpoint     keep y   0x00005e41f227ff16 in miri::eval::create_ecx at src/eval.rs:288 inf 11\n>>> c\nContinuing.\n[Thread debugging using libthread_db enabled]\nUsing host libthread_db library \"/lib/x86_64-linux-gnu/libthread_db.so.1\".\n\nThread 11.1 \"miri\" hit Breakpoint 2, miri::main () at src/bin/miri.rs:440\n440         let early_dcx = EarlyDiagCtxt::new(ErrorOutputType::default());\n>>> c\nContinuing.\n[New Thread 0x7475637ff6c0 (LWP 24580) (id 11.20)]\n[New Thread 0x7475635fe6c0 (LWP 24581) (id 11.21)]\n[New Thread 0x747562dfd6c0 (LWP 24582) (id 11.22)]\nwarning: unstable feature specified for `-Ctarget-feature`: `ermsb`\n  |\n  = note: this feature is not stably supported; its behavior can change in the future\n\n[Switching to Thread 0x7475635fe6c0 (LWP 24581)]\n\nThread 11.21 \"rustc\" hit Breakpoint 3, miri::eval::create_ecx (tcx=..., entry_id=..., entry_type=..., config=0x74756356fa98, genmc_ctx=...) at src/eval.rs:288\n288         let layout_cx = LayoutCx::new(tcx, typing_env);",
+        "tree": {
+          "sha": "8a48a48e7240442640189e524ebf929e44072052",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/8a48a48e7240442640189e524ebf929e44072052"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/2777abe7d77099806e896cbfdb716589006aab6e",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/2777abe7d77099806e896cbfdb716589006aab6e",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/2777abe7d77099806e896cbfdb716589006aab6e",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/2777abe7d77099806e896cbfdb716589006aab6e/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "916ac9d5a883a66deff2d7481eef456d3d94fa32",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/916ac9d5a883a66deff2d7481eef456d3d94fa32",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/916ac9d5a883a66deff2d7481eef456d3d94fa32"
+        }
+      ]
+    },
+    {
+      "sha": "fa32594237be34b7ea13a81654f9b223c19ccf92",
+      "node_id": "C_kwDORCC-bNoAKGZhMzI1OTQyMzdiZTM0YjdlYTEzYTgxNjU0ZjliMjIzYzE5Y2NmOTI",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-14T02:51:26Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-14T02:51:26Z"
+        },
+        "message": "install_miri_osdk: install miri with tracing support",
+        "tree": {
+          "sha": "4e1396d3fddd6497e877c32eb9f9d835884dac22",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/4e1396d3fddd6497e877c32eb9f9d835884dac22"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/fa32594237be34b7ea13a81654f9b223c19ccf92",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/fa32594237be34b7ea13a81654f9b223c19ccf92",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/fa32594237be34b7ea13a81654f9b223c19ccf92",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/fa32594237be34b7ea13a81654f9b223c19ccf92/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "2777abe7d77099806e896cbfdb716589006aab6e",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/2777abe7d77099806e896cbfdb716589006aab6e",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/2777abe7d77099806e896cbfdb716589006aab6e"
+        }
+      ]
+    },
+    {
+      "sha": "74a6b7cf306149afcc4c24203f6a83de33fe9fc0",
+      "node_id": "C_kwDORCC-bNoAKDc0YTZiN2NmMzA2MTQ5YWZjYzRjMjQyMDNmNmE4M2RlMzNmZTlmYzA",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-14T02:52:00Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-14T02:52:00Z"
+        },
+        "message": "install_miri_osdk: install and run osdk with OSDK_LOCAL_DEV=1",
+        "tree": {
+          "sha": "50c64d3ca0be7ec0e7e95b5241967749fe4ce89f",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/50c64d3ca0be7ec0e7e95b5241967749fe4ce89f"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/74a6b7cf306149afcc4c24203f6a83de33fe9fc0",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/74a6b7cf306149afcc4c24203f6a83de33fe9fc0",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/74a6b7cf306149afcc4c24203f6a83de33fe9fc0",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/74a6b7cf306149afcc4c24203f6a83de33fe9fc0/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "fa32594237be34b7ea13a81654f9b223c19ccf92",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/fa32594237be34b7ea13a81654f9b223c19ccf92",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/fa32594237be34b7ea13a81654f9b223c19ccf92"
+        }
+      ]
+    },
+    {
+      "sha": "94a74af53b096add4bb25d9ffebaba7ee4fa0864",
+      "node_id": "C_kwDORCC-bNoAKDk0YTc0YWY1M2IwOTZhZGQ0YmIyNWQ5ZmZlYmFiYTdlZTRmYTA4NjQ",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-14T02:52:24Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-14T02:52:24Z"
+        },
+        "message": "README: list commands to debug kmiri",
+        "tree": {
+          "sha": "aa90831302817efa72d687af0e01bce856f5670c",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/aa90831302817efa72d687af0e01bce856f5670c"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/94a74af53b096add4bb25d9ffebaba7ee4fa0864",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/94a74af53b096add4bb25d9ffebaba7ee4fa0864",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/94a74af53b096add4bb25d9ffebaba7ee4fa0864",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/94a74af53b096add4bb25d9ffebaba7ee4fa0864/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "74a6b7cf306149afcc4c24203f6a83de33fe9fc0",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/74a6b7cf306149afcc4c24203f6a83de33fe9fc0",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/74a6b7cf306149afcc4c24203f6a83de33fe9fc0"
+        }
+      ]
+    },
+    {
+      "sha": "4295988869d09468c23d33742a1c3c0ddfce6f19",
+      "node_id": "C_kwDORCC-bNoAKDQyOTU5ODg4NjlkMDk0NjhjMjNkMzM3NDJhMWMzYzBkZGZjZTZmMTk",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-14T02:53:56Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-14T02:53:56Z"
+        },
+        "message": "gdb: `miri run` as entry point; `miri` as start point; load breakpoints.gdb",
+        "tree": {
+          "sha": "3bc8f05aa2c890c6dae75e9d3c12bd0ceb43a658",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/3bc8f05aa2c890c6dae75e9d3c12bd0ceb43a658"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/4295988869d09468c23d33742a1c3c0ddfce6f19",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/4295988869d09468c23d33742a1c3c0ddfce6f19",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/4295988869d09468c23d33742a1c3c0ddfce6f19",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/4295988869d09468c23d33742a1c3c0ddfce6f19/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "94a74af53b096add4bb25d9ffebaba7ee4fa0864",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/94a74af53b096add4bb25d9ffebaba7ee4fa0864",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/94a74af53b096add4bb25d9ffebaba7ee4fa0864"
+        }
+      ]
+    },
+    {
+      "sha": "6c3f768dba96e3bd9ae946432b02f617e5994140",
+      "node_id": "C_kwDORCC-bNoAKDZjM2Y3NjhkYmE5NmUzYmQ5YWU5NDY0MzJiMDJmNjE3ZTU5OTQxNDA",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-14T02:54:16Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-14T02:54:16Z"
+        },
+        "message": "gdb: adjust dash styling",
+        "tree": {
+          "sha": "16d42a012bcf5c399a545a4f2bc595aa9f421a1d",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/16d42a012bcf5c399a545a4f2bc595aa9f421a1d"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/6c3f768dba96e3bd9ae946432b02f617e5994140",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/6c3f768dba96e3bd9ae946432b02f617e5994140",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/6c3f768dba96e3bd9ae946432b02f617e5994140",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/6c3f768dba96e3bd9ae946432b02f617e5994140/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "4295988869d09468c23d33742a1c3c0ddfce6f19",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/4295988869d09468c23d33742a1c3c0ddfce6f19",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/4295988869d09468c23d33742a1c3c0ddfce6f19"
+        }
+      ]
+    },
+    {
+      "sha": "bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "node_id": "C_kwDORCC-bNoAKGJkOGQ2YmEyZDJjZDI0MjM2MTY4ZmJmMmYwMjU5N2RjODk4MTg0YzI",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-14T03:00:28Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-04-14T03:00:28Z"
+        },
+        "message": "tests/os: dump disassemble and backtrace on before_memory_deallocation",
+        "tree": {
+          "sha": "762a61715797f6e6cc3e3d485ec53d2c13395245",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/trees/762a61715797f6e6cc3e3d485ec53d2c13395245"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/KMiri/git/commits/bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "html_url": "https://github.com/KMiri-rs/KMiri/commit/bd8d6ba2d2cd24236168fbf2f02597dc898184c2",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/bd8d6ba2d2cd24236168fbf2f02597dc898184c2/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "6c3f768dba96e3bd9ae946432b02f617e5994140",
+          "url": "https://api.github.com/repos/KMiri-rs/KMiri/commits/6c3f768dba96e3bd9ae946432b02f617e5994140",
+          "html_url": "https://github.com/KMiri-rs/KMiri/commit/6c3f768dba96e3bd9ae946432b02f617e5994140"
+        }
+      ]
+    }
+  ]
+}

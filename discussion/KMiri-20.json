@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4AlpiM",
+    "number": 20,
+    "title": "【第 4-5 周】修复 KMiri 错误；Miri 源码分析：内存分配过程；星绽集成 KLint",
+    "body": "# 修复 KMiri 错误\r\n\r\n* 地址溢出问题：https://github.com/KMiri-rs/KMiri/issues/6\r\n* 入口函数变动：https://github.com/KMiri-rs/KMiri/issues/17\r\n* Osdk 传递的参数问题：https://github.com/KMiri-rs/KMiri/issues/18\r\n* Miri 上游注释问题：https://github.com/rust-lang/miri/pull/4951\r\n\r\n空的 miri_start 实现已经跑通，但仍需要适配代码。比如下面的示例仍然遇到 panic\r\n* https://github.com/KMiri-rs/KMiri/issues/19\r\n\r\n```rust\r\n#[cfg(miri)]\r\n#[unsafe(no_mangle)]\r\nfn miri_start(argc: isize, _argv: *const *const u8) -> isize {\r\n    ostd::miri_println!(\"argc={}\", argc);\r\n    0\r\n}\r\n```\r\n\r\n# Miri 源码分析：内存分配过程\r\n\r\n涉及 Miri 内存类型和处理方式、Rust 编译器的解释执行抽象，以及星绽添加的内核地址空间。\r\n\r\n对于具体的 API 的内存分配过程，我记录在 [book](https://os-checker.github.io/book/checker/KernMiri/dev-logs/analyze-miri.html#%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D)。\r\n\r\nMiri 内存分配分为两层维度：\r\n* 实际数据的分配：Miri 有多种分析模式和多种分配器，对模拟的代码进行实际（堆）分配，并以 AllocId 作为索引。\r\n* 程序分析的分配：被分析的代码在不同的分析模式下有一种 base addr 的抽象层，可能并不采用实际的数据分配地址，例如\r\n  * 正常模式中，每次分配，该基地址一直基于上次记录的“模拟”地址而增加，或者回收利用地址 (GC)\r\n  * 星绽分析内核使用物理地址、虚拟地址、页表等多种分配地址的概念\r\n  * native-lib (FFI) 模式采用基于大页预分配并复制数据的策略\r\n  * GenMC 并发检测也需要自己的分配处理逻辑\r\n\r\nMiri 的最大价值是内存分析检测，因此需要弄清楚分配的模拟和处理逻辑，才能进一步正确修复和开发代码。\r\n\r\n# 星绽集成 KLint\r\n\r\n两周前的工作。把 Rust for Linux 的 KLint 的 not_using_prelude 检查和修复引入星绽，需升级 Rust 工具链和 Docker。PR 如下：\r\n\r\n* https://github.com/asterinas/asterinas/pull/3083\r\n* https://github.com/asterinas/asterinas/pull/3089\r\n* https://github.com/asterinas/asterinas/pull/3036\r\n\r\n但至今未合并。",
+    "bodyText": "修复 KMiri 错误\n\n地址溢出问题：#6\n入口函数变动：#17\nOsdk 传递的参数问题：#18\nMiri 上游注释问题：rust-lang/miri#4951\n\n空的 miri_start 实现已经跑通，但仍需要适配代码。比如下面的示例仍然遇到 panic\n\n#19\n\n#[cfg(miri)]\n#[unsafe(no_mangle)]\nfn miri_start(argc: isize, _argv: *const *const u8) -> isize {\n    ostd::miri_println!(\"argc={}\", argc);\n    0\n}\nMiri 源码分析：内存分配过程\n涉及 Miri 内存类型和处理方式、Rust 编译器的解释执行抽象，以及星绽添加的内核地址空间。\n对于具体的 API 的内存分配过程，我记录在 book。\nMiri 内存分配分为两层维度：\n\n实际数据的分配：Miri 有多种分析模式和多种分配器，对模拟的代码进行实际（堆）分配，并以 AllocId 作为索引。\n程序分析的分配：被分析的代码在不同的分析模式下有一种 base addr 的抽象层，可能并不采用实际的数据分配地址，例如\n\n正常模式中，每次分配，该基地址一直基于上次记录的“模拟”地址而增加，或者回收利用地址 (GC)\n星绽分析内核使用物理地址、虚拟地址、页表等多种分配地址的概念\nnative-lib (FFI) 模式采用基于大页预分配并复制数据的策略\nGenMC 并发检测也需要自己的分配处理逻辑\n\n\n\nMiri 的最大价值是内存分析检测，因此需要弄清楚分配的模拟和处理逻辑，才能进一步正确修复和开发代码。\n星绽集成 KLint\n两周前的工作。把 Rust for Linux 的 KLint 的 not_using_prelude 检查和修复引入星绽，需升级 Rust 工具链和 Docker。PR 如下：\n\nasterinas/asterinas#3083\nasterinas/asterinas#3089\nasterinas/asterinas#3036\n\n但至今未合并。",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/20",
+    "createdAt": "2026-04-12T17:48:15Z",
+    "updatedAt": "2026-04-12T17:48:15Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

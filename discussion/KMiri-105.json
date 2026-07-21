@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4Anusn",
+    "number": 105,
+    "title": "【第 18 周】KMiri：成功执行单核多任务；MIR 调试器：提前遍历可达的单态化函数实例信息；提议通明湖中心与操作系统训练营合作",
+    "body": "# KMiri：成功执行单核多任务\r\n\r\n1. 解决任务结束期间内存耗尽问题 https://github.com/KMiri-rs/KMiri/issues/90 。耗尽原因是任务队列为空，一直循环，无法回到主线程。一开始通过增加 `miri_terminate_current_thread` shim,告知 miri 当前任务已经结束，自行回到主线程，但直接在 KMiri 中切换线程状态会导致任务栈未被清理，产生内存泄漏\r\n* https://github.com/KMiri-rs/asterinas/pull/20\r\n* https://github.com/KMiri-rs/miri/pull/31\r\n* https://github.com/KMiri-rs/asterinas/pull/22\r\n* https://github.com/KMiri-rs/asterinas/pull/24\r\n* https://github.com/KMiri-rs/miri/pull/33\r\n\r\n2. 解决内存泄漏问题：通过正常返回 `()` 而不是 `!`，让任务函数运行结束来清理栈；并且在最终检测泄漏之前，对 Kernel 内存类型进行检查和手动释放物理内存\r\n* https://github.com/KMiri-rs/asterinas/pull/21\r\n* https://github.com/KMiri-rs/asterinas/pull/23\r\n\r\n# MIR 调试器：提前遍历可达的单态化函数实例信息\r\n\r\n关于 https://github.com/KMiri-rs/KMiri/issues/92 。使用 kmiri-helper 提前遍历可达的单态化函数实例信息，将数据存储成 JSON 文件以供调试器直接加载\r\n* https://github.com/KMiri-rs/asterinas/pull/19\r\n* https://github.com/KMiri-rs/miri/pull/30\r\n\r\n# 提议通明湖中心与操作系统训练营合作\r\n\r\n周二晚上与中心谢主任单独交流的时候，我提议与操作系统训练营合作，以此增加星绽贡献者和实习生。谢主任很赞同这个想法，并且愿意给训练营提供赞助、和陈渝老师沟通。\r\n\r\n周三我与洪亮提到这一点，并约好晚上与向老师线上交流。洪亮让我写一个[合作提议](https://docs.qq.com/doc/DTEt2WFByZ1NQWGRs)，关于两方需要什么和提供什么，但这个提议未被向老师和洪亮采纳。\r\n\r\n周四编写向老师所需的通明湖中心 AI 中台 Coding Agent [使用说明](https://docs.qq.com/aio/DTE1RdW1NeFpFU1RF?p=35k7KvJep6O1sVlklumNkT)。\r\n\r\n---\r\n\r\n会议纪要：通明湖中心与操作系统训练营合作意向交流\r\n时间：2026-07-08 20:00 - 21:00\r\n参会人员：\r\n* 清华大学/操作系统训练营：向勇老师\r\n* 通明湖中心：田洪亮、周积萍、李磊\r\n\r\n1. 对进入第三阶段的学员提供免费的 token 支持。向老师指出，在 AI 时代，学生很难有机会尝试国外先进的大模型，老师无法告诉学生如何翻墙或者通过其他渠道使用国外的大模型。根据今年春季训练营的情况，2421 人报名参加，仅约 100 人进入第三阶段，最终只有不到 20 人通过训练营。洪亮认为，如果给每人提供 100 至 200 元的大模型额度，那么费用为 1 至 2 万。这需要通明湖 AI 中台能够提供外部账号和模型额度的权限管控。\r\n2. 操作系统人才培养与复用。向老师和洪亮一致认为，操作系统训练营带来的核心收益是用 Rust 开发操作系统的人才资源。通明湖中心可以赞助训练营，在第三阶段增加星绽项目选题，培养和筛选星绽开发人才。向老师欢迎洪亮到下学期的清华大学操作系统专题训练课，专门安排一次星绽的讲课。\r\n3. 希望 KMiri 这样的内核代码检查工具可以继续开发，因为它们与操作系统无关，星绽和其他操作系统都能使用。\r\n\r\n# 总结\r\n\r\n本周 [新提交 10 个 PR、9 个 issue](https://github.com/search?q=author%3Azjp-CN+created%3A2026-07-05T23%3A59%3A00%2B08%3A00..2026-07-12T23%3A59%3A00%2B08%3A00+org%3AKMiri-rs++org%3Aasterinas+&type=pullrequests)，[关闭 11 个 PR、8 个 issue](https://github.com/search?q=author%3Azjp-CN+closed%3A2026-07-05T23%3A59%3A00%2B08%3A00..2026-07-12T23%3A59%3A00%2B08%3A00+org%3AKMiri-rs++org%3Aasterinas+&type=pullrequests)。\r\n\r\n",
+    "bodyText": "KMiri：成功执行单核多任务\n\n解决任务结束期间内存耗尽问题 #90 。耗尽原因是任务队列为空，一直循环，无法回到主线程。一开始通过增加 miri_terminate_current_thread shim,告知 miri 当前任务已经结束，自行回到主线程，但直接在 KMiri 中切换线程状态会导致任务栈未被清理，产生内存泄漏\n\n\nKMiri-rs/asterinas#20\nKMiri-rs/miri#31\nKMiri-rs/asterinas#22\nKMiri-rs/asterinas#24\nKMiri-rs/miri#33\n\n\n解决内存泄漏问题：通过正常返回 () 而不是 !，让任务函数运行结束来清理栈；并且在最终检测泄漏之前，对 Kernel 内存类型进行检查和手动释放物理内存\n\n\nKMiri-rs/asterinas#21\nKMiri-rs/asterinas#23\n\nMIR 调试器：提前遍历可达的单态化函数实例信息\n关于 #92 。使用 kmiri-helper 提前遍历可达的单态化函数实例信息，将数据存储成 JSON 文件以供调试器直接加载\n\nKMiri-rs/asterinas#19\nKMiri-rs/miri#30\n\n提议通明湖中心与操作系统训练营合作\n周二晚上与中心谢主任单独交流的时候，我提议与操作系统训练营合作，以此增加星绽贡献者和实习生。谢主任很赞同这个想法，并且愿意给训练营提供赞助、和陈渝老师沟通。\n周三我与洪亮提到这一点，并约好晚上与向老师线上交流。洪亮让我写一个合作提议，关于两方需要什么和提供什么，但这个提议未被向老师和洪亮采纳。\n周四编写向老师所需的通明湖中心 AI 中台 Coding Agent 使用说明。\n\n会议纪要：通明湖中心与操作系统训练营合作意向交流\n时间：2026-07-08 20:00 - 21:00\n参会人员：\n\n清华大学/操作系统训练营：向勇老师\n通明湖中心：田洪亮、周积萍、李磊\n\n\n对进入第三阶段的学员提供免费的 token 支持。向老师指出，在 AI 时代，学生很难有机会尝试国外先进的大模型，老师无法告诉学生如何翻墙或者通过其他渠道使用国外的大模型。根据今年春季训练营的情况，2421 人报名参加，仅约 100 人进入第三阶段，最终只有不到 20 人通过训练营。洪亮认为，如果给每人提供 100 至 200 元的大模型额度，那么费用为 1 至 2 万。这需要通明湖 AI 中台能够提供外部账号和模型额度的权限管控。\n操作系统人才培养与复用。向老师和洪亮一致认为，操作系统训练营带来的核心收益是用 Rust 开发操作系统的人才资源。通明湖中心可以赞助训练营，在第三阶段增加星绽项目选题，培养和筛选星绽开发人才。向老师欢迎洪亮到下学期的清华大学操作系统专题训练课，专门安排一次星绽的讲课。\n希望 KMiri 这样的内核代码检查工具可以继续开发，因为它们与操作系统无关，星绽和其他操作系统都能使用。\n\n总结\n本周 新提交 10 个 PR、9 个 issue，关闭 11 个 PR、8 个 issue。",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/105",
+    "createdAt": "2026-07-12T14:07:06Z",
+    "updatedAt": "2026-07-12T14:08:38Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

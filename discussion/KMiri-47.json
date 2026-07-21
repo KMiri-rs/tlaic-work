@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4Am6nM",
+    "number": 47,
+    "title": "【第 13 周】KMiri：双周会讨论和解决 alloc_meta_frames 指针出处问题；星绽：重构 short-vis-path 测试代码",
+    "body": "# 星绽：重构 short-vis-path 测试代码\r\n\r\n* 针对 https://github.com/asterinas/asterinas/pull/3247\r\n\r\n洪亮对该 crate 的测试代码进行了细致的审查，指出命名糟糕的问题和一些奇特的测试逻辑，因此我把测试代码进行了简化，在所有测试模块和结构上都带统一成 `test_说明` 的形式。\r\n\r\n# KMiri 双周会：alloc_meta_frames 指针出处和 stacked borrow 讨论\r\n\r\n时间：6 月 5 日 10:00 - 11:20\r\n\r\n人员：澄钧、我\r\n\r\n内容：\r\n* 围绕解决 https://github.com/KMiri-rs/KMiri/issues/36 \r\n* 无法改成整数运算来解决报错\r\n* 讨论解决方案\r\n  * 在 provenance 中增加 Direct variant,不处理裸指针检查\r\n  * 或者在 retype shim 中添加参数，支持 provenance 指定\r\n\r\n# 解决 alloc_meta_frames 指针出处问题\r\n\r\n结合最近的代码阅读理解和双周会讨论，应该解决了这个问题\r\n* KMiri 端：https://github.com/KMiri-rs/miri/pull/12\r\n  * 在 borrow_tracker 的 expose_tag 映射中使用原始指针，从而 Stack 在 access 期间，find_granting [可以找到](https://github.com/KMiri-rs/miri/blob/c366320aabcaffa822e347585b429e4ba8ce39f5/src/borrow_tracker/stacked_borrows/stack.rs#L222) 出处暴露情况下的授权项\r\n* 星绽端：https://github.com/KMiri-rs/asterinas/pull/3\r\n  * 上面的 KMiri 代码修复之后，又 alloc_meta_frames 被报越界问题，那么采用整数运算替代 ptr.add 操作来解决（正如澄钧一开始预料地那样）\r\n\r\n出处问题解决了，但又遇到[地址耗尽](https://github.com/KMiri-rs/KMiri/issues/49)问题，需要优化 KMiri 在内核内存分配的代码。\r\n\r\n# 其他\r\n\r\n* 我发现 KMiri 似乎在 UB 检测上有[回归](https://github.com/KMiri-rs/KMiri/discussions/46)，原本报 dangling pointer 的例子现在报 memory leaked，原因是暴露的指针依然存活且不可达\r\n  * 下周需要仔细比对和分析这个情况\r\n  * 或者需要考虑更广泛的问题：KMiri 需要兼容 Miri 的所有测试，但目前添加到内核分析专用代码已经影响了原本的分析\r\n* 整理 GDB 调试脚本到 tool/gdb 目录，在所有测试上共享调试入口，这样更方便动态跟踪 kmiri 代码的执行逻辑\r\n\r\n",
+    "bodyText": "星绽：重构 short-vis-path 测试代码\n\n针对 asterinas/asterinas#3247\n\n洪亮对该 crate 的测试代码进行了细致的审查，指出命名糟糕的问题和一些奇特的测试逻辑，因此我把测试代码进行了简化，在所有测试模块和结构上都带统一成 test_说明 的形式。\nKMiri 双周会：alloc_meta_frames 指针出处和 stacked borrow 讨论\n时间：6 月 5 日 10:00 - 11:20\n人员：澄钧、我\n内容：\n\n围绕解决 #36\n无法改成整数运算来解决报错\n讨论解决方案\n\n在 provenance 中增加 Direct variant,不处理裸指针检查\n或者在 retype shim 中添加参数，支持 provenance 指定\n\n\n\n解决 alloc_meta_frames 指针出处问题\n结合最近的代码阅读理解和双周会讨论，应该解决了这个问题\n\nKMiri 端：KMiri-rs/miri#12\n\n在 borrow_tracker 的 expose_tag 映射中使用原始指针，从而 Stack 在 access 期间，find_granting 可以找到 出处暴露情况下的授权项\n\n\n星绽端：KMiri-rs/asterinas#3\n\n上面的 KMiri 代码修复之后，又 alloc_meta_frames 被报越界问题，那么采用整数运算替代 ptr.add 操作来解决（正如澄钧一开始预料地那样）\n\n\n\n出处问题解决了，但又遇到地址耗尽问题，需要优化 KMiri 在内核内存分配的代码。\n其他\n\n我发现 KMiri 似乎在 UB 检测上有回归，原本报 dangling pointer 的例子现在报 memory leaked，原因是暴露的指针依然存活且不可达\n\n下周需要仔细比对和分析这个情况\n或者需要考虑更广泛的问题：KMiri 需要兼容 Miri 的所有测试，但目前添加到内核分析专用代码已经影响了原本的分析\n\n\n整理 GDB 调试脚本到 tool/gdb 目录，在所有测试上共享调试入口，这样更方便动态跟踪 kmiri 代码的执行逻辑",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/47",
+    "createdAt": "2026-06-05T04:01:30Z",
+    "updatedAt": "2026-06-07T14:57:11Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

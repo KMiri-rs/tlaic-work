@@ -1,0 +1,52 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4Aksl6",
+    "number": 8,
+    "title": "【讨论】2026-03-11 线上会议",
+    "body": "时间：10:00 - 11:40\r\n\r\n人员：向老师、陈澄均、周积萍\r\n\r\n内容：\r\n1. 陈分享了 KernMiri PPT（设计、实现和经验）\r\n2. 向询问了 KernMiri 的细节\r\n3. 周分享了最新的工作（同步到最新的星绽和 Miri）\r\n4. 自由交流\r\n\r\n共同关注点：弄清楚 KMiri 能够适配到不同操作系统（星绽、ArceOS）一致的接口",
+    "bodyText": "时间：10:00 - 11:40\n人员：向老师、陈澄均、周积萍\n内容：\n\n陈分享了 KernMiri PPT（设计、实现和经验）\n向询问了 KernMiri 的细节\n周分享了最新的工作（同步到最新的星绽和 Miri）\n自由交流\n\n共同关注点：弄清楚 KMiri 能够适配到不同操作系统（星绽、ArceOS）一致的接口",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/8",
+    "createdAt": "2026-03-11T01:47:47Z",
+    "updatedAt": "2026-03-15T16:30:16Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [
+    {
+      "id": "DC_kwDORCC-bM4A9Vq1",
+      "body": "Q：检测能力\r\n* 工具已有的检测能力\r\n  * https://github.com/rust-lang/miri\r\n  * POPL'26 Miri （[笔记](https://os-checker.github.io/book/checker/KernMiri/Miri.html)）\r\n* 适用于 OS 的检测能力\r\n  * 可适配的\r\n  * 可拓展的：内核内存、分页管理、内核栈、多核 CPU\r\n  * 受限的：与硬件交互无法检测（汇编、外设等）；可能与 Qemu 联合模拟吗？\r\n\r\n| | 评估 | 星绽 | ArceOS|\r\n|-|-|-|-|\r\n|Uninitialized memory| | | |\r\n|Out-of-bounds| | | |\r\n|Use-after-free| | | |\r\n|Memory leaks|  内存泄露对内核和 Miri 的含义？| | |\r\n|Data races| 用户态的并发问题适用于内核吗？线程 vs 进程 vs 多核 | | |\r\n| Uninitialized memory |   | | |\r\n| Rust type invariants |语言级别的检测|  | |\r\n| Pointer provenance | 语言级别的检测；现有内核代码需要大改|  | |\r\n| Aliasing violations | 语言级别的检测；现有内核代码需要大改|  | |\r\n",
+      "bodyText": "Q：检测能力\n\n工具已有的检测能力\n\nhttps://github.com/rust-lang/miri\nPOPL'26 Miri （笔记）\n\n\n适用于 OS 的检测能力\n\n可适配的\n可拓展的：内核内存、分页管理、内核栈、多核 CPU\n受限的：与硬件交互无法检测（汇编、外设等）；可能与 Qemu 联合模拟吗？\n\n\n\n\n\n\n\n评估\n星绽\nArceOS\n\n\n\n\nUninitialized memory\n\n\n\n\n\nOut-of-bounds\n\n\n\n\n\nUse-after-free\n\n\n\n\n\nMemory leaks\n内存泄露对内核和 Miri 的含义？\n\n\n\n\nData races\n用户态的并发问题适用于内核吗？线程 vs 进程 vs 多核\n\n\n\n\nUninitialized memory\n\n\n\n\n\nRust type invariants\n语言级别的检测\n\n\n\n\nPointer provenance\n语言级别的检测；现有内核代码需要大改\n\n\n\n\nAliasing violations\n语言级别的检测；现有内核代码需要大改",
+      "url": "https://github.com/KMiri-rs/KMiri/discussions/8#discussioncomment-16079541",
+      "createdAt": "2026-03-11T07:16:03Z",
+      "updatedAt": "2026-03-11T07:16:03Z",
+      "author": {
+        "login": "zjp-CN",
+        "url": "https://github.com/zjp-CN"
+      },
+      "replies": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": null
+        },
+        "nodes": []
+      }
+    }
+  ],
+  "truncated_replies": []
+}

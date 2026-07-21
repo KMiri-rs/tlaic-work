@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4Alz9s",
+    "number": 23,
+    "title": "【第 6 周】移植上游 MIR 调试器",
+    "body": "\r\n# 移植上游 MIR 调试器\r\n\r\nMiri 和 MIR 需要不同的调试器\r\n* 在调查 panic 时，只知道一个地址触发分配检查错误，以及相应的 Miri 调用栈，但并不知道在运行到哪行（被解释的）目标代码有问题 \r\n* GDB 能够跟踪 Miri 的执行过程，从而方便解决 Miri 内部的 bug，但很难解决解释执行 MIR 期间的 bug —— GDB 的源码断点打不到目标代码上，即便技术上可以设置一系列 watch points，然后整合变量状态来知道当前 Miri 正在解释什么目标代码，但这非常麻烦\r\n* 因此需要直接的工具来调试 MIR 解释执行，[Priroda](https://os-checker.github.io/book/checker/KernMiri/Priroda.html) 已经太旧而无法运行，但今年谷歌开源之夏的贡献者已经做了一个 MIR 调试器雏形（尚未合并），我可以直接移植过来\r\n* 移植工作： https://github.com/KMiri-rs/miri/pull/1\r\n\r\n\r\n实现 MIR 调试器的思路：\r\n* 在 Miri 解释执行 MIR 的时候，捕获执行上下文（栈帧情况、局部变量的具体值、指针分配情况等）\r\n* 然后呈现这些上下文，呈现的方式决定了如何在上下文与 UI 之间通信：以前的 Priroda 采用 Web 前端，因此通过 socket 通信，而现在采用  TUI 界面，直接在 Miri 中生成一个子线程在标准输出和伪终端上绘制，通过 channel 通信\r\n* 不仅仅是把上游贡献者的代码复制粘贴过来，我还进行了全部重构，并添加了我需要的功能\r\n\r\n![](https://github.com/user-attachments/assets/aaa9c0f6-a9dc-4525-9111-d6968f0d653e)\r\n\r\n# 其他\r\n\r\n* [【GDB 记录】调试 Miri 内联的函数](https://github.com/orgs/KMiri-rs/discussions/21)\r\n* 调查了一下 Miri 与硬件模拟的可能：\r\n  * Qemu 全系统模拟发生在二进制级别并且不支持部分功能模拟，而 Miri 发生在 MIR/IR 级别，这意味着无法将某些硬件交互代码替换成与 Qemu 进行交互模拟\r\n  * 还没仔细调查与 S2E 结合的可能性；或者直接使用 S2E 分析检查星绽和 ArceOS 的二进制内核文件，看有没有硬件级别的内存问题\r\n* 查看田博转发的 [上海交大 IPADS 团队推出形式化方法智能体 FM-Agent](https://mp.weixin.qq.com/s/AQLsy41Fx9yc5dXlokRI6w) 论文，我的理解是它用 LLM 进行代码自动分析和测试生成来找 bug，并不是生成形式化验证的代码\r\n* 旁听 [开源操作系统训练营实习总结报告：内核组件设计和改进](https://www.yuque.com/xyong-9fuoz/hg8kgr/cvbvasbkmttrf30m)",
+    "bodyText": "移植上游 MIR 调试器\nMiri 和 MIR 需要不同的调试器\n\n在调查 panic 时，只知道一个地址触发分配检查错误，以及相应的 Miri 调用栈，但并不知道在运行到哪行（被解释的）目标代码有问题\nGDB 能够跟踪 Miri 的执行过程，从而方便解决 Miri 内部的 bug，但很难解决解释执行 MIR 期间的 bug —— GDB 的源码断点打不到目标代码上，即便技术上可以设置一系列 watch points，然后整合变量状态来知道当前 Miri 正在解释什么目标代码，但这非常麻烦\n因此需要直接的工具来调试 MIR 解释执行，Priroda 已经太旧而无法运行，但今年谷歌开源之夏的贡献者已经做了一个 MIR 调试器雏形（尚未合并），我可以直接移植过来\n移植工作： KMiri-rs/miri#1\n\n实现 MIR 调试器的思路：\n\n在 Miri 解释执行 MIR 的时候，捕获执行上下文（栈帧情况、局部变量的具体值、指针分配情况等）\n然后呈现这些上下文，呈现的方式决定了如何在上下文与 UI 之间通信：以前的 Priroda 采用 Web 前端，因此通过 socket 通信，而现在采用  TUI 界面，直接在 Miri 中生成一个子线程在标准输出和伪终端上绘制，通过 channel 通信\n不仅仅是把上游贡献者的代码复制粘贴过来，我还进行了全部重构，并添加了我需要的功能\n\n\n其他\n\n【GDB 记录】调试 Miri 内联的函数\n调查了一下 Miri 与硬件模拟的可能：\n\nQemu 全系统模拟发生在二进制级别并且不支持部分功能模拟，而 Miri 发生在 MIR/IR 级别，这意味着无法将某些硬件交互代码替换成与 Qemu 进行交互模拟\n还没仔细调查与 S2E 结合的可能性；或者直接使用 S2E 分析检查星绽和 ArceOS 的二进制内核文件，看有没有硬件级别的内存问题\n\n\n查看田博转发的 上海交大 IPADS 团队推出形式化方法智能体 FM-Agent 论文，我的理解是它用 LLM 进行代码自动分析和测试生成来找 bug，并不是生成形式化验证的代码\n旁听 开源操作系统训练营实习总结报告：内核组件设计和改进",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/23",
+    "createdAt": "2026-04-19T18:04:52Z",
+    "updatedAt": "2026-04-20T04:30:59Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

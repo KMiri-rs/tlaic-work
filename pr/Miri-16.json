@@ -1,0 +1,1965 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "Miri",
+  "kind": "pr",
+  "item": {
+    "url": "https://api.github.com/repos/KMiri-rs/miri/pulls/16",
+    "id": 3873567237,
+    "node_id": "PR_kwDORLP5es7m4fIF",
+    "html_url": "https://github.com/KMiri-rs/miri/pull/16",
+    "diff_url": "https://github.com/KMiri-rs/miri/pull/16.diff",
+    "patch_url": "https://github.com/KMiri-rs/miri/pull/16.patch",
+    "issue_url": "https://api.github.com/repos/KMiri-rs/miri/issues/16",
+    "number": 16,
+    "state": "closed",
+    "locked": false,
+    "title": "kmiri: fix stack resource exhaustion via StackPopAllocTracker ",
+    "user": {
+      "login": "zjp-CN",
+      "id": 25300418,
+      "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/zjp-CN",
+      "html_url": "https://github.com/zjp-CN",
+      "followers_url": "https://api.github.com/users/zjp-CN/followers",
+      "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+      "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+      "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+      "repos_url": "https://api.github.com/users/zjp-CN/repos",
+      "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "\r\n* Fix https://github.com/KMiri-rs/KMiri/issues/60\r\n* Fix https://github.com/KMiri-rs/KMiri/issues/61\r\n\r\nThis PR handles the new stack allocations during stack popping:\r\n1. Each thread now has a StackPopAllocTracker which is used to do stack allocation based on the saved SP in between before_stack_pop and after_stack_pop.\r\n2. StackPopAllocTracker should be considered as isolated caller allocation data, especially with separated int_to_ptr_map; global_state int_to_ptr_map is for callee during the stack popping, so stack deallocation prefers removing the address from global_state.\r\n\r\n\r\nAlso\r\n* Improves the debugger's stack pane by displaying the last_recorded_stack_ptr.\r\n* Revert the physical memory layout in the config.\r\n\r\nThe maximum stack footprint is now only 6MB, a 70% reduction from the original 18.61MB in #15. No stack resource exhaustion. :tada: \r\n\r\n<img width=\"2074\" height=\"169\" alt=\"image\" src=\"https://github.com/user-attachments/assets/0b4fe511-9cdc-4fc0-9158-0c835613f968\" />\r\n",
+    "created_at": "2026-06-16T07:02:19Z",
+    "updated_at": "2026-06-16T10:43:48Z",
+    "closed_at": "2026-06-16T07:02:39Z",
+    "merged_at": "2026-06-16T07:02:39Z",
+    "merge_commit_sha": "91b4f3f9c8ff1e267a005fd759b9153992cf2024",
+    "assignees": [],
+    "requested_reviewers": [],
+    "requested_teams": [],
+    "labels": [],
+    "milestone": null,
+    "draft": false,
+    "commits_url": "https://api.github.com/repos/KMiri-rs/miri/pulls/16/commits",
+    "review_comments_url": "https://api.github.com/repos/KMiri-rs/miri/pulls/16/comments",
+    "review_comment_url": "https://api.github.com/repos/KMiri-rs/miri/pulls/comments{/number}",
+    "comments_url": "https://api.github.com/repos/KMiri-rs/miri/issues/16/comments",
+    "statuses_url": "https://api.github.com/repos/KMiri-rs/miri/statuses/b3b00ba66cfd944344053125c0e90800e061f92f",
+    "head": {
+      "label": "KMiri-rs:fix-resource-exhaustion",
+      "ref": "fix-resource-exhaustion",
+      "sha": "b3b00ba66cfd944344053125c0e90800e061f92f",
+      "user": {
+        "login": "KMiri-rs",
+        "id": 257443784,
+        "node_id": "O_kgDOD1hHyA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/257443784?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/KMiri-rs",
+        "html_url": "https://github.com/KMiri-rs",
+        "followers_url": "https://api.github.com/users/KMiri-rs/followers",
+        "following_url": "https://api.github.com/users/KMiri-rs/following{/other_user}",
+        "gists_url": "https://api.github.com/users/KMiri-rs/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/KMiri-rs/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/KMiri-rs/subscriptions",
+        "organizations_url": "https://api.github.com/users/KMiri-rs/orgs",
+        "repos_url": "https://api.github.com/users/KMiri-rs/repos",
+        "events_url": "https://api.github.com/users/KMiri-rs/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/KMiri-rs/received_events",
+        "type": "Organization",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "repo": {
+        "id": 1152645498,
+        "node_id": "R_kgDORLP5eg",
+        "name": "miri",
+        "full_name": "KMiri-rs/miri",
+        "private": false,
+        "owner": {
+          "login": "KMiri-rs",
+          "id": 257443784,
+          "node_id": "O_kgDOD1hHyA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/257443784?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/KMiri-rs",
+          "html_url": "https://github.com/KMiri-rs",
+          "followers_url": "https://api.github.com/users/KMiri-rs/followers",
+          "following_url": "https://api.github.com/users/KMiri-rs/following{/other_user}",
+          "gists_url": "https://api.github.com/users/KMiri-rs/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/KMiri-rs/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/KMiri-rs/subscriptions",
+          "organizations_url": "https://api.github.com/users/KMiri-rs/orgs",
+          "repos_url": "https://api.github.com/users/KMiri-rs/repos",
+          "events_url": "https://api.github.com/users/KMiri-rs/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/KMiri-rs/received_events",
+          "type": "Organization",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/KMiri-rs/miri",
+        "description": "[A forked miri for OS] An interpreter for Rust's mid-level intermediate representation",
+        "fork": true,
+        "url": "https://api.github.com/repos/KMiri-rs/miri",
+        "forks_url": "https://api.github.com/repos/KMiri-rs/miri/forks",
+        "keys_url": "https://api.github.com/repos/KMiri-rs/miri/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/KMiri-rs/miri/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/KMiri-rs/miri/teams",
+        "hooks_url": "https://api.github.com/repos/KMiri-rs/miri/hooks",
+        "issue_events_url": "https://api.github.com/repos/KMiri-rs/miri/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/KMiri-rs/miri/events",
+        "assignees_url": "https://api.github.com/repos/KMiri-rs/miri/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/KMiri-rs/miri/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/KMiri-rs/miri/tags",
+        "blobs_url": "https://api.github.com/repos/KMiri-rs/miri/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/KMiri-rs/miri/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/KMiri-rs/miri/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/KMiri-rs/miri/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/KMiri-rs/miri/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/KMiri-rs/miri/languages",
+        "stargazers_url": "https://api.github.com/repos/KMiri-rs/miri/stargazers",
+        "contributors_url": "https://api.github.com/repos/KMiri-rs/miri/contributors",
+        "subscribers_url": "https://api.github.com/repos/KMiri-rs/miri/subscribers",
+        "subscription_url": "https://api.github.com/repos/KMiri-rs/miri/subscription",
+        "commits_url": "https://api.github.com/repos/KMiri-rs/miri/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/KMiri-rs/miri/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/KMiri-rs/miri/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/KMiri-rs/miri/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/KMiri-rs/miri/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/KMiri-rs/miri/merges",
+        "archive_url": "https://api.github.com/repos/KMiri-rs/miri/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/KMiri-rs/miri/downloads",
+        "issues_url": "https://api.github.com/repos/KMiri-rs/miri/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/KMiri-rs/miri/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/KMiri-rs/miri/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/KMiri-rs/miri/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/KMiri-rs/miri/labels{/name}",
+        "releases_url": "https://api.github.com/repos/KMiri-rs/miri/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/KMiri-rs/miri/deployments",
+        "created_at": "2026-02-08T07:34:16Z",
+        "updated_at": "2026-07-19T14:46:04Z",
+        "pushed_at": "2026-07-20T12:59:54Z",
+        "git_url": "git://github.com/KMiri-rs/miri.git",
+        "ssh_url": "git@github.com:KMiri-rs/miri.git",
+        "clone_url": "https://github.com/KMiri-rs/miri.git",
+        "svn_url": "https://github.com/KMiri-rs/miri",
+        "homepage": "",
+        "size": 33055,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "language": "Rust",
+        "has_issues": false,
+        "has_projects": true,
+        "has_downloads": true,
+        "has_wiki": false,
+        "has_pages": false,
+        "has_discussions": false,
+        "forks_count": 0,
+        "mirror_url": null,
+        "archived": false,
+        "disabled": false,
+        "open_issues_count": 0,
+        "license": {
+          "key": "apache-2.0",
+          "name": "Apache License 2.0",
+          "spdx_id": "Apache-2.0",
+          "url": "https://api.github.com/licenses/apache-2.0",
+          "node_id": "MDc6TGljZW5zZTI="
+        },
+        "allow_forking": true,
+        "is_template": false,
+        "web_commit_signoff_required": false,
+        "has_pull_requests": true,
+        "pull_request_creation_policy": "all",
+        "topics": [],
+        "visibility": "public",
+        "forks": 0,
+        "open_issues": 0,
+        "watchers": 0,
+        "default_branch": "kmiri"
+      }
+    },
+    "base": {
+      "label": "KMiri-rs:kmiri",
+      "ref": "kmiri",
+      "sha": "68d1819d5b31f87467daae345e506c54e009365e",
+      "user": {
+        "login": "KMiri-rs",
+        "id": 257443784,
+        "node_id": "O_kgDOD1hHyA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/257443784?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/KMiri-rs",
+        "html_url": "https://github.com/KMiri-rs",
+        "followers_url": "https://api.github.com/users/KMiri-rs/followers",
+        "following_url": "https://api.github.com/users/KMiri-rs/following{/other_user}",
+        "gists_url": "https://api.github.com/users/KMiri-rs/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/KMiri-rs/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/KMiri-rs/subscriptions",
+        "organizations_url": "https://api.github.com/users/KMiri-rs/orgs",
+        "repos_url": "https://api.github.com/users/KMiri-rs/repos",
+        "events_url": "https://api.github.com/users/KMiri-rs/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/KMiri-rs/received_events",
+        "type": "Organization",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "repo": {
+        "id": 1152645498,
+        "node_id": "R_kgDORLP5eg",
+        "name": "miri",
+        "full_name": "KMiri-rs/miri",
+        "private": false,
+        "owner": {
+          "login": "KMiri-rs",
+          "id": 257443784,
+          "node_id": "O_kgDOD1hHyA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/257443784?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/KMiri-rs",
+          "html_url": "https://github.com/KMiri-rs",
+          "followers_url": "https://api.github.com/users/KMiri-rs/followers",
+          "following_url": "https://api.github.com/users/KMiri-rs/following{/other_user}",
+          "gists_url": "https://api.github.com/users/KMiri-rs/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/KMiri-rs/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/KMiri-rs/subscriptions",
+          "organizations_url": "https://api.github.com/users/KMiri-rs/orgs",
+          "repos_url": "https://api.github.com/users/KMiri-rs/repos",
+          "events_url": "https://api.github.com/users/KMiri-rs/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/KMiri-rs/received_events",
+          "type": "Organization",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/KMiri-rs/miri",
+        "description": "[A forked miri for OS] An interpreter for Rust's mid-level intermediate representation",
+        "fork": true,
+        "url": "https://api.github.com/repos/KMiri-rs/miri",
+        "forks_url": "https://api.github.com/repos/KMiri-rs/miri/forks",
+        "keys_url": "https://api.github.com/repos/KMiri-rs/miri/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/KMiri-rs/miri/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/KMiri-rs/miri/teams",
+        "hooks_url": "https://api.github.com/repos/KMiri-rs/miri/hooks",
+        "issue_events_url": "https://api.github.com/repos/KMiri-rs/miri/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/KMiri-rs/miri/events",
+        "assignees_url": "https://api.github.com/repos/KMiri-rs/miri/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/KMiri-rs/miri/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/KMiri-rs/miri/tags",
+        "blobs_url": "https://api.github.com/repos/KMiri-rs/miri/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/KMiri-rs/miri/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/KMiri-rs/miri/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/KMiri-rs/miri/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/KMiri-rs/miri/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/KMiri-rs/miri/languages",
+        "stargazers_url": "https://api.github.com/repos/KMiri-rs/miri/stargazers",
+        "contributors_url": "https://api.github.com/repos/KMiri-rs/miri/contributors",
+        "subscribers_url": "https://api.github.com/repos/KMiri-rs/miri/subscribers",
+        "subscription_url": "https://api.github.com/repos/KMiri-rs/miri/subscription",
+        "commits_url": "https://api.github.com/repos/KMiri-rs/miri/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/KMiri-rs/miri/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/KMiri-rs/miri/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/KMiri-rs/miri/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/KMiri-rs/miri/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/KMiri-rs/miri/merges",
+        "archive_url": "https://api.github.com/repos/KMiri-rs/miri/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/KMiri-rs/miri/downloads",
+        "issues_url": "https://api.github.com/repos/KMiri-rs/miri/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/KMiri-rs/miri/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/KMiri-rs/miri/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/KMiri-rs/miri/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/KMiri-rs/miri/labels{/name}",
+        "releases_url": "https://api.github.com/repos/KMiri-rs/miri/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/KMiri-rs/miri/deployments",
+        "created_at": "2026-02-08T07:34:16Z",
+        "updated_at": "2026-07-19T14:46:04Z",
+        "pushed_at": "2026-07-20T12:59:54Z",
+        "git_url": "git://github.com/KMiri-rs/miri.git",
+        "ssh_url": "git@github.com:KMiri-rs/miri.git",
+        "clone_url": "https://github.com/KMiri-rs/miri.git",
+        "svn_url": "https://github.com/KMiri-rs/miri",
+        "homepage": "",
+        "size": 33055,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "language": "Rust",
+        "has_issues": false,
+        "has_projects": true,
+        "has_downloads": true,
+        "has_wiki": false,
+        "has_pages": false,
+        "has_discussions": false,
+        "forks_count": 0,
+        "mirror_url": null,
+        "archived": false,
+        "disabled": false,
+        "open_issues_count": 0,
+        "license": {
+          "key": "apache-2.0",
+          "name": "Apache License 2.0",
+          "spdx_id": "Apache-2.0",
+          "url": "https://api.github.com/licenses/apache-2.0",
+          "node_id": "MDc6TGljZW5zZTI="
+        },
+        "allow_forking": true,
+        "is_template": false,
+        "web_commit_signoff_required": false,
+        "has_pull_requests": true,
+        "pull_request_creation_policy": "all",
+        "topics": [],
+        "visibility": "public",
+        "forks": 0,
+        "open_issues": 0,
+        "watchers": 0,
+        "default_branch": "kmiri"
+      }
+    },
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/KMiri-rs/miri/pulls/16"
+      },
+      "html": {
+        "href": "https://github.com/KMiri-rs/miri/pull/16"
+      },
+      "issue": {
+        "href": "https://api.github.com/repos/KMiri-rs/miri/issues/16"
+      },
+      "comments": {
+        "href": "https://api.github.com/repos/KMiri-rs/miri/issues/16/comments"
+      },
+      "review_comments": {
+        "href": "https://api.github.com/repos/KMiri-rs/miri/pulls/16/comments"
+      },
+      "review_comment": {
+        "href": "https://api.github.com/repos/KMiri-rs/miri/pulls/comments{/number}"
+      },
+      "commits": {
+        "href": "https://api.github.com/repos/KMiri-rs/miri/pulls/16/commits"
+      },
+      "statuses": {
+        "href": "https://api.github.com/repos/KMiri-rs/miri/statuses/b3b00ba66cfd944344053125c0e90800e061f92f"
+      }
+    },
+    "author_association": "MEMBER",
+    "auto_merge": null,
+    "assignee": null,
+    "active_lock_reason": null,
+    "merged": true,
+    "mergeable": null,
+    "rebaseable": null,
+    "mergeable_state": "unknown",
+    "merged_by": {
+      "login": "zjp-CN",
+      "id": 25300418,
+      "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/zjp-CN",
+      "html_url": "https://github.com/zjp-CN",
+      "followers_url": "https://api.github.com/users/zjp-CN/followers",
+      "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+      "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+      "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+      "repos_url": "https://api.github.com/users/zjp-CN/repos",
+      "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "comments": 0,
+    "review_comments": 0,
+    "maintainer_can_modify": false,
+    "commits": 17,
+    "additions": 372,
+    "deletions": 73,
+    "changed_files": 7
+  },
+  "issue": {
+    "url": "https://api.github.com/repos/KMiri-rs/miri/issues/16",
+    "repository_url": "https://api.github.com/repos/KMiri-rs/miri",
+    "labels_url": "https://api.github.com/repos/KMiri-rs/miri/issues/16/labels{/name}",
+    "comments_url": "https://api.github.com/repos/KMiri-rs/miri/issues/16/comments",
+    "events_url": "https://api.github.com/repos/KMiri-rs/miri/issues/16/events",
+    "html_url": "https://github.com/KMiri-rs/miri/pull/16",
+    "id": 4671854292,
+    "node_id": "PR_kwDORLP5es7m4fIF",
+    "number": 16,
+    "title": "kmiri: fix stack resource exhaustion via StackPopAllocTracker ",
+    "user": {
+      "login": "zjp-CN",
+      "id": 25300418,
+      "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/zjp-CN",
+      "html_url": "https://github.com/zjp-CN",
+      "followers_url": "https://api.github.com/users/zjp-CN/followers",
+      "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+      "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+      "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+      "repos_url": "https://api.github.com/users/zjp-CN/repos",
+      "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "labels": [],
+    "state": "closed",
+    "locked": false,
+    "assignees": [],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2026-06-16T07:02:19Z",
+    "updated_at": "2026-06-16T10:43:48Z",
+    "closed_at": "2026-06-16T07:02:39Z",
+    "assignee": null,
+    "author_association": "MEMBER",
+    "issue_field_values": [],
+    "type": null,
+    "active_lock_reason": null,
+    "draft": false,
+    "pull_request": {
+      "url": "https://api.github.com/repos/KMiri-rs/miri/pulls/16",
+      "html_url": "https://github.com/KMiri-rs/miri/pull/16",
+      "diff_url": "https://github.com/KMiri-rs/miri/pull/16.diff",
+      "patch_url": "https://github.com/KMiri-rs/miri/pull/16.patch",
+      "merged_at": "2026-06-16T07:02:39Z"
+    },
+    "body": "\r\n* Fix https://github.com/KMiri-rs/KMiri/issues/60\r\n* Fix https://github.com/KMiri-rs/KMiri/issues/61\r\n\r\nThis PR handles the new stack allocations during stack popping:\r\n1. Each thread now has a StackPopAllocTracker which is used to do stack allocation based on the saved SP in between before_stack_pop and after_stack_pop.\r\n2. StackPopAllocTracker should be considered as isolated caller allocation data, especially with separated int_to_ptr_map; global_state int_to_ptr_map is for callee during the stack popping, so stack deallocation prefers removing the address from global_state.\r\n\r\n\r\nAlso\r\n* Improves the debugger's stack pane by displaying the last_recorded_stack_ptr.\r\n* Revert the physical memory layout in the config.\r\n\r\nThe maximum stack footprint is now only 6MB, a 70% reduction from the original 18.61MB in #15. No stack resource exhaustion. :tada: \r\n\r\n<img width=\"2074\" height=\"169\" alt=\"image\" src=\"https://github.com/user-attachments/assets/0b4fe511-9cdc-4fc0-9158-0c835613f968\" />\r\n",
+    "closed_by": {
+      "login": "zjp-CN",
+      "id": 25300418,
+      "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/zjp-CN",
+      "html_url": "https://github.com/zjp-CN",
+      "followers_url": "https://api.github.com/users/zjp-CN/followers",
+      "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+      "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+      "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+      "repos_url": "https://api.github.com/users/zjp-CN/repos",
+      "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/KMiri-rs/miri/issues/16/reactions",
+      "total_count": 1,
+      "+1": 1,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "timeline_url": "https://api.github.com/repos/KMiri-rs/miri/issues/16/timeline",
+    "performed_via_github_app": null,
+    "state_reason": null
+  },
+  "issue_comments": [],
+  "review_comments": [],
+  "reviews": [],
+  "files": [
+    {
+      "sha": "01d5f437f402a2851170b347ed9ca1c6a920912f",
+      "filename": "src/alloc_addresses/mod.rs",
+      "status": "modified",
+      "additions": 80,
+      "deletions": 26,
+      "changes": 106,
+      "blob_url": "https://github.com/KMiri-rs/miri/blob/b3b00ba66cfd944344053125c0e90800e061f92f/src%2Falloc_addresses%2Fmod.rs",
+      "raw_url": "https://github.com/KMiri-rs/miri/raw/b3b00ba66cfd944344053125c0e90800e061f92f/src%2Falloc_addresses%2Fmod.rs",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/src%2Falloc_addresses%2Fmod.rs?ref=b3b00ba66cfd944344053125c0e90800e061f92f",
+      "patch": "@@ -18,7 +18,6 @@ use self::reuse_pool::ReusePool;\n use crate::alloc::MiriAllocParams;\n use crate::alloc_addresses::address_generator::align_addr;\n use crate::concurrency::VClock;\n-use crate::debugger::debugger_log;\n use crate::diagnostics::SpanDedupDiagnostic;\n use crate::mirch::{\n     CodeSection, PageState, kernel_code_paddr_to_vaddr, kernel_code_vaddr_to_paddr,\n@@ -74,6 +73,8 @@ pub struct GlobalStateInner {\n     /// This is used for allocating addresses for cpu-local allocations.\n     next_cpu_local_paddr: u64,\n     /// This is used for allocating addresses for stack allocations.\n+    /// FIXME: this field seems unused as real stack allocations, because thread next_stack_addr is\n+    /// used instead.\n     next_stack_paddr: u64,\n }\n \n@@ -162,6 +163,19 @@ impl GlobalStateInner {\n     pub fn get_base_addr(&self, alloc_id: AllocId) -> u64 {\n         *self.base_paddr.get(&alloc_id).unwrap()\n     }\n+\n+    /// Removes the exact base-address mapping for an allocation.\n+    ///\n+    /// This is not an arbitrary address lookup: `paddr` must be the allocation base address stored\n+    /// in `base_paddr`. If multiple entries with the same base address exist temporarily, remove\n+    /// only the one with the matching `AllocId`.\n+    pub(crate) fn remove_base_addr_mapping(&mut self, paddr: u64, alloc_id: AllocId) -> bool {\n+        self.int_to_ptr_map.sort_unstable();\n+        self.int_to_ptr_map.binary_search(&(paddr, alloc_id)).is_ok_and(|pos| {\n+            self.int_to_ptr_map.remove(pos);\n+            true\n+        })\n+    }\n }\n \n impl<'tcx> EvalContextExtPriv<'tcx> for crate::MiriInterpCx<'tcx> {}\n@@ -268,17 +282,31 @@ trait EvalContextExtPriv<'tcx>: crate::MiriInterpCxExt<'tcx> {\n         } else {\n             let base_addr = if memory_kind == MemoryKind::Stack {\n                 let thread = this.machine.threads.active_thread_ref();\n-                let mut next_stack_addr = thread.next_stack_addr.borrow_mut();\n-\n-                let base_addr = *next_stack_addr - info.size.bytes().max(1);\n-                let base_addr = base_addr - base_addr % info.align.bytes();\n+                if let Some(stack_pop_allocs) = thread.stack_pop_allocs.borrow_mut().as_mut() {\n+                    // Stack locals can be materialized after `before_stack_pop` but before\n+                    // `after_stack_pop`. Allocate them from the caller's recorded stack pointer\n+                    // and remember their AllocIds so `after_stack_pop` can re-run stack layout in a\n+                    // deterministic AllocId order.\n+                    let base_addr = stack_pop_allocs.next_stack_addr - info.size.bytes().max(1);\n+                    let base_addr = base_addr - base_addr % info.align.bytes();\n+\n+                    if base_addr < thread.stack_bottom {\n+                        throw_exhaust!(AddressSpaceFull);\n+                    }\n+                    stack_pop_allocs.next_stack_addr = base_addr;\n+                    stack_pop_allocs.alloc_ids.push(alloc_id);\n+                    base_addr\n+                } else {\n+                    let mut next_stack_addr = thread.next_stack_addr.borrow_mut();\n+                    let base_addr = *next_stack_addr - info.size.bytes().max(1);\n+                    let base_addr = base_addr - base_addr % info.align.bytes();\n \n-                if base_addr < thread.stack_bottom {\n-                    throw_exhaust!(AddressSpaceFull);\n+                    if base_addr < thread.stack_bottom {\n+                        throw_exhaust!(AddressSpaceFull);\n+                    }\n+                    *next_stack_addr = base_addr;\n+                    base_addr\n                 }\n-                *next_stack_addr = base_addr;\n-\n-                base_addr\n             } else {\n                 let (next_address, limit) =\n                     if this.machine.cpu_local_alloc_set.borrow().contains(&alloc_id) {\n@@ -600,11 +628,25 @@ pub trait EvalContextExt<'tcx>: crate::MiriInterpCxExt<'tcx> {\n                 // Store address in cache.\n                 global_state.base_paddr.try_insert(alloc_id, base_paddr).unwrap();\n \n+                let stack_pop_allocation = base_paddr != 0\n+                    && memory_kind == MemoryKind::Stack\n+                    && this\n+                        .machine\n+                        .threads\n+                        .active_thread_ref()\n+                        .stack_pop_allocs\n+                        .borrow_mut()\n+                        .as_mut()\n+                        .is_some_and(|stack_pop_allocs| {\n+                            stack_pop_allocs.insert_int_to_ptr(base_paddr, alloc_id);\n+                            true\n+                        });\n+\n                 // Also maintain the opposite mapping in `int_to_ptr_map`, ensuring we keep it\n                 // sorted. We have a fast-path for the common case that this address is bigger than\n                 // all previous ones. We skip this for allocations at address 0; those can't be\n                 // real, they must be TypeId \"fake allocations\".\n-                if base_paddr != 0 {\n+                if base_paddr != 0 && !stack_pop_allocation {\n                     let pos = if global_state\n                         .int_to_ptr_map\n                         .last()\n@@ -614,15 +656,14 @@ pub trait EvalContextExt<'tcx>: crate::MiriInterpCxExt<'tcx> {\n                     } else {\n                         match global_state\n                             .int_to_ptr_map\n-                            .binary_search_by_key(&base_paddr, |(addr, _)| *addr)\n+                            .binary_search_by_key(&base_paddr, |(addr, id)| *addr)\n                         {\n                             Ok(found) => {\n                                 let found_alloc_id = global_state.int_to_ptr_map[found].1;\n-                                if found_alloc_id == alloc_id {\n-                                    debugger_log(format!(\n-                                        \"{base_paddr} has two AllocId {alloc_id:?} and {found_alloc_id:?}\"\n-                                    ))\n-                                }\n+                                assert_ne!(\n+                                    found_alloc_id, alloc_id,\n+                                    \"0x{base_paddr:x} has two AllocId {alloc_id:?} and {found_alloc_id:?}\"\n+                                );\n                                 return interp_ok(base_paddr);\n                             }\n                             Err(pos) => pos,\n@@ -866,9 +907,6 @@ pub trait EvalContextExt<'tcx>: crate::MiriInterpCxExt<'tcx> {\n \n impl<'tcx> MiriMachine<'tcx> {\n     pub fn free_alloc_id(&mut self, dead_id: AllocId, size: Size, align: Align, kind: MemoryKind) {\n-        let global_state = self.alloc_addresses.get_mut();\n-        let rng = self.rng.get_mut();\n-\n         // We can *not* remove this from `base_addr`, since the interpreter design requires that we\n         // be able to retrieve an AllocId + offset for any memory access *before* we check if the\n         // access is valid. Specifically, `ptr_get_alloc` is called on each attempt at a memory\n@@ -881,17 +919,33 @@ impl<'tcx> MiriMachine<'tcx> {\n         // returns a dead allocation.\n         // To avoid a linear scan we first look up the address in `base_addr`, and then find it in\n         // `int_to_ptr_map`.\n-        let addr = *global_state.base_paddr.get(&dead_id).unwrap();\n-        let pos =\n-            global_state.int_to_ptr_map.binary_search_by_key(&addr, |(addr, _)| *addr).unwrap();\n-        let removed = global_state.int_to_ptr_map.remove(pos);\n+        let addr = *self.alloc_addresses.get_mut().base_paddr.get(&dead_id).unwrap();\n+        let global_state = self.alloc_addresses.get_mut();\n         // log!(\"[free_alloc_id] addr={addr:#x} alloc_id={dead_id:?} kind={kind:?}\");\n-        assert_eq!(removed, (addr, dead_id)); // double-check that we removed the right thing\n+        let removed_from_global = global_state.remove_base_addr_mapping(addr, dead_id);\n+        let removed_from_stack_pop = if removed_from_global {\n+            false\n+        } else {\n+            kind == MemoryKind::Stack\n+                && self\n+                    .threads\n+                    .active_thread_ref()\n+                    .stack_pop_allocs\n+                    .borrow_mut()\n+                    .as_mut()\n+                    .is_some_and(|stack_pop_allocs| {\n+                        stack_pop_allocs.remove_base_addr_mapping(addr, dead_id)\n+                    })\n+        };\n+        assert!(removed_from_global || removed_from_stack_pop);\n         // We can also remove it from `exposed`, since this allocation can anyway not be returned by\n         // `alloc_id_from_addr` any more.\n         global_state.exposed.remove(&dead_id);\n         // Also remember this address for future reuse.\n-        if let Some((_addr_gen, reuse)) = global_state.address_generation.as_mut() {\n+        if !removed_from_stack_pop\n+            && let Some((_addr_gen, reuse)) = global_state.address_generation.as_mut()\n+        {\n+            let rng = self.rng.get_mut();\n             let thread = self.threads.active_thread();\n             reuse.add_addr(rng, addr, size, align, kind, thread, || {\n                 // We cannot be in GenMC mode as then `address_generation` is `None`. We cannot use"
+    },
+    {
+      "sha": "5db1b631e0c2bef2b7d5108a250e719b38d30b14",
+      "filename": "src/concurrency/thread.rs",
+      "status": "modified",
+      "additions": 42,
+      "deletions": 0,
+      "changes": 42,
+      "blob_url": "https://github.com/KMiri-rs/miri/blob/b3b00ba66cfd944344053125c0e90800e061f92f/src%2Fconcurrency%2Fthread.rs",
+      "raw_url": "https://github.com/KMiri-rs/miri/raw/b3b00ba66cfd944344053125c0e90800e061f92f/src%2Fconcurrency%2Fthread.rs",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/src%2Fconcurrency%2Fthread.rs?ref=b3b00ba66cfd944344053125c0e90800e061f92f",
+      "patch": "@@ -185,6 +185,14 @@ pub struct Thread<'tcx> {\n     /// Records for the addresses of the stack frames in the current thread.\n     pub(crate) stack_addr_records: Vec<u64>,\n \n+    /// Stack allocations materialized while a frame is being popped.\n+    ///\n+    /// Miri can still materialize caller-side locals between `before_stack_pop` and\n+    /// `after_stack_pop`. Those allocations must be based on the caller's restored stack pointer,\n+    /// not on the callee's current one, otherwise they may consume stack space that is about to be\n+    /// released.\n+    pub(crate) stack_pop_allocs: RefCell<Option<StackPopAllocTracker>>,\n+\n     /// The stack address for the next stack variable.\n     pub(crate) next_stack_addr: RefCell<u64>,\n \n@@ -227,6 +235,38 @@ pub struct Thread<'tcx> {\n pub type StackEmptyCallback<'tcx> =\n     Box<dyn FnMut(&mut MiriInterpCx<'tcx>) -> InterpResult<'tcx, Poll<()>> + 'tcx>;\n \n+pub(crate) struct StackPopAllocTracker {\n+    /// The temporary stack pointer used to place stack allocations during the pop window.\n+    pub(crate) next_stack_addr: u64,\n+    /// Temporary address-to-allocation map for pop-window allocations.\n+    ///\n+    /// These entries are intentionally not published in the global `int_to_ptr_map` because their\n+    /// temporary addresses may overlap callee stack allocations that are still live during the pop.\n+    pub(crate) int_to_ptr_map: Vec<(u64, AllocId)>,\n+    /// Allocations created during the pop window; rebased in `after_stack_pop`.\n+    pub(crate) alloc_ids: Vec<AllocId>,\n+}\n+\n+impl StackPopAllocTracker {\n+    pub(crate) fn insert_int_to_ptr(&mut self, paddr: u64, alloc_id: AllocId) {\n+        let pos = if self.int_to_ptr_map.last().is_some_and(|(last_addr, _)| *last_addr < paddr) {\n+            self.int_to_ptr_map.len()\n+        } else {\n+            self.int_to_ptr_map.binary_search_by_key(&paddr, |(addr, _)| *addr).unwrap_err()\n+        };\n+        self.int_to_ptr_map.insert(pos, (paddr, alloc_id));\n+    }\n+\n+    /// Removes the exact base-address mapping for an allocation in this temporary map.\n+    pub(crate) fn remove_base_addr_mapping(&mut self, paddr: u64, alloc_id: AllocId) -> bool {\n+        self.int_to_ptr_map.sort_unstable();\n+        self.int_to_ptr_map.binary_search(&(paddr, alloc_id)).is_ok_and(|pos| {\n+            self.int_to_ptr_map.remove(pos);\n+            true\n+        })\n+    }\n+}\n+\n impl<'tcx> Thread<'tcx> {\n     /// Get the name of the current thread if it was set.\n     fn thread_name(&self) -> Option<&[u8]> {\n@@ -345,6 +385,7 @@ impl<'tcx> Thread<'tcx> {\n             thread_name: name.map(|name| Vec::from(name.as_bytes())),\n             stack: Vec::new(),\n             stack_addr_records: Vec::new(),\n+            stack_pop_allocs: RefCell::new(None),\n             next_stack_addr: RefCell::new(stack_range.end),\n             stack_bottom: stack_range.start,\n             origin_span: DUMMY_SP,\n@@ -364,6 +405,7 @@ impl VisitProvenance for Thread<'_> {\n             last_error,\n             stack,\n             stack_addr_records: _,\n+            stack_pop_allocs: _,\n             next_stack_addr: _,\n             stack_bottom: _,\n             origin_span: _,"
+    },
+    {
+      "sha": "10f235c59be0862dc35dfb7d60f0becb9920a5e4",
+      "filename": "src/debugger/state.rs",
+      "status": "modified",
+      "additions": 10,
+      "deletions": 0,
+      "changes": 10,
+      "blob_url": "https://github.com/KMiri-rs/miri/blob/b3b00ba66cfd944344053125c0e90800e061f92f/src%2Fdebugger%2Fstate.rs",
+      "raw_url": "https://github.com/KMiri-rs/miri/raw/b3b00ba66cfd944344053125c0e90800e061f92f/src%2Fdebugger%2Fstate.rs",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/src%2Fdebugger%2Fstate.rs?ref=b3b00ba66cfd944344053125c0e90800e061f92f",
+      "patch": "@@ -13,6 +13,7 @@ use crate::debugger::debugger_log;\n use crate::debugger::reachability::FunctionInstanceInfo;\n use crate::debugger::tui::theme::STYLE_HIGHTLIGHTED;\n use crate::debugger::utils::{pos_to_line_nr, source_file};\n+use crate::mirch::kernel_code_vaddr_to_paddr;\n use crate::*;\n \n #[derive(Clone, Debug)]\n@@ -107,6 +108,7 @@ pub struct DebuggerState {\n     pub output: Vec<OutputSpan>,\n     /// The lowest allocated stack vaddr.\n     pub min_stack_ptr: Option<u64>,\n+    pub last_recorded_stack_ptr: Option<u64>,\n     // Although this is a global state that won't change after initialization.\n     pub borrow_tracker_method: Option<BorrowTrackerMethod>,\n }\n@@ -122,6 +124,13 @@ impl DebuggerState {\n             .borrow()\n             .min_allocated_stack_paddr()\n             .map(|(paddr, _)| paddr);\n+        let last_recorded_stack_ptr = ecx\n+            .machine\n+            .threads\n+            .active_thread_ref()\n+            .stack_addr_records\n+            .last()\n+            .map(|&vaddr| kernel_code_vaddr_to_paddr(vaddr as usize) as u64);\n \n         let stack_frames: Vec<_> =\n             stack.iter().rev().map(|frame| capture_frame(sm, frame)).collect();\n@@ -163,6 +172,7 @@ impl DebuggerState {\n             allocs,\n             output,\n             min_stack_ptr,\n+            last_recorded_stack_ptr,\n             borrow_tracker_method: ecx\n                 .machine\n                 .borrow_tracker"
+    },
+    {
+      "sha": "45cc402565c9b6145cd0ca33cb97a8394499a4a1",
+      "filename": "src/debugger/tui/pane/stack.rs",
+      "status": "modified",
+      "additions": 5,
+      "deletions": 1,
+      "changes": 6,
+      "blob_url": "https://github.com/KMiri-rs/miri/blob/b3b00ba66cfd944344053125c0e90800e061f92f/src%2Fdebugger%2Ftui%2Fpane%2Fstack.rs",
+      "raw_url": "https://github.com/KMiri-rs/miri/raw/b3b00ba66cfd944344053125c0e90800e061f92f/src%2Fdebugger%2Ftui%2Fpane%2Fstack.rs",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/src%2Fdebugger%2Ftui%2Fpane%2Fstack.rs?ref=b3b00ba66cfd944344053125c0e90800e061f92f",
+      "patch": "@@ -15,8 +15,12 @@ impl PaneStack {\n     pub fn widget(&self, state: &DebuggerState, focus: bool) -> (List<'static>, ListState) {\n         let min_sp =\n             state.min_stack_ptr.map(|ptr| format!(\", min_sp=0x{ptr:x}\")).unwrap_or_default();\n+        let record_sp = state\n+            .last_recorded_stack_ptr\n+            .map(|ptr| format!(\", last_sp=0x{ptr:x}\"))\n+            .unwrap_or_default();\n \n-        let title = format!(\"Stack (thread {}{min_sp})\", state.current_thread.to_u32());\n+        let title = format!(\"Stack (t{}{min_sp}{record_sp})\", state.current_thread.to_u32());\n \n         let items: Vec<_> = state\n             .stack_frames"
+    },
+    {
+      "sha": "f984a8cb46e8190aafc7cf49d30c4a84e209c5a3",
+      "filename": "src/machine.rs",
+      "status": "modified",
+      "additions": 207,
+      "deletions": 9,
+      "changes": 216,
+      "blob_url": "https://github.com/KMiri-rs/miri/blob/b3b00ba66cfd944344053125c0e90800e061f92f/src%2Fmachine.rs",
+      "raw_url": "https://github.com/KMiri-rs/miri/raw/b3b00ba66cfd944344053125c0e90800e061f92f/src%2Fmachine.rs",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/src%2Fmachine.rs?ref=b3b00ba66cfd944344053125c0e90800e061f92f",
+      "patch": "@@ -39,6 +39,7 @@ use crate::alloc_addresses::EvalContextExt;\n use crate::concurrency::cpu_affinity::{self, CpuAffinityMask};\n use crate::concurrency::data_race::{self, NaReadType, NaWriteType};\n use crate::concurrency::sync::SyncObj;\n+use crate::concurrency::thread::StackPopAllocTracker;\n use crate::concurrency::{\n     AllocDataRaceHandler, GenmcCtx, GenmcEvalContextExt as _, GlobalDataRaceHandler, weak_memory,\n };\n@@ -1138,6 +1139,172 @@ impl VisitProvenance for MiriMachine<'_> {\n /// A rustc InterpCx for Miri.\n pub type MiriInterpCx<'tcx> = InterpCx<'tcx, MiriMachine<'tcx>>;\n \n+fn allocate_stack_base<'tcx>(\n+    next_stack_addr: &mut u64,\n+    size: Size,\n+    align: Align,\n+    stack_bottom: u64,\n+) -> InterpResult<'tcx, u64> {\n+    // KMiri stack allocations grow downward and reserve at least one byte so zero-sized\n+    // allocations still get distinct addresses.\n+    let base_addr = next_stack_addr\n+        .checked_sub(size.bytes().max(1))\n+        .ok_or_else(|| err_exhaust!(AddressSpaceFull))?;\n+    let base_addr = base_addr - base_addr % align.bytes();\n+\n+    if base_addr < stack_bottom {\n+        throw_exhaust!(AddressSpaceFull);\n+    }\n+\n+    *next_stack_addr = base_addr;\n+    interp_ok(base_addr)\n+}\n+\n+/// Recompute the final addresses of stack allocations created during a stack-pop window.\n+///\n+/// Miri may materialize caller-side stack locals after `before_stack_pop` has run but before\n+/// `after_stack_pop` restores the caller's stack pointer. Those allocations are first placed using\n+/// a temporary stack pointer so allocation can succeed immediately; this function then lays them\n+/// out again from the restored caller stack pointer.\n+///\n+/// The rebase is intentionally based on sorted `AllocId`s, not materialization order, so the final\n+/// stack layout is deterministic even if Miri observes locals at slightly different times. The\n+/// temporary address-to-allocation mappings were isolated in `StackPopAllocTracker`, so this\n+/// function publishes only the final physical addresses into the global `int_to_ptr_map`. For each\n+/// still-live allocation, this updates `base_paddr` and, when the base changes, moves the\n+/// pseudo-physical backing allocation while preserving initialized bytes and provenance metadata.\n+fn rebase_stack_allocs_after_pop<'tcx>(\n+    ecx: &mut MiriInterpCx<'tcx>,\n+    mut next_stack_addr: u64,\n+    stack_bottom: u64,\n+    alloc_ids: &[AllocId],\n+) -> InterpResult<'tcx, u64> {\n+    let mut alloc_ids = alloc_ids.to_vec();\n+    alloc_ids.sort_by_key(|alloc_id| alloc_id.0);\n+    alloc_ids.dedup();\n+\n+    for alloc_id in alloc_ids {\n+        if !ecx.is_alloc_live(alloc_id) {\n+            continue;\n+        }\n+        let info = ecx.get_alloc_info(alloc_id);\n+        if matches!(info.kind, AllocKind::Dead) {\n+            continue;\n+        }\n+\n+        // `addr_from_alloc_id_uncached` returns a virtual address for stack allocations; the global\n+        // maps store physical addresses, so mirror the normal vaddr-to-paddr conversion here.\n+        let new_base_vaddr =\n+            allocate_stack_base(&mut next_stack_addr, info.size, info.align, stack_bottom)?;\n+        let new_base_paddr = mirch::page_walk_or(new_base_vaddr as usize, || {\n+            mirch::try_kernel_code_vaddr_to_paddr(new_base_vaddr as usize)\n+                .unwrap_or(new_base_vaddr as usize)\n+        })\n+        .unwrap() as u64;\n+\n+        let old_base_paddr = {\n+            let mut global_state = ecx.machine.alloc_addresses.borrow_mut();\n+            let Some(old_base_paddr) = global_state.base_paddr.get(&alloc_id).copied() else {\n+                continue;\n+            };\n+\n+            global_state.base_paddr.insert(alloc_id, new_base_paddr);\n+\n+            let pos = if global_state\n+                .int_to_ptr_map\n+                .last()\n+                .is_some_and(|(last_addr, _)| *last_addr < new_base_paddr)\n+            {\n+                global_state.int_to_ptr_map.len()\n+            } else {\n+                match global_state\n+                    .int_to_ptr_map\n+                    .binary_search_by_key(&new_base_paddr, |(addr, _)| *addr)\n+                {\n+                    Ok(found) => {\n+                        let found_alloc_id = global_state.int_to_ptr_map[found].1;\n+                        assert_eq!(\n+                            found_alloc_id, alloc_id,\n+                            \"0x{new_base_paddr:x} has two AllocId {alloc_id:?} and {found_alloc_id:?}\"\n+                        );\n+                        found\n+                    }\n+                    Err(pos) => pos,\n+                }\n+            };\n+            if global_state\n+                .int_to_ptr_map\n+                .get(pos)\n+                .is_none_or(|(addr, id)| *addr != new_base_paddr || *id != alloc_id)\n+            {\n+                global_state.int_to_ptr_map.insert(pos, (new_base_paddr, alloc_id));\n+            }\n+\n+            Some(old_base_paddr)\n+        };\n+\n+        let Some(old_base_paddr) = old_base_paddr else {\n+            continue;\n+        };\n+        // debugger_log(format!(\n+        //     \"[stack_pop_rebase] {alloc_id:?} old=0x{old_base_paddr:x} new=0x{new_base_paddr:x}\"\n+        // ));\n+        if old_base_paddr == new_base_paddr || info.size.bytes() == 0 {\n+            continue;\n+        }\n+\n+        // The address maps are not enough: stack allocations backed by pseudo physical memory also\n+        // need their backing allocation moved so later reads/writes hit the recomputed base.\n+        let alloc_map = ecx.memory.alloc_map();\n+        let (kind, old_allocation) = &alloc_map.get(alloc_id).unwrap();\n+        let alloc_size_usize = old_allocation.size().bytes_usize();\n+        let (new_allocation, kind) = {\n+            let mut allocation = mirch::create_allocation_at(\n+                new_base_paddr as usize,\n+                Layout::from_size_align(\n+                    old_allocation.size().bytes_usize(),\n+                    old_allocation.align.bytes_usize(),\n+                )\n+                .unwrap(),\n+                ecx.machine.get_default_alloc_params(),\n+            );\n+            let extra = MiriMachine::init_allocation(\n+                ecx,\n+                alloc_id,\n+                *kind,\n+                old_allocation.size(),\n+                old_allocation.align,\n+            )?;\n+\n+            let alloc_range =\n+                rustc_middle::mir::interpret::alloc_range(Size::ZERO, old_allocation.size());\n+            let init_mask = old_allocation.init_mask();\n+\n+            if !init_mask.is_range_initialized(alloc_range).is_err_and(|range| {\n+                range.start == alloc_range.start && range.size == alloc_range.size\n+            }) {\n+                let src_ptr = old_allocation.get_bytes_unchecked_raw();\n+                let dst_ptr = allocation.get_bytes_unchecked_raw_mut();\n+                unsafe {\n+                    core::ptr::copy(src_ptr, dst_ptr, alloc_size_usize);\n+                }\n+\n+                let init_copy = init_mask.prepare_copy((0..alloc_size_usize).into());\n+                allocation.init_mask_apply_copy(init_copy, alloc_range, 1);\n+\n+                let provenance_copy =\n+                    old_allocation.provenance().prepare_copy(alloc_range, &[0], ecx);\n+                allocation.provenance_apply_copy(provenance_copy, alloc_range, 1);\n+            }\n+            (allocation.with_extra(extra), *kind)\n+        };\n+\n+        alloc_map.insert(alloc_id, (kind, new_allocation));\n+    }\n+\n+    interp_ok(next_stack_addr)\n+}\n+\n /// A little trait that's useful to be inherited by extension traits.\n pub trait MiriInterpCxExt<'tcx> {\n     fn eval_context_ref<'a>(&'a self) -> &'a MiriInterpCx<'tcx>;\n@@ -1971,10 +2138,26 @@ impl<'tcx> Machine<'tcx> for MiriMachine<'tcx> {\n             // We have to skip the frame that is just being popped.\n             ecx.active_thread_mut().recompute_top_user_relevant_frame(/* skip */ 1);\n         }\n+\n         // tracing-tree can automatically annotate scope changes, but it gets very confused by our\n         // concurrency and what it prints is just plain wrong. So we print our own information\n         // instead. (Cc https://github.com/rust-lang/miri/issues/2266)\n         // log!(\"Leaving {}\", ecx.frame().instance().bright_red());\n+        let thread = ecx.active_thread_mut();\n+        // Start a short-lived allocation window before the frame is actually removed. Any stack\n+        // locals materialized during this window belong to the caller and are rebased once the pop\n+        // finishes.\n+        let next_stack_addr = thread\n+            .stack_addr_records\n+            .last()\n+            .copied()\n+            .unwrap_or_else(|| *thread.next_stack_addr.borrow());\n+        debug_assert!(thread.stack_pop_allocs.borrow().is_none());\n+        *thread.stack_pop_allocs.borrow_mut() = Some(StackPopAllocTracker {\n+            next_stack_addr,\n+            int_to_ptr_map: Vec::new(),\n+            alloc_ids: Vec::new(),\n+        });\n         interp_ok(())\n     }\n \n@@ -1999,16 +2182,31 @@ impl<'tcx> Machine<'tcx> for MiriMachine<'tcx> {\n         if !ecx.active_thread_stack().is_empty() {\n             info!(\"Continuing in {}\", ecx.frame().instance());\n         }\n+\n         // Resumes the stack pointer.\n-        let thread = ecx.machine.threads.active_thread_mut();\n-        if let Some(next_stack_addr) = thread.stack_addr_records.pop() {\n-            let mut current_sp = thread.next_stack_addr.borrow_mut();\n-            // Update stack ptr only when the recorded sp is lower than current sp.\n-            // That's to say do nothing if current sp is lower than recorded sp,\n-            // which is possible when returning to frame with more locals allocated.\n-            if *current_sp > next_stack_addr {\n-                *current_sp = next_stack_addr;\n-            }\n+        let (next_stack_addr, stack_bottom, stack_pop_allocs) = {\n+            let thread = ecx.machine.threads.active_thread_mut();\n+            // Take the pop-window allocations before rebasing so any nested stack allocation during\n+            // rebase uses the regular stack path instead of recursively extending this window.\n+            let stack_pop_allocs = thread\n+                .stack_pop_allocs\n+                .borrow_mut()\n+                .take()\n+                .map(|tracker| tracker.alloc_ids)\n+                .unwrap_or_default();\n+            (thread.stack_addr_records.pop(), thread.stack_bottom, stack_pop_allocs)\n+        };\n+        if let Some(next_stack_addr) = next_stack_addr {\n+            let next_stack_addr = rebase_stack_allocs_after_pop(\n+                ecx,\n+                next_stack_addr,\n+                stack_bottom,\n+                &stack_pop_allocs,\n+            )?;\n+\n+            let thread = ecx.machine.threads.active_thread_mut();\n+            let current_sp = &mut *thread.next_stack_addr.borrow_mut();\n+            *current_sp = next_stack_addr;\n         }\n \n         // log!(\"stack (pop after):\\n{}\", thread.display_stack_records());"
+    },
+    {
+      "sha": "c4bdb07ff2cbd557aa5f1b22c4c525c4745dfc7f",
+      "filename": "src/mirch/config.rs",
+      "status": "modified",
+      "additions": 28,
+      "deletions": 31,
+      "changes": 59,
+      "blob_url": "https://github.com/KMiri-rs/miri/blob/b3b00ba66cfd944344053125c0e90800e061f92f/src%2Fmirch%2Fconfig.rs",
+      "raw_url": "https://github.com/KMiri-rs/miri/raw/b3b00ba66cfd944344053125c0e90800e061f92f/src%2Fmirch%2Fconfig.rs",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/src%2Fmirch%2Fconfig.rs?ref=b3b00ba66cfd944344053125c0e90800e061f92f",
+      "patch": "@@ -18,12 +18,8 @@ pub fn parse_json_file(file_path: &str) -> Result<PhysConfig, io::Error> {\n     );\n     assert!(\n         config.kernel_code_size\n-            >= kernel_static_start_addr() + config.kernel_static_size + config.cpu_local_size,\n-        \"kernel_code_size need to be big enough for kernel static and CPU-local sections\"\n-    );\n-    assert!(\n-        config.total_mem_size >= kernel_stack_end_addr(),\n-        \"total_mem_size must cover the kernel stack section\"\n+            > kernel_static_start_addr() + config.kernel_static_size + config.cpu_local_size,\n+        \"kernel_code_size need to be bigger enough\"\n     );\n \n     const INIT_MAPPING_SIZE: usize = 0x4000_0000; // 1GB\n@@ -42,10 +38,14 @@ pub fn parse_json_file(file_path: &str) -> Result<PhysConfig, io::Error> {\n ///\n /// Represents the layout of physical memory in the system with the following structure:\n ///\n-/// |<----------Kernel Reserved---------->|<-----Free Pages----->|<--Kernel Stack-->|\n-/// |<-Boot PT->|<-Static->|<-CPU-local-->|                      |                  |\n-/// |-----------|---------|--------------|----------------------|------------------|\n-/// 0x0      0x10000  0x400000     `kernel_code_size`      0x8000000    `total_mem_size`\n+/// |<-------------------------------Kernel Code Section-------------------------------->|\n+/// |<-Boot PT->|<-Kernel Static Section->|<-CPU-local Section->|<-Kernel Stack Section->|\n+/// |-----------|------------------------------------------------------------------------|\n+/// 0x0      0x10000                                                             `kernel_code_size`\n+///\n+/// |<-Kernel Code Section->|<-----Free Pages------>|\n+/// |-----------------------|-----------------------|\n+/// 0x0              `kernel_code_size`        `total_mem_size`\n ///\n #[derive(Deserialize, Clone, Copy, Debug)]\n pub struct PhysConfig {\n@@ -85,15 +85,20 @@ impl PhysConfig {\n \n     /// Creates a default physical memory configuration with typical values:\n     ///\n-    /// |<-Boot PT->|<-Kernel Static Section->|<-CPU-local Section------------>|<--- Free Pages --->|<------------Kernel Stack------------>|\n-    /// |-----------|-------------------------|--------------------------------|--------------------|--------------------------------------|\n-    /// 0x0      0x1_0000              0x40_0000                       0x100_0000          0x800_0000                               0xb20_0000\n+    /// |<-------------------------------Kernel Code Section-------------------------------->|\n+    /// |<-Boot PT->|<-Kernel Static Section->|<-CPU-local Section->|<-Kernel Stack Section->|\n+    /// |-----------|-------------------------|---------------------|------------------------|\n+    /// 0x0      0x1_0000                 0x40_0000             0x41_0000                0x100_0000\n+    ///\n+    /// |<-Kernel Code Section->|<-----Free Pages------>|\n+    /// |-----------------------|-----------------------|\n+    /// 0x0                 0x100_0000             0x800_0000\n     pub const fn default() -> Self {\n         Self {\n-            total_mem_size: 0xb20_0000,\n+            total_mem_size: 0x800_0000,\n             kernel_code_size: 0x100_0000,\n             kernel_static_size: 0x3f_0000,\n-            cpu_local_size: 0xc0_0000,\n+            cpu_local_size: 0x1_0000,\n \n             // Size and base should align to 0x4000_0000\n             kernel_code_base_vaddr: 0xffff_ffff_8000_0000,\n@@ -118,9 +123,9 @@ impl CodeSection {\n             Self::BootPt\n         } else if paddr < cpu_local_start_addr() {\n             Self::Static\n-        } else if paddr < cpu_local_end_addr() {\n+        } else if paddr < kernel_stack_start_addr() {\n             Self::CpuLocal\n-        } else if paddr >= kernel_stack_start_addr() && paddr < kernel_stack_end_addr() {\n+        } else if paddr <= kernel_stack_end_addr() {\n             Self::Stack\n         } else {\n             return Err(format!(\"physical addr 0x{paddr:x} doesn't locate in kernel section\"));\n@@ -209,22 +214,14 @@ pub fn cpu_local_end_addr() -> usize {\n }\n \n // Kernel stack accessors\n-/// Returns starting physical address of kernel stacks.\n-///\n-/// Keep this immediately after the free-pages range, whose requested default extent is\n-/// 0x1000000..0x8000000.\n-pub const fn kernel_stack_start_addr() -> usize {\n-    0x800_0000\n-}\n-\n-/// Returns the size of the kernel stack section.\n-pub const fn kernel_stack_size() -> usize {\n-    50 * 1024 * 1024\n+/// Returns starting physical address of kernel stacks\n+pub fn kernel_stack_start_addr() -> usize {\n+    cpu_local_end_addr()\n }\n \n-/// Returns ending physical address of kernel stacks (exclusive).\n-pub const fn kernel_stack_end_addr() -> usize {\n-    kernel_stack_start_addr() + kernel_stack_size()\n+/// Returns ending physical address of kernel stacks\n+pub fn kernel_stack_end_addr() -> usize {\n+    kernel_code_end()\n }\n \n // Virtual address accessors"
+    },
+    {
+      "sha": "7e8bdfe66141efced68f8a1d8e84af9fa30b1373",
+      "filename": "src/mirch/physical_mem.rs",
+      "status": "modified",
+      "additions": 0,
+      "deletions": 6,
+      "changes": 6,
+      "blob_url": "https://github.com/KMiri-rs/miri/blob/b3b00ba66cfd944344053125c0e90800e061f92f/src%2Fmirch%2Fphysical_mem.rs",
+      "raw_url": "https://github.com/KMiri-rs/miri/raw/b3b00ba66cfd944344053125c0e90800e061f92f/src%2Fmirch%2Fphysical_mem.rs",
+      "contents_url": "https://api.github.com/repos/KMiri-rs/miri/contents/src%2Fmirch%2Fphysical_mem.rs?ref=b3b00ba66cfd944344053125c0e90800e061f92f",
+      "patch": "@@ -237,12 +237,6 @@ impl PhysicalMemory {\n                 PageState::Typed { page_type: TypedKind::Interpreter, type_size: page_size() };\n         }\n \n-        #[allow(clippy::needless_range_loop)]\n-        for i in kernel_stack_start_addr() / page_size()..kernel_stack_end_addr() / page_size() {\n-            page_states[i] =\n-                PageState::Typed { page_type: TypedKind::Stack, type_size: page_size() };\n-        }\n-\n         Self { mem, page_states, init_masks: BTreeMap::new(), page_table: None }\n     }\n }"
+    }
+  ],
+  "commits": [
+    {
+      "sha": "9cc087b20a293607b8abeb07044f40eb353b4756",
+      "node_id": "C_kwDORLP5etoAKDljYzA4N2IyMGEyOTM2MDdiOGFiZWIwNzA0NGY0MGViMzUzYjQ3NTY",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-15T13:51:28Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-15T13:51:28Z"
+        },
+        "message": "kmiri: fix the condition during the conflict of int_to_ptr_map insertion",
+        "tree": {
+          "sha": "88fb34c358248bf853fac5979cb1422ebc97b443",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/88fb34c358248bf853fac5979cb1422ebc97b443"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/9cc087b20a293607b8abeb07044f40eb353b4756",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/9cc087b20a293607b8abeb07044f40eb353b4756",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/9cc087b20a293607b8abeb07044f40eb353b4756",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/9cc087b20a293607b8abeb07044f40eb353b4756/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "68d1819d5b31f87467daae345e506c54e009365e",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/68d1819d5b31f87467daae345e506c54e009365e",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/68d1819d5b31f87467daae345e506c54e009365e"
+        }
+      ]
+    },
+    {
+      "sha": "fd5bd25814edb7e72f4af8ae657dd1735ece52ec",
+      "node_id": "C_kwDORLP5etoAKGZkNWJkMjU4MTRlZGI3ZTcyZjRhZjhhZTY1N2RkMTczNWVjZTUyZWM",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-15T13:52:32Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-15T13:52:32Z"
+        },
+        "message": "debugger: add last_recorded_stack_ptr",
+        "tree": {
+          "sha": "59b4be0c1c830d99e9050f9abd11cbfb507f0313",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/59b4be0c1c830d99e9050f9abd11cbfb507f0313"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/fd5bd25814edb7e72f4af8ae657dd1735ece52ec",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/fd5bd25814edb7e72f4af8ae657dd1735ece52ec",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/fd5bd25814edb7e72f4af8ae657dd1735ece52ec",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/fd5bd25814edb7e72f4af8ae657dd1735ece52ec/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "9cc087b20a293607b8abeb07044f40eb353b4756",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/9cc087b20a293607b8abeb07044f40eb353b4756",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/9cc087b20a293607b8abeb07044f40eb353b4756"
+        }
+      ]
+    },
+    {
+      "sha": "4b40540b0b9d6d342ebc4628594415a39a31adff",
+      "node_id": "C_kwDORLP5etoAKDRiNDA1NDBiMGI5ZDZkMzQyZWJjNDYyODU5NDQxNWEzOWEzMWFkZmY",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-15T13:59:13Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-15T13:59:13Z"
+        },
+        "message": "kmiri: resume stack point in before_stack_pop\n\nunluckily, it doesn't resolve the allocation overlap problem\n\nthread 'rustc' (119235) panicked at src/alloc_addresses/mod.rs:896:17:\naddr (186646288) (alloc154) is not in int_to_ptr_map\nstack backtrace:\n\nresume stack pointer from ffffffff8b1fff18 to ffffffff8b1fff18\nhandle_stack_pop_unwind(extra = FrameData { borrow_tracker: So\neState { local_clocks: RefCell { value: {} } }) }, unwinding =\n[addr_from_alloc_id_uncached] alloc153 addr=0xffffffff8b1fff10\nresume stack pointer from ffffffff8b1fff10 to ffffffff8b1fff18\n[addr_from_alloc_id_uncached] alloc154 addr=0xffffffff8b1fff10\n186646288 has two AllocId alloc154 and alloc153\nfree alloc153 (addr=0xb1fff10=186646288)",
+        "tree": {
+          "sha": "9bbb35b2f98e707755c254b7367a1207850c7a35",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/9bbb35b2f98e707755c254b7367a1207850c7a35"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/4b40540b0b9d6d342ebc4628594415a39a31adff",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/4b40540b0b9d6d342ebc4628594415a39a31adff",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/4b40540b0b9d6d342ebc4628594415a39a31adff",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/4b40540b0b9d6d342ebc4628594415a39a31adff/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "fd5bd25814edb7e72f4af8ae657dd1735ece52ec",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/fd5bd25814edb7e72f4af8ae657dd1735ece52ec",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/fd5bd25814edb7e72f4af8ae657dd1735ece52ec"
+        }
+      ]
+    },
+    {
+      "sha": "57f903ac9a28b9154df73ffd78c329ba0687ac0e",
+      "node_id": "C_kwDORLP5etoAKDU3ZjkwM2FjOWEyOGI5MTU0ZGY3M2ZmZDc4YzMyOWJhMDY4N2FjMGU",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-15T14:05:26Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-15T14:05:26Z"
+        },
+        "message": "kmiri: add some debugger_log points",
+        "tree": {
+          "sha": "8f8b54febb07adef74d9a2dc406dc274b0237562",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/8f8b54febb07adef74d9a2dc406dc274b0237562"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/57f903ac9a28b9154df73ffd78c329ba0687ac0e",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/57f903ac9a28b9154df73ffd78c329ba0687ac0e",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/57f903ac9a28b9154df73ffd78c329ba0687ac0e",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/57f903ac9a28b9154df73ffd78c329ba0687ac0e/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "4b40540b0b9d6d342ebc4628594415a39a31adff",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/4b40540b0b9d6d342ebc4628594415a39a31adff",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/4b40540b0b9d6d342ebc4628594415a39a31adff"
+        }
+      ]
+    },
+    {
+      "sha": "36756fc9b56c1b6d41646127af5377bfbcd85043",
+      "node_id": "C_kwDORLP5etoAKDM2NzU2ZmM5YjU2YzFiNmQ0MTY0NjEyN2FmNTM3N2JmYmNkODUwNDM",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-15T15:24:05Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-15T15:24:05Z"
+        },
+        "message": "kmiri: handle the new stack allocations during stack popping",
+        "tree": {
+          "sha": "7ab96f7619ed6be369624d6cde463d57cb717722",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/7ab96f7619ed6be369624d6cde463d57cb717722"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/36756fc9b56c1b6d41646127af5377bfbcd85043",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/36756fc9b56c1b6d41646127af5377bfbcd85043",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/36756fc9b56c1b6d41646127af5377bfbcd85043",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/36756fc9b56c1b6d41646127af5377bfbcd85043/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "57f903ac9a28b9154df73ffd78c329ba0687ac0e",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/57f903ac9a28b9154df73ffd78c329ba0687ac0e",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/57f903ac9a28b9154df73ffd78c329ba0687ac0e"
+        }
+      ]
+    },
+    {
+      "sha": "7be428161e449254551eacc9b868f0cafb8f2449",
+      "node_id": "C_kwDORLP5etoAKDdiZTQyODE2MWU0NDkyNTQ1NTFlYWNjOWI4NjhmMGNhZmI4ZjI0NDk",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-15T15:42:57Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-15T15:42:57Z"
+        },
+        "message": "kmiri: replace the gap fix; compute new alloc addr instead",
+        "tree": {
+          "sha": "bc519adb0a77dea359f7b3d1e6b458a034041b4a",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/bc519adb0a77dea359f7b3d1e6b458a034041b4a"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/7be428161e449254551eacc9b868f0cafb8f2449",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/7be428161e449254551eacc9b868f0cafb8f2449",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/7be428161e449254551eacc9b868f0cafb8f2449",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/7be428161e449254551eacc9b868f0cafb8f2449/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "36756fc9b56c1b6d41646127af5377bfbcd85043",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/36756fc9b56c1b6d41646127af5377bfbcd85043",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/36756fc9b56c1b6d41646127af5377bfbcd85043"
+        }
+      ]
+    },
+    {
+      "sha": "648c8cd387d630869f45dcbe9a761600d0d9ca8e",
+      "node_id": "C_kwDORLP5etoAKDY0OGM4Y2QzODdkNjMwODY5ZjQ1ZGNiZTlhNzYxNjAwZDBkOWNhOGU",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T01:02:55Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T01:02:55Z"
+        },
+        "message": "kmiri: materialize return place allocation in init_frame\n\nbut it doesn't help; still panics\n\nthread 'rustc' (15568) panicked at src/alloc_addresses/mod.rs:904:13:\nfree alloc1036799 at 0xb1ffe77, but it is not present in int_to_ptr_map\nstack backtrace:\n   0:     0x70a5f37b8fbb - <<std[ca0b0bcade21542d]::sys::backtrace::BacktraceLock>::print::DisplayBacktrace as core[db70abf3441067d4]::fmt::Display>::fmt\n   1:     0x70a5f3e1db88 - core[db70abf3441067d4]::fmt::write\n   2:     0x70a5f37cffc6 - <std[ca0b0bcade21542d]::sys::stdio::unix::Stderr as std[ca0b0bcade21542d]::io::Write>::write_fmt\n   3:     0x70a5f378efc8 - std[ca0b0bcade21542d]::panicking::default_hook::{closure#0}\n   4:     0x70a5f37ac3c3 - std[ca0b0bcade21542d]::panicking::default_hook\n   5:     0x70a5f27affbc - std[ca0b0bcade21542d]::panicking::update_hook::<alloc[1873db2efb56cea0]::boxed::Box<rustc_driver_impl[a544dc0f85200ca5]::install_i\nce_hook::{closure#1}>>::{closure#0}\n   6:     0x70a5f37ac6a2 - std[ca0b0bcade21542d]::panicking::panic_with_hook\n   7:     0x70a5f378f088 - std[ca0b0bcade21542d]::panicking::panic_handler::{closure#0}\n   8:     0x70a5f37835d9 - std[ca0b0bcade21542d]::sys::backtrace::__rust_end_short_backtrace::<std[ca0b0bcade21542d]::panicking::panic_handler::{closure#0},\n!>\n   9:     0x70a5f3790aed - __rustc[2170a97d85da7901]::rust_begin_unwind\n  10:     0x70a5f02a3d7c - core[db70abf3441067d4]::panicking::panic_fmt\n  11:     0x575a23108a7e - <miri[7c0c08bdabaa247c]::machine::MiriMachine>::free_alloc_id\n                               at /home/zjp/KMiri/kmiri/src/alloc_addresses/mod.rs:904:13\n  12:     0x575a22f66717 - <miri[7c0c08bdabaa247c]::machine::MiriMachine as rustc_const_eval[c087febcd7017123]::interpret::machine::Machine>::before_memory_d\neallocation\n                               at /home/zjp/KMiri/kmiri/src/machine.rs:1805:17\n  13:     0x575a22f66717 - <rustc_const_eval[c087febcd7017123]::interpret::eval_context::InterpCx<miri[7c0c08bdabaa247c]::machine::MiriMachine>>::deallocate_\nptr\n                               at /home/zjp/.rustup/toolchains/nightly-2026-04-03-x86_64-unknown-linux-gnu/lib/rustlib/rustc-src/rust/compiler/rustc_const_ev\nal/src/interpret/memory.rs:437:9\n  14:     0x575a22f8f9e0 - <rustc_const_eval[c087febcd7017123]::interpret::eval_context::InterpCx<miri[7c0c08bdabaa247c]::machine::MiriMachine>>::deallocate_\nlocal\n                               at /home/zjp/.rustup/toolchains/nightly-2026-04-03-x86_64-unknown-linux-gnu/lib/rustlib/rustc-src/rust/compiler/rustc_const_ev\nal/src/interpret/stack.rs:602:18\n  15:     0x575a22f8f9e0 - <rustc_const_eval[c087febcd7017123]::interpret::eval_context::InterpCx<miri[7c0c08bdabaa247c]::machine::MiriMachine>>::storage_dea\nd\n                               at /home/zjp/.rustup/toolchains/nightly-2026-04-03-x86_64-unknown-linux-gnu/lib/rustlib/rustc-src/rust/compiler/rustc_const_ev\nal/src/interpret/stack.rs:588:14\n  16:     0x575a22f8f9e0 - <rustc_const_eval[c087febcd7017123]::interpret::eval_context::InterpCx<miri[7c0c08bdabaa247c]::machine::MiriMachine>>::eval_statem\nent\n                               at /home/zjp/.rustup/toolchains/nightly-2026-04-03-x86_64-unknown-linux-gnu/lib/rustlib/rustc-src/rust/compiler/rustc_const_ev\nal/src/interpret/step.rs:108:22\n  17:     0x575a22f8f9e0 - <rustc_const_eval[c087febcd7017123]::interpret::eval_context::InterpCx<miri[7c0c08bdabaa247c]::machine::MiriMachine>>::step\n                               at /home/zjp/.rustup/toolchains/nightly-2026-04-03-x86_64-unknown-linux-gnu/lib/rustlib/rustc-src/rust/compiler/rustc_const_ev\nal/src/interpret/step.rs:57:18\n  18:     0x575a22f8f9e0 - <rustc_const_eval[c087febcd7017123]::interpret::eval_context::InterpCx<miri[7c0c08bdabaa247c]::machine::MiriMachine> as miri[7c0c0\n8bdabaa247c]::concurrency::thread::EvalContextExt>::run_threads\n                               at /home/zjp/KMiri/kmiri/src/concurrency/thread.rs:1516:30\n  19:     0x575a231b14ac - miri[7c0c08bdabaa247c]::eval::eval_entry::{closure#0}\n                               at /home/zjp/KMiri/kmiri/src/eval.rs:508:53\n  20:     0x575a231b14ac - <miri[7c0c08bdabaa247c]::eval::eval_entry::{closure#0} as core[db70abf3441067d4]::ops::function::FnOnce<()>>::call_once\n                               at /home/zjp/.rustup/toolchains/nightly-2026-04-03-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/function\n.rs:250:5\n  21:     0x575a231b14ac - <core[db70abf3441067d4]::panic::unwind_safe::AssertUnwindSafe<miri[7c0c08bdabaa247c]::eval::eval_entry::{closure#0}> as core[db70a\nbf3441067d4]::ops::function::FnOnce<()>>::call_once\n                               at /home/zjp/.rustup/toolchains/nightly-2026-04-03-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/panic/unwind\n_safe.rs:275:9\n  22:     0x575a231b14ac - std[ca0b0bcade21542d]::panicking::catch_unwind::do_call::<core[db70abf3441067d4]::panic::unwind_safe::AssertUnwindSafe<miri[7c0c08\nbdabaa247c]::eval::eval_entry::{closure#0}>, rustc_middle[9f018cce0c08ab13]::mir::interpret::error::InterpResult<!>>\n                               at /home/zjp/.rustup/toolchains/nightly-2026-04-03-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/panicking.rs:\n581:40\n  23:     0x575a231b14ac - std[ca0b0bcade21542d]::panicking::catch_unwind::<rustc_middle[9f018cce0c08ab13]::mir::interpret::error::InterpResult<!>, core[db70\nabf3441067d4]::panic::unwind_safe::AssertUnwindSafe<miri[7c0c08bdabaa247c]::eval::eval_entry::{closure#0}>>\n                               at /home/zjp/.rustup/toolchains/nightly-2026-04-03-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/panicking.rs:\n544:19\n  24:     0x575a231b14ac - std[ca0b0bcade21542d]::panic::catch_unwind::<core[db70abf3441067d4]::panic::unwind_safe::AssertUnwindSafe<miri[7c0c08bdabaa247c]::\neval::eval_entry::{closure#0}>, rustc_middle[9f018cce0c08ab13]::mir::interpret::error::InterpResult<!>>\n                               at /home/zjp/.rustup/toolchains/nightly-2026-04-03-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/panic.rs:359:\n14\n  25:     0x575a231b14ac - miri[7c0c08bdabaa247c]::eval::eval_entry\n                               at /home/zjp/KMiri/kmiri/src/eval.rs:508:9\n  26:     0x575a22ee0594 - <miri[8994ab0f2c7a5c59]::MiriCompilerCalls as rustc_driver_impl[a544dc0f85200ca5]::Callbacks>::after_analysis\n                               at /home/zjp/KMiri/kmiri/src/bin/miri.rs:289:13\n  27:     0x70a5f4ff94b7 - rustc_interface[e25ca096212c0b43]::interface::run_compiler::<(), rustc_driver_impl[a544dc0f85200ca5]::run_compiler::{closure#0}>::\n{closure#1}\n  28:     0x70a5f4fe2ffe - std[ca0b0bcade21542d]::sys::backtrace::__rust_begin_short_backtrace::<rustc_interface[e25ca096212c0b43]::util::run_in_thread_with_\nglobals<rustc_interface[e25ca096212c0b43]::util::run_in_thread_pool_with_globals<rustc_interface[e25ca096212c0b43]::interface::run_compiler<(), rustc_driver_\nimpl[a544dc0f85200ca5]::run_compiler::{closure#0}>::{closure#1}, ()>::{closure#0}, ()>::{closure#0}::{closure#0}, ()>\n  29:     0x70a5f4fe38a0 - <std[ca0b0bcade21542d]::thread::lifecycle::spawn_unchecked<rustc_interface[e25ca096212c0b43]::util::run_in_thread_with_globals<rus\ntc_interface[e25ca096212c0b43]::util::run_in_thread_pool_with_globals<rustc_interface[e25ca096212c0b43]::interface::run_compiler<(), rustc_driver_impl[a544dc\n0f85200ca5]::run_compiler::{closure#0}>::{closure#1}, ()>::{closure#0}, ()>::{closure#0}::{closure#0}, ()>::{closure#1} as core[db70abf3441067d4]::ops::funct\nion::FnOnce<()>>::call_once::{shim:vtable#0}\n  30:     0x70a5f4fe472c - <std[ca0b0bcade21542d]::sys::thread::unix::Thread>::new::thread_start\n  31:     0x70a5ee8a40da - start_thread\n                               at ./nptl/pthread_create.c:454:8\n  32:     0x70a5ee9377ac - __GI___clone3\n                               at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0\n  33:                0x0 - <unknown>",
+        "tree": {
+          "sha": "14d2aa1f2ce45093ddbcf43e77bfeb022de24431",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/14d2aa1f2ce45093ddbcf43e77bfeb022de24431"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/648c8cd387d630869f45dcbe9a761600d0d9ca8e",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/648c8cd387d630869f45dcbe9a761600d0d9ca8e",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/648c8cd387d630869f45dcbe9a761600d0d9ca8e",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/648c8cd387d630869f45dcbe9a761600d0d9ca8e/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "7be428161e449254551eacc9b868f0cafb8f2449",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/7be428161e449254551eacc9b868f0cafb8f2449",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/7be428161e449254551eacc9b868f0cafb8f2449"
+        }
+      ]
+    },
+    {
+      "sha": "1b6f26e0a0b24e88f228d92ab363bc21c061735e",
+      "node_id": "C_kwDORLP5etoAKDFiNmYyNmUwYTBiMjRlODhmMjI4ZDkyYWIzNjNiYzIxYzA2MTczNWU",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T01:29:11Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T01:29:11Z"
+        },
+        "message": "kmiri: allowing multiple AllocIds point to the same addr causes UB\n\nerror: Undefined Behavior: constructing invalid value of type core::fmt::Arguments<'_>: at .template, encountered 0, but expected something greater or equal\nto 1\n   --> /home/zjp/.rustup/toolchains/nightly-2026-04-03-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/fmt/mod.rs:236:33\n    |\n236 |                     write(self, args)\n    |                                 ^^^^ Undefined Behavior occurred here\n    |\n    = help: this indicates a bug in the program: it performed an invalid operation, and caused Undefined Behavior\n    = help: see https://doc.rust-lang.org/nightly/reference/behavior-considered-undefined.html for further information\n    = note: stack backtrace:\n            0: <&mut ostd::arch::MiriStdout as core::fmt::Write::write_fmt::SpecWriteFmt>::spec_write_fmt\n                at /home/zjp/.rustup/toolchains/nightly-2026-04-03-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/fmt/mod.rs:236:33: 236:37\n            1: <ostd::arch::MiriStdout as core::fmt::Write>::write_fmt\n                at /home/zjp/.rustup/toolchains/nightly-2026-04-03-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/fmt/mod.rs:241:9: 241:34\n            2: ostd::arch::_miri_print\n                at /home/zjp/KMiri/asterinas/ostd/src/arch/miri/mod.rs:141:5: 141:31\n            3: miri_start\n                at /home/zjp/KMiri/asterinas/ostd/src/lib.rs:39:9: 39:69",
+        "tree": {
+          "sha": "deebdb74120148ab265de1114aef46375d4bd8e5",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/deebdb74120148ab265de1114aef46375d4bd8e5"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/1b6f26e0a0b24e88f228d92ab363bc21c061735e",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/1b6f26e0a0b24e88f228d92ab363bc21c061735e",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/1b6f26e0a0b24e88f228d92ab363bc21c061735e",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/1b6f26e0a0b24e88f228d92ab363bc21c061735e/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "648c8cd387d630869f45dcbe9a761600d0d9ca8e",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/648c8cd387d630869f45dcbe9a761600d0d9ca8e",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/648c8cd387d630869f45dcbe9a761600d0d9ca8e"
+        }
+      ]
+    },
+    {
+      "sha": "59d4ea5c12672c1b8770b2fdead5335648049990",
+      "node_id": "C_kwDORLP5etoAKDU5ZDRlYTVjMTI2NzJjMWI4NzcwYjJmZGVhZDUzMzU2NDgwNDk5OTA",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T01:38:07Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T01:38:07Z"
+        },
+        "message": "kmiri: hard error if multiple AllocIds point to the same address",
+        "tree": {
+          "sha": "7f94f9599a7c162de8d21454b3e0174af2e38a77",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/7f94f9599a7c162de8d21454b3e0174af2e38a77"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/59d4ea5c12672c1b8770b2fdead5335648049990",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/59d4ea5c12672c1b8770b2fdead5335648049990",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/59d4ea5c12672c1b8770b2fdead5335648049990",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/59d4ea5c12672c1b8770b2fdead5335648049990/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "1b6f26e0a0b24e88f228d92ab363bc21c061735e",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/1b6f26e0a0b24e88f228d92ab363bc21c061735e",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/1b6f26e0a0b24e88f228d92ab363bc21c061735e"
+        }
+      ]
+    },
+    {
+      "sha": "84ecf058735c82f92e39430fb2870679887a112d",
+      "node_id": "C_kwDORLP5etoAKDg0ZWNmMDU4NzM1YzgyZjkyZTM5NDMwZmIyODcwNjc5ODg3YTExMmQ",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T01:48:40Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T01:48:40Z"
+        },
+        "message": "kmiri: restore the SP and int_to_ptr_map changes",
+        "tree": {
+          "sha": "5b8dd85ac894b77e02f2b99b290a1bb9ccdcc589",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/5b8dd85ac894b77e02f2b99b290a1bb9ccdcc589"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/84ecf058735c82f92e39430fb2870679887a112d",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/84ecf058735c82f92e39430fb2870679887a112d",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/84ecf058735c82f92e39430fb2870679887a112d",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/84ecf058735c82f92e39430fb2870679887a112d/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "59d4ea5c12672c1b8770b2fdead5335648049990",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/59d4ea5c12672c1b8770b2fdead5335648049990",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/59d4ea5c12672c1b8770b2fdead5335648049990"
+        }
+      ]
+    },
+    {
+      "sha": "024a4c856b5fdc34489078c44d6cbd9ff4ae8ae9",
+      "node_id": "C_kwDORLP5etoAKDAyNGE0Yzg1NmI1ZmRjMzQ0ODkwNzhjNDRkNmNiZDlmZjRhZThhZTk",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T02:10:40Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T03:32:30Z"
+        },
+        "message": "kmiri: record stack alloc and second alloc path during stack pop\n\n主要改动：\n\n- 在 `Thread` 里新增 `stack_pop_allocs`，用于记录 `before_stack_pop` 到 `after_stack_pop` 之间 materialize 出来的栈 allocation，以及这段窗口自己的临时 `next_stack_addr`。对应代码在 https://github.com/KMiri-rs/miri/blob/84ecf058735c82f92e39430fb2870679887a112d/src/concurrency/thread.rs#L188 和 https://github.com/KMiri-rs/miri/blob/84ecf058735c82f92e39430fb2870679887a112d/src/concurrency/thread.rs#L233。\n\n- `MemoryKind::Stack` 分配路径现在会检测是否处于 stack-pop 窗口；如果是，就基于记录里的 caller-side `next_stack_addr` 分配，并按分配发生顺序记录 `AllocId`。对应代码在 https://github.com/KMiri-rs/miri/blob/84ecf058735c82f92e39430fb2870679887a112d/src/alloc_addresses/mod.rs#L271。\n\n- `before_stack_pop` 开始记录窗口，`after_stack_pop` 取出窗口内的新栈 allocation，按 `AllocId` 顺序重新计算 base address，考虑 size/alignment，并同步更新 `base_paddr`、`int_to_ptr_map` 和必要时的 backing allocation/provenance copy。对应代码在 https://github.com/KMiri-rs/miri/blob/84ecf058735c82f92e39430fb2870679887a112d/src/machine.rs#L1162 和 https://github.com/KMiri-rs/miri/blob/84ecf058735c82f92e39430fb2870679887a112d/src/machine.rs#L2152。\n\n实现里额外处理了一个关键边界：窗口内新 allocation 可能先临时撞上尚未 `StorageDead` 的旧 allocation，导致第一次插入 `int_to_ptr_map` 时没有自己的反向映射。现在 `after_stack_pop` 如果发现 old base 已经不在 `int_to_ptr_map`，会记录 `[stack_pop_rebase_missing_old]`，然后把仍 live 的 allocation 按重算后的地址重新插回映射，避免后续 `free_alloc_id` panic。\n\n验证结果：\n\n- `cargo check` 通过。\n- `./run.sh` 已运行，原来的 `resource exhaustion: there are no more free addresses in the address space` 没有再出现。\n- `miri_debugger.log` 中没有 `AddressSpaceFull`。\n- 日志确认该路径大量触发：`stack_pop_alloc` 约 `233232` 次，窗口内分配都被后续 `stack_pop_rebase` 处理。\n- 当前 `./run.sh` 仍以 code 6 结束，但已经推进到另一个问题：guest 代码在 https://github.com/KMiri-rs/asterinas/blob/5714a23ba8f0c039c1e829f321a771becf0d365e/ostd/src/mm/page_table/boot_pt.rs#L292 对 `0xffff800001200000[noalloc]` 做 `write_bytes`，Miri 报 dangling pointer/no provenance。这是越过原先栈地址耗尽后的新 UB，不是这次 stack-pop 重排路径的 `AddressSpaceFull`。",
+        "tree": {
+          "sha": "91287f23d86d0632bd7514c39777ad94293e1dee",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/91287f23d86d0632bd7514c39777ad94293e1dee"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/024a4c856b5fdc34489078c44d6cbd9ff4ae8ae9",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/024a4c856b5fdc34489078c44d6cbd9ff4ae8ae9",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/024a4c856b5fdc34489078c44d6cbd9ff4ae8ae9",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/024a4c856b5fdc34489078c44d6cbd9ff4ae8ae9/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "84ecf058735c82f92e39430fb2870679887a112d",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/84ecf058735c82f92e39430fb2870679887a112d",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/84ecf058735c82f92e39430fb2870679887a112d"
+        }
+      ]
+    },
+    {
+      "sha": "8676f6b344cbe3652f48d4377342cfc5a7803c03",
+      "node_id": "C_kwDORLP5etoAKDg2NzZmNmIzNDRjYmUzNjUyZjQ4ZDQzNzczNDJjZmM1YTc4MDNjMDM",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T03:37:48Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T03:37:48Z"
+        },
+        "message": "Revert \"kmiri(mirch): enlarge kernel stack range to 50MB and move it to last\"\n\nThis reverts commit 26e55ef2da9d930880601924d1d212715c7c33de.",
+        "tree": {
+          "sha": "184ce3a0abe9835b19648521e1293eda1976a964",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/184ce3a0abe9835b19648521e1293eda1976a964"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/8676f6b344cbe3652f48d4377342cfc5a7803c03",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/8676f6b344cbe3652f48d4377342cfc5a7803c03",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/8676f6b344cbe3652f48d4377342cfc5a7803c03",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/8676f6b344cbe3652f48d4377342cfc5a7803c03/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "024a4c856b5fdc34489078c44d6cbd9ff4ae8ae9",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/024a4c856b5fdc34489078c44d6cbd9ff4ae8ae9",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/024a4c856b5fdc34489078c44d6cbd9ff4ae8ae9"
+        }
+      ]
+    },
+    {
+      "sha": "1832ee172110ae2d9fd3aee2dd4bf836c314fe2b",
+      "node_id": "C_kwDORLP5etoAKDE4MzJlZTE3MjExMGFlMmQ5ZmQzYWVlMmRkNGJmODM2YzMxNGZlMmI",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T03:45:19Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T03:45:32Z"
+        },
+        "message": "kmiri: remove debugger_log spots",
+        "tree": {
+          "sha": "23a1feba0244f703cfcc4c1445a7ec59faaf3f39",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/23a1feba0244f703cfcc4c1445a7ec59faaf3f39"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/1832ee172110ae2d9fd3aee2dd4bf836c314fe2b",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/1832ee172110ae2d9fd3aee2dd4bf836c314fe2b",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/1832ee172110ae2d9fd3aee2dd4bf836c314fe2b",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/1832ee172110ae2d9fd3aee2dd4bf836c314fe2b/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "8676f6b344cbe3652f48d4377342cfc5a7803c03",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/8676f6b344cbe3652f48d4377342cfc5a7803c03",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/8676f6b344cbe3652f48d4377342cfc5a7803c03"
+        }
+      ]
+    },
+    {
+      "sha": "6653f36588ea0accede6135eb94e1a23f8c30e47",
+      "node_id": "C_kwDORLP5etoAKDY2NTNmMzY1ODhlYTBhY2NlZGU2MTM1ZWI5NGUxYTIzZjhjMzBlNDc",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T03:57:52Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T03:57:52Z"
+        },
+        "message": "kmiri: debugger_log stack footprint (max stack usage is 1MB now)",
+        "tree": {
+          "sha": "c73a6ac3192a2f084e1f12f9583f5a2d6bb20bd0",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/c73a6ac3192a2f084e1f12f9583f5a2d6bb20bd0"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/6653f36588ea0accede6135eb94e1a23f8c30e47",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/6653f36588ea0accede6135eb94e1a23f8c30e47",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/6653f36588ea0accede6135eb94e1a23f8c30e47",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/6653f36588ea0accede6135eb94e1a23f8c30e47/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "1832ee172110ae2d9fd3aee2dd4bf836c314fe2b",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/1832ee172110ae2d9fd3aee2dd4bf836c314fe2b",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/1832ee172110ae2d9fd3aee2dd4bf836c314fe2b"
+        }
+      ]
+    },
+    {
+      "sha": "a83906585128f8e9603b8c0e50d52c85ca576985",
+      "node_id": "C_kwDORLP5etoAKGE4MzkwNjU4NTEyOGY4ZTk2MDNiOGMwZTUwZDUyYzg1Y2E1NzY5ODU",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T04:58:58Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T04:58:58Z"
+        },
+        "message": "Revert \"kmiri: debugger_log stack footprint (max stack usage is 1MB now)\"\n\nThis reverts commit 6653f36588ea0accede6135eb94e1a23f8c30e47.",
+        "tree": {
+          "sha": "23a1feba0244f703cfcc4c1445a7ec59faaf3f39",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/23a1feba0244f703cfcc4c1445a7ec59faaf3f39"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/a83906585128f8e9603b8c0e50d52c85ca576985",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/a83906585128f8e9603b8c0e50d52c85ca576985",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/a83906585128f8e9603b8c0e50d52c85ca576985",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/a83906585128f8e9603b8c0e50d52c85ca576985/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "6653f36588ea0accede6135eb94e1a23f8c30e47",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/6653f36588ea0accede6135eb94e1a23f8c30e47",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/6653f36588ea0accede6135eb94e1a23f8c30e47"
+        }
+      ]
+    },
+    {
+      "sha": "4edc90a7956532f53f3761ca4839c60b2b74e127",
+      "node_id": "C_kwDORLP5etoAKDRlZGM5MGE3OTU2NTMyZjUzZjM3NjFjYTQ4MzljNjBiMmI3NGUxMjc",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T06:01:40Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T06:01:40Z"
+        },
+        "message": "kmiri: reduce unnecessary assignment",
+        "tree": {
+          "sha": "cfc4247d30b2f3803a8b9635e15636f987361877",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/cfc4247d30b2f3803a8b9635e15636f987361877"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/4edc90a7956532f53f3761ca4839c60b2b74e127",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/4edc90a7956532f53f3761ca4839c60b2b74e127",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/4edc90a7956532f53f3761ca4839c60b2b74e127",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/4edc90a7956532f53f3761ca4839c60b2b74e127/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "a83906585128f8e9603b8c0e50d52c85ca576985",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/a83906585128f8e9603b8c0e50d52c85ca576985",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/a83906585128f8e9603b8c0e50d52c85ca576985"
+        }
+      ]
+    },
+    {
+      "sha": "b3b00ba66cfd944344053125c0e90800e061f92f",
+      "node_id": "C_kwDORLP5etoAKGIzYjAwYmE2NmNmZDk0NDM0NDA1MzEyNWMwZTkwODAwZTA2MWY5MmY",
+      "commit": {
+        "author": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T06:43:00Z"
+        },
+        "committer": {
+          "name": "zjp",
+          "email": "jiping_zhou@foxmail.com",
+          "date": "2026-06-16T06:44:09Z"
+        },
+        "message": "kmiri: isolate stack-pop temporary address mappings\n\nUse a thread StackPopAllocTracker int_to_ptr_map to avoid the address\ncollision with the one in global_state int_to_ptr_map.\nStackPopAllocTracker should be considered as caller allocation,\nso during stack dellocation, remove the matched address from global_state\nint_to_ptr_map first as that's callee's allocation.",
+        "tree": {
+          "sha": "4c26d12d4976426d0bc0fe467b601a4825e400fe",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/git/trees/4c26d12d4976426d0bc0fe467b601a4825e400fe"
+        },
+        "url": "https://api.github.com/repos/KMiri-rs/miri/git/commits/b3b00ba66cfd944344053125c0e90800e061f92f",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/KMiri-rs/miri/commits/b3b00ba66cfd944344053125c0e90800e061f92f",
+      "html_url": "https://github.com/KMiri-rs/miri/commit/b3b00ba66cfd944344053125c0e90800e061f92f",
+      "comments_url": "https://api.github.com/repos/KMiri-rs/miri/commits/b3b00ba66cfd944344053125c0e90800e061f92f/comments",
+      "author": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "zjp-CN",
+        "id": 25300418,
+        "node_id": "MDQ6VXNlcjI1MzAwNDE4",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25300418?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zjp-CN",
+        "html_url": "https://github.com/zjp-CN",
+        "followers_url": "https://api.github.com/users/zjp-CN/followers",
+        "following_url": "https://api.github.com/users/zjp-CN/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zjp-CN/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zjp-CN/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zjp-CN/subscriptions",
+        "organizations_url": "https://api.github.com/users/zjp-CN/orgs",
+        "repos_url": "https://api.github.com/users/zjp-CN/repos",
+        "events_url": "https://api.github.com/users/zjp-CN/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zjp-CN/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "4edc90a7956532f53f3761ca4839c60b2b74e127",
+          "url": "https://api.github.com/repos/KMiri-rs/miri/commits/4edc90a7956532f53f3761ca4839c60b2b74e127",
+          "html_url": "https://github.com/KMiri-rs/miri/commit/4edc90a7956532f53f3761ca4839c60b2b74e127"
+        }
+      ]
+    }
+  ]
+}

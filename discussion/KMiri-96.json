@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4AnnkQ",
+    "number": 96,
+    "title": "`cocoindex_code` usage",
+    "body": "```bash\r\n$ ccc index\r\nProject: /home/zjp/KMiri\r\nIndexing: 3340 files listed | 0 added, 0 deleted, 0 reprocessed, 3340 unchanged, error: 0\r\n\r\nIndex stats:\r\n  Chunks: 19076\r\n  Files:  3340\r\n  Languages:\r\n    rust: 16595 chunks\r\n    markdown: 853 chunks\r\n    c: 821 chunks\r\n    bash: 307 chunks\r\n    toml: 184 chunks\r\n    cpp: 110 chunks\r\n    yaml: 109 chunks\r\n    text: 48 chunks\r\n    python: 33 chunks\r\n    json: 16 chunks\r\n```\r\n\r\n```bash\r\n# Install sqlite3 vec0 extension\r\n$ mkdir -p ~/.sqlite_extensions && cd ~/.sqlite_extensions && curl -L 'https://github.com/asg017/sqlite-vec/releases/latest/download/install.sh' | sh\r\n$ echo \".load /home/zjp/.sqlite_extensions/vec0\" >> ~/.sqliterc\r\n\r\n# See what files have been indexed\r\n$ sqlite3 .cocoindex_code/target_sqlite.db \"SELECT DISTINCT file_path FROM code_chunks_vec;\"\r\n```",
+    "bodyText": "$ ccc index\nProject: /home/zjp/KMiri\nIndexing: 3340 files listed | 0 added, 0 deleted, 0 reprocessed, 3340 unchanged, error: 0\n\nIndex stats:\n  Chunks: 19076\n  Files:  3340\n  Languages:\n    rust: 16595 chunks\n    markdown: 853 chunks\n    c: 821 chunks\n    bash: 307 chunks\n    toml: 184 chunks\n    cpp: 110 chunks\n    yaml: 109 chunks\n    text: 48 chunks\n    python: 33 chunks\n    json: 16 chunks\n# Install sqlite3 vec0 extension\n$ mkdir -p ~/.sqlite_extensions && cd ~/.sqlite_extensions && curl -L 'https://github.com/asg017/sqlite-vec/releases/latest/download/install.sh' | sh\n$ echo \".load /home/zjp/.sqlite_extensions/vec0\" >> ~/.sqliterc\n\n# See what files have been indexed\n$ sqlite3 .cocoindex_code/target_sqlite.db \"SELECT DISTINCT file_path FROM code_chunks_vec;\"",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/96",
+    "createdAt": "2026-07-07T10:59:20Z",
+    "updatedAt": "2026-07-07T11:00:45Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVQ",
+      "name": "Show and tell",
+      "emoji": ":raised_hands:",
+      "description": "Show off something you've made"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

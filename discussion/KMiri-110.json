@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4An4-q",
+    "number": 110,
+    "title": "【第 19 周】Miri 双周会：围绕 #102 的分配写入越界 UB 问题；MIR 调试器支持分配信息筛选、文件行号断点；星绽：更新 Rust 工具链、集成 udeps 检查",
+    "body": "# 调试 #102；MIR 调试器支持分配信息筛选、文件行号断点\r\n\r\n关于 https://github.com/KMiri-rs/KMiri/issues/102 ，为了更方便地跳转和调试 `RcuDrop::drop` 和 `after_grace_period` 函数，改进调试器\r\n* 重用 Kani 的可达性：搜集更多编译器内部生成的单态化实例（比如 dropglue 代码：`Arc::<ostd::task::Task>` 在释放内部资源的时候，会调用 `drop_in_place` 这个函数，然后编译器会填充 drop 代码，其中会调用 `RcuDrop::drop`）\r\n  *  https://github.com/KMiri-rs/KMiri/pull/109\r\n* 修复同名依赖的不同版本造成的写入冲突问题：赋予编译器计算的 hash 值后缀，写入不同的  JSON 文件\r\n  * https://github.com/KMiri-rs/KMiri/pull/108\r\n* 复用搜索框，根据地址或 AllocID 筛选分配\r\n  * https://github.com/KMiri-rs/miri/pull/34\r\n* 复用搜索框，运行至指定的文件行号\r\n  * https://github.com/KMiri-rs/miri/pull/35\r\n\r\nhttps://github.com/user-attachments/assets/be8ddb9f-c64c-4d15-beaf-97a0c98e3353\r\n\r\n\r\n# Miri 双周会：围绕 #102 的分配写入越界 UB 问题\r\n\r\n时间：周一下午 3 点到 3点 17 和周五上午 10 点到 11 点\r\n\r\n我把 VecDeque 元素从回调函数改成普通  u8 值，依然是这个位置上的越界错误。\r\n\r\n澄钧认为模拟的时候，分配的定位逻辑没有处理好。因为 0x68 这个数字并不寻常，它与 State 结构体的大小一致。\r\n\r\n\r\n完善调试器之后，我在 stack borrow 界面看到分配栈的 span，确认 MaybeDangling 来自 `core::mem::MaybeDangling::<alloc::collections::btree::node::LeafNode<u32, ostd::arch::irq::HwCpuId>>::new`，也就是 ostd 的 `HW_CPU_ID_MAP`，这是一个 static，符合处于 Kernel Section 的内存部分，并且 `LeafNode<u32, HwCpuId>` 的大小正好也是 0x68！我把 HwCpuId 内部的 u32 改成 u8，那么大小变为 0x48，新的诊断确实变成了 0x48 位置～\r\n\r\n<img width=\"3336\" height=\"1464\" alt=\"image\" src=\"https://github.com/user-attachments/assets/70fe1d51-bdf1-41f9-867b-fdb33cd11014\" />\r\n\r\n\r\n# 星绽\r\n\r\n* 更新 Rust 工具链\r\n  * https://github.com/asterinas/asterinas/pull/3588\r\n* 调整工作区依赖\r\n  * https://github.com/asterinas/asterinas/pull/3591\r\n* 集成 udeps 检查\r\n  * https://github.com/asterinas/asterinas/pull/3595\r\n  * https://github.com/asterinas/asterinas/pull/3596\r\n  * https://github.com/asterinas/asterinas/pull/3608\r\n\r\n# 总结\r\n\r\n本周新创建 [9 个 PR, 2 个 issue](https://github.com/search?q=author%3Azjp-CN+created%3A2026-07-12T23%3A59%3A00%2B08%3A00..2026-07-19T23%3A59%3A00%2B08%3A00+org%3AKMiri-rs++org%3Aasterinas+&type=pullrequests)，关闭 [5 个 PR, 2 个 issue](https://github.com/search?q=author%3Azjp-CN+closed%3A2026-07-12T23%3A59%3A00%2B08%3A00..2026-07-19T23%3A59%3A00%2B08%3A00+org%3AKMiri-rs++org%3Aasterinas+&type=pullrequests)。",
+    "bodyText": "调试 #102；MIR 调试器支持分配信息筛选、文件行号断点\n关于 #102 ，为了更方便地跳转和调试 RcuDrop::drop 和 after_grace_period 函数，改进调试器\n\n重用 Kani 的可达性：搜集更多编译器内部生成的单态化实例（比如 dropglue 代码：Arc::<ostd::task::Task> 在释放内部资源的时候，会调用 drop_in_place 这个函数，然后编译器会填充 drop 代码，其中会调用 RcuDrop::drop）\n\n#109\n\n\n修复同名依赖的不同版本造成的写入冲突问题：赋予编译器计算的 hash 值后缀，写入不同的  JSON 文件\n\n#108\n\n\n复用搜索框，根据地址或 AllocID 筛选分配\n\nKMiri-rs/miri#34\n\n\n复用搜索框，运行至指定的文件行号\n\nKMiri-rs/miri#35\n\n\n\n\n  \n    \n    \n\n    mir-debugger-run-to-srcline.mp4\n    \n  \n\n  \n\n  \n\n\nMiri 双周会：围绕 #102 的分配写入越界 UB 问题\n时间：周一下午 3 点到 3点 17 和周五上午 10 点到 11 点\n我把 VecDeque 元素从回调函数改成普通  u8 值，依然是这个位置上的越界错误。\n澄钧认为模拟的时候，分配的定位逻辑没有处理好。因为 0x68 这个数字并不寻常，它与 State 结构体的大小一致。\n完善调试器之后，我在 stack borrow 界面看到分配栈的 span，确认 MaybeDangling 来自 core::mem::MaybeDangling::<alloc::collections::btree::node::LeafNode<u32, ostd::arch::irq::HwCpuId>>::new，也就是 ostd 的 HW_CPU_ID_MAP，这是一个 static，符合处于 Kernel Section 的内存部分，并且 LeafNode<u32, HwCpuId> 的大小正好也是 0x68！我把 HwCpuId 内部的 u32 改成 u8，那么大小变为 0x48，新的诊断确实变成了 0x48 位置～\n\n星绽\n\n更新 Rust 工具链\n\nasterinas/asterinas#3588\n\n\n调整工作区依赖\n\nasterinas/asterinas#3591\n\n\n集成 udeps 检查\n\nasterinas/asterinas#3595\nasterinas/asterinas#3596\nasterinas/asterinas#3608\n\n\n\n总结\n本周新创建 9 个 PR, 2 个 issue，关闭 5 个 PR, 2 个 issue。",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/110",
+    "createdAt": "2026-07-19T15:15:22Z",
+    "updatedAt": "2026-07-19T15:15:22Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

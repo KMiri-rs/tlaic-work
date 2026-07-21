@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4AnH7v",
+    "number": 55,
+    "title": "【第 14 周】KMiri：修复内核栈资源耗尽、改进 MIR 调试器；星绽：short-vis-path 由于编译器的诊断 bug 而受阻；AI 工具尝鲜与复现 Sashiko",
+    "body": "# KMiri：修复内核栈资源耗尽；改进 MIR 调试器\r\n\r\n* 针对 https://github.com/KMiri-rs/KMiri/issues/49\r\n  * 暂时通过增加栈内存并调整位置缓解：https://github.com/KMiri-rs/miri/pull/15\r\n  * 核心矛盾在于 Miri 的解释执行和内核的机器视角对内存分配有不同的理解：前者不关心分配布局，而后者精确控制分配布局\r\n  * Miri 的栈分配和释放与内核的行为完全不同，我们似乎不能侵入式改动 Miri 的内存分配\r\n    * [如果重新思考 miri 用于纯 Rust 编写的内核代码检测，最简单的思路是什么样的](https://github.com/orgs/KMiri-rs/discussions/53)\r\n* 改进调试器 PRs\r\n  * 避免数据竞争：https://github.com/KMiri-rs/miri/pull/13\r\n  * 空表格渲染：https://github.com/KMiri-rs/miri/pull/14\r\n\r\n# 星绽：short-vis-path 由于编译器的诊断 bug 而受阻\r\n\r\nhttps://github.com/asterinas/asterinas/pull/3247 对文件形式的模块组织方式具有糟糕的诊断报告：当模块文件出现编译错误，诊断将出现在模块的声明处，而不是实际发生错误的模块内部。洪亮认为这是致命的问题，无法合并该 PR。\r\n\r\n我已经向上游提交这个 bug，或许下周可以尝试修复一下编译器来解决一下\r\n* https://github.com/rust-lang/rust/issues/157881\r\n\r\n# AI 工具尝鲜与复现 Sashiko\r\n\r\n这周向中心申请了模型密钥，每个月有 2 千的使用额度，因此尽情尝试各种 AI 工具，比如 Sashiko、[Loop](https://loop.pingkai.cn/)、[Aider](http://aider.chat/)、 [dify](http://dify.ai/)。\r\n\r\n[Sashiko](https://github.com/sashiko-dev/sashiko) 是 Google 人员针对 Linux 邮件补丁而开发 AI 代码审查工具。\r\n\r\n我复现了 mbox 的补丁审查，记录在 https://github.com/os-checker/book/issues/34 。\r\n\r\n不推荐 Sashiko 用于星绽的审查，原因：\r\n* 审查代码很慢：耗时 1 个半小时审查单个补丁 —— 使用 Claude 模型，但当然不是模型的问题，而是 Sashiko 自身编排的问题\r\n* 各种 bug 让审查失败：花费时间排查了其中一些，比如虽然它支持主流模型，但对超时的支持非常不统一，可以观察到作者只是在不同阶段合并功能，完全没有维护代码\r\n* 高度集成 Linux 开发流程，不适合 Github PR 流程\r\n\r\n\r\n其实 Codex CLI 内置 agent 编排工作流：https://developers.openai.com/codex/subagents\r\n\r\n目前星绽使用 Copilot 和 Codex 双重 AI 审查，想要类似 Sashiko 的多阶段代码审查，可以尝试 Codex 的 Subagents，不仅更快，还符合当前的 PR 提交过程。\r\n\r\n",
+    "bodyText": "KMiri：修复内核栈资源耗尽；改进 MIR 调试器\n\n针对 #49\n\n暂时通过增加栈内存并调整位置缓解：KMiri-rs/miri#15\n核心矛盾在于 Miri 的解释执行和内核的机器视角对内存分配有不同的理解：前者不关心分配布局，而后者精确控制分配布局\nMiri 的栈分配和释放与内核的行为完全不同，我们似乎不能侵入式改动 Miri 的内存分配\n\n如果重新思考 miri 用于纯 Rust 编写的内核代码检测，最简单的思路是什么样的\n\n\n\n\n改进调试器 PRs\n\n避免数据竞争：KMiri-rs/miri#13\n空表格渲染：KMiri-rs/miri#14\n\n\n\n星绽：short-vis-path 由于编译器的诊断 bug 而受阻\nasterinas/asterinas#3247 对文件形式的模块组织方式具有糟糕的诊断报告：当模块文件出现编译错误，诊断将出现在模块的声明处，而不是实际发生错误的模块内部。洪亮认为这是致命的问题，无法合并该 PR。\n我已经向上游提交这个 bug，或许下周可以尝试修复一下编译器来解决一下\n\nrust-lang/rust#157881\n\nAI 工具尝鲜与复现 Sashiko\n这周向中心申请了模型密钥，每个月有 2 千的使用额度，因此尽情尝试各种 AI 工具，比如 Sashiko、Loop、Aider、 dify。\nSashiko 是 Google 人员针对 Linux 邮件补丁而开发 AI 代码审查工具。\n我复现了 mbox 的补丁审查，记录在 os-checker/book#34 。\n不推荐 Sashiko 用于星绽的审查，原因：\n\n审查代码很慢：耗时 1 个半小时审查单个补丁 —— 使用 Claude 模型，但当然不是模型的问题，而是 Sashiko 自身编排的问题\n各种 bug 让审查失败：花费时间排查了其中一些，比如虽然它支持主流模型，但对超时的支持非常不统一，可以观察到作者只是在不同阶段合并功能，完全没有维护代码\n高度集成 Linux 开发流程，不适合 Github PR 流程\n\n其实 Codex CLI 内置 agent 编排工作流：https://developers.openai.com/codex/subagents\n目前星绽使用 Copilot 和 Codex 双重 AI 审查，想要类似 Sashiko 的多阶段代码审查，可以尝试 Codex 的 Subagents，不仅更快，还符合当前的 PR 提交过程。",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/55",
+    "createdAt": "2026-06-14T14:47:07Z",
+    "updatedAt": "2026-06-14T14:47:07Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

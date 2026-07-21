@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4AmzRl",
+    "number": 45,
+    "title": "【第 12 周】KMiri：调试器增加 borrow stacks 和 instance search 面板；解决星绽 alloc_meta_frames 无权限指针出处问题",
+    "body": "# KMiri：调试器增加 borrow stacks 和 instance search 面板\r\n\r\n进一步理解 stacked borrows 检测的过程中，需要严格观测 miri 的数据结构状态，因此我在调试器中增加了新的弹出面板来呈现这些状态的变化，并对应到源码位置；\r\n\r\nhttps://github.com/user-attachments/assets/975baf60-52ad-481e-a956-1d77cd92384b\r\n\r\n为了更好地直接跳转到所关注的函数，增加了一个搜索面板，提前进行可达性分析，从入口函数静态分析得到可能执行的函数，得到函数实例列表（含单态化泛型和源码位置），并提供搜索交互，以及新的运行逻辑；\r\n\r\n此外，还补充了一种 MIR 运行方式，类似 GDB 的“执行当前行，不进入函数内部” (next / step over)，当函数栈帧增加，那么一直运行到返回当前函数，这种方式做了默认模式（`space` 键）取代之前默认的运行一条 MIR 语句（`n` 键），从而专注于当前函数。\r\n\r\n* 主 PR：https://github.com/KMiri-rs/miri/pull/8\r\n* 修复调试器其他面板的一些问题\r\n  * https://github.com/KMiri-rs/miri/pull/9\r\n  * https://github.com/KMiri-rs/miri/pull/10\r\n  * https://github.com/KMiri-rs/miri/pull/11\r\n\r\n# KMiri：解决星绽 alloc_meta_frames 无权限指针出处问题\r\n\r\n针对 https://github.com/KMiri-rs/KMiri/issues/36 ，关于页表初始化的裸指针出处暴露，kmiri 和星绽都需要修改。\r\n\r\nAI 改了一版，不再报这个 UB 了，还得仔细理解改动是否正确。\r\n\r\n* https://github.com/KMiri-rs/miri/pull/12\r\n* https://github.com/KMiri-rs/asterinas/pull/3\r\n\r\n# 其他\r\n\r\n* 一些  miri 笔记（借助 Codex AI）\r\n  * [StackBorrow 的 Retag 机制](https://github.com/orgs/KMiri-rs/discussions/41) \r\n  * [StackBorrow 的 protect 机制](https://github.com/orgs/KMiri-rs/discussions/40) \r\n  * [Miri 中的 exposed provenance](https://github.com/orgs/KMiri-rs/discussions/42)\r\n  * [DedupRangeMap<Stack> 拆分合并](https://github.com/orgs/KMiri-rs/discussions/39) \r\n* 星绽 PR：\r\n  * 提交 https://github.com/asterinas/asterinas/pull/3274\r\n  * 更新 https://github.com/asterinas/asterinas/pull/3247\r\n\r\n# 统计\r\n\r\n本周 [新开 7 个 PR、5 个 issue](https://github.com/search?q=author%3Azjp-CN+created%3A2026-05-24T23%3A59%3A00%2B08%3A00..2026-06-01T00%3A59%3A00%2B08%3A00&type=pullrequests)，[关闭 6 个 PR、2 个 issue](https://github.com/search?q=author%3Azjp-CN+closed%3A2026-05-24T23%3A59%3A00%2B08%3A00..2026-06-01T00%3A59%3A00%2B08%3A00&type=pullrequests)。\r\n\r\n",
+    "bodyText": "KMiri：调试器增加 borrow stacks 和 instance search 面板\n进一步理解 stacked borrows 检测的过程中，需要严格观测 miri 的数据结构状态，因此我在调试器中增加了新的弹出面板来呈现这些状态的变化，并对应到源码位置；\n\n  \n    \n    \n\n    Screencast.From.2026-05-29.16-55-26.mp4\n    \n  \n\n  \n\n  \n\n\n为了更好地直接跳转到所关注的函数，增加了一个搜索面板，提前进行可达性分析，从入口函数静态分析得到可能执行的函数，得到函数实例列表（含单态化泛型和源码位置），并提供搜索交互，以及新的运行逻辑；\n此外，还补充了一种 MIR 运行方式，类似 GDB 的“执行当前行，不进入函数内部” (next / step over)，当函数栈帧增加，那么一直运行到返回当前函数，这种方式做了默认模式（space 键）取代之前默认的运行一条 MIR 语句（n 键），从而专注于当前函数。\n\n主 PR：KMiri-rs/miri#8\n修复调试器其他面板的一些问题\n\nKMiri-rs/miri#9\nKMiri-rs/miri#10\nKMiri-rs/miri#11\n\n\n\nKMiri：解决星绽 alloc_meta_frames 无权限指针出处问题\n针对 #36 ，关于页表初始化的裸指针出处暴露，kmiri 和星绽都需要修改。\nAI 改了一版，不再报这个 UB 了，还得仔细理解改动是否正确。\n\nKMiri-rs/miri#12\nKMiri-rs/asterinas#3\n\n其他\n\n一些  miri 笔记（借助 Codex AI）\n\nStackBorrow 的 Retag 机制\nStackBorrow 的 protect 机制\nMiri 中的 exposed provenance\nDedupRangeMap 拆分合并\n\n\n星绽 PR：\n\n提交 asterinas/asterinas#3274\n更新 asterinas/asterinas#3247\n\n\n\n统计\n本周 新开 7 个 PR、5 个 issue，关闭 6 个 PR、2 个 issue。",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/45",
+    "createdAt": "2026-05-31T15:14:04Z",
+    "updatedAt": "2026-05-31T15:16:52Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 1,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

@@ -1,0 +1,32 @@
+{
+  "owner": "KMiri-rs",
+  "repo": "KMiri",
+  "kind": "discussion",
+  "item": {
+    "id": "D_kwDORCC-bM4AmJwv",
+    "number": 25,
+    "title": "【第 8-9 周】KMiri：解决栈踩踏问题；每两周周五上午十点与澄钧交流；KLint 集成：修复工具链更新问题",
+    "body": "# KMiri：解决栈踩踏问题\r\n\r\n问题见 https://github.com/KMiri-rs/KMiri/issues/19 ，修复见 https://github.com/KMiri-rs/miri/pull/6 。\r\n\r\nKernMiri 在新函数退栈返回旧函数的时候，新分配了一些栈内存，但弹出的栈指针指向这些新的分配的开头，之后的分配复写了当前帧，造成同一地址对应多分配的 bug。解决方式是，当的栈指针低于当前最新的栈指针，才更新（恢复）栈指针。\r\n\r\n与 Miri 上游人员进行了一些交流\r\n- https://github.com/rust-lang/miri/issues/5000\r\n\r\n# KMiri：每两周周五上午十点与澄钧交流\r\n\r\n钉钉会议回放：https://shanji.dingtalk.com/app/transcribes/76327569643238333733353936315f333132383937373630355f30\r\n\r\nAI 会议纪要：\r\n<img width=\"2800\" height=\"3096\" alt=\"image\" src=\"https://github.com/user-attachments/assets/08578854-21d9-46c4-b026-abaeac898807\" />\r\n\r\n\r\n# KLint 集成：修复工具链更新问题\r\n\r\n* https://github.com/asterinas/asterinas/pull/3089 已合并\r\n* 等待 https://github.com/asterinas/asterinas/pull/3083 和 https://github.com/asterinas/asterinas/pull/3036 合并\r\n\r\n\r\n# 其他\r\n\r\n这两周来北京入职通明湖中心。集齐入职材料、找房子、购置台式主机等等花了不少时间...\r\n\r\n<img width=\"1706\" height=\"1279\" alt=\"e5f95701a1cbfc18a690c95b5749452d\" src=\"https://github.com/user-attachments/assets/aa744ed5-40f9-4277-a21e-465862ab6f8b\" />\r\n\r\n",
+    "bodyText": "KMiri：解决栈踩踏问题\n问题见 #19 ，修复见 KMiri-rs/miri#6 。\nKernMiri 在新函数退栈返回旧函数的时候，新分配了一些栈内存，但弹出的栈指针指向这些新的分配的开头，之后的分配复写了当前帧，造成同一地址对应多分配的 bug。解决方式是，当的栈指针低于当前最新的栈指针，才更新（恢复）栈指针。\n与 Miri 上游人员进行了一些交流\n\nrust-lang/miri#5000\n\nKMiri：每两周周五上午十点与澄钧交流\n钉钉会议回放：https://shanji.dingtalk.com/app/transcribes/76327569643238333733353936315f333132383937373630355f30\nAI 会议纪要：\n\nKLint 集成：修复工具链更新问题\n\nasterinas/asterinas#3089 已合并\n等待 asterinas/asterinas#3083 和 asterinas/asterinas#3036 合并\n\n其他\n这两周来北京入职通明湖中心。集齐入职材料、找房子、购置台式主机等等花了不少时间...",
+    "url": "https://github.com/orgs/KMiri-rs/discussions/25",
+    "createdAt": "2026-05-04T14:54:27Z",
+    "updatedAt": "2026-05-12T10:37:23Z",
+    "closed": false,
+    "closedAt": null,
+    "locked": false,
+    "upvoteCount": 2,
+    "author": {
+      "login": "zjp-CN",
+      "url": "https://github.com/zjp-CN"
+    },
+    "category": {
+      "id": "DIC_kwDORCC-bM4C1eVM",
+      "name": "Announcements",
+      "emoji": ":mega:",
+      "description": "Updates from maintainers"
+    },
+    "answer": null
+  },
+  "comments": [],
+  "truncated_replies": []
+}

@@ -2,47 +2,47 @@
 
 ## 按组织聚合
 
-| 组织 | PR 数 | +行 | -行 |
-| --- | ---: | ---: | ---: |
-| **合计** | **181** | **22344** | **8649** |
-| KMiri-rs | 154 | 18219 | 4525 |
-| asterinas | 27 | 4125 | 4124 |
+| 组织 | Issue 数 | PR 数 | +行 | -行 |
+| --- | ---: | ---: | ---: | ---: |
+| **合计** | **135** | **181** | **22344** | **8649** |
+| KMiri-rs | 124 | 154 | 18219 | 4525 |
+| asterinas | 11 | 27 | 4125 | 4124 |
 
 ## 按仓库聚合
 
-| 仓库 | PR 数 | +行 | -行 |
-| --- | ---: | ---: | ---: |
-| **合计** | **181** | **22344** | **8649** |
-| KMiri-rs/miri | 49 | 6585 | 2491 |
-| KMiri-rs/KMiri | 30 | 4058 | 312 |
-| KMiri-rs/asterinas | 26 | 3649 | 431 |
-| asterinas/asterinas | 22 | 3449 | 2962 |
-| KMiri-rs/vivoblueos-kernel | 13 | 763 | 285 |
-| KMiri-rs/book | 10 | 1054 | 717 |
-| KMiri-rs/tock | 10 | 279 | 58 |
-| KMiri-rs/vivoblueos-build | 6 | 326 | 62 |
-| asterinas/asterinas.github.io | 5 | 676 | 1162 |
-| KMiri-rs/vivoblueos-libc | 3 | 15 | 26 |
-| KMiri-rs/linux | 2 | 692 | 10 |
-| KMiri-rs/vivoblueos-rust | 1 | 704 | 90 |
-| KMiri-rs/vivoblueos-cc-rs | 1 | 50 | 2 |
-| KMiri-rs/DragonOS | 1 | 26 | 18 |
-| KMiri-rs/vivoblueos-librs | 1 | 17 | 22 |
-| KMiri-rs/vivoblueos-external | 1 | 1 | 1 |
+| 仓库 | Issue 数 | PR 数 | +行 | -行 |
+| --- | ---: | ---: | ---: | ---: |
+| **合计** | **135** | **181** | **22344** | **8649** |
+| KMiri-rs/miri | 0 | 49 | 6585 | 2491 |
+| KMiri-rs/KMiri | 124 | 30 | 4058 | 312 |
+| KMiri-rs/asterinas | 0 | 26 | 3649 | 431 |
+| asterinas/asterinas | 9 | 22 | 3449 | 2962 |
+| KMiri-rs/vivoblueos-kernel | 0 | 13 | 763 | 285 |
+| KMiri-rs/book | 0 | 10 | 1054 | 717 |
+| KMiri-rs/tock | 0 | 10 | 279 | 58 |
+| KMiri-rs/vivoblueos-build | 0 | 6 | 326 | 62 |
+| asterinas/asterinas.github.io | 2 | 5 | 676 | 1162 |
+| KMiri-rs/vivoblueos-libc | 0 | 3 | 15 | 26 |
+| KMiri-rs/linux | 0 | 2 | 692 | 10 |
+| KMiri-rs/vivoblueos-rust | 0 | 1 | 704 | 90 |
+| KMiri-rs/vivoblueos-cc-rs | 0 | 1 | 50 | 2 |
+| KMiri-rs/DragonOS | 0 | 1 | 26 | 18 |
+| KMiri-rs/vivoblueos-librs | 0 | 1 | 17 | 22 |
+| KMiri-rs/vivoblueos-external | 0 | 1 | 1 | 1 |
 
 ## 按月份聚合
 
-| 月份 | PR 数 | +行 | -行 |
-| --- | ---: | ---: | ---: |
-| **合计** | **181** | **22344** | **8649** |
-| 2026-05 | 22 | 5412 | 1804 |
-| 2026-06 | 31 | 1238 | 938 |
-| 2026-07 | 28 | 4216 | 1537 |
-| 2026-08 | 30 | 2889 | 2618 |
-| 2026-09 | 42 | 5313 | 756 |
-| 2026-10 | 28 | 3276 | 996 |
+| 月份 | Issue 数 | PR 数 | +行 | -行 |
+| --- | ---: | ---: | ---: | ---: |
+| **合计** | **135** | **181** | **22344** | **8649** |
+| 2026-05 | 14 | 22 | 5412 | 1804 |
+| 2026-06 | 31 | 31 | 1238 | 938 |
+| 2026-07 | 20 | 28 | 4216 | 1537 |
+| 2026-08 | 27 | 30 | 2889 | 2618 |
+| 2026-09 | 28 | 42 | 5313 | 756 |
+| 2026-10 | 15 | 28 | 3276 | 996 |
 
-## 明细
+## PR 明细
 
 | 仓库 | PR 编号 | 标题 | +行 | -行 |
 | --- | --- | --- | ---: | ---: |
@@ -230,6 +230,146 @@
 | asterinas/asterinas.github.io | [#14][181] | Simplify and reuse page header code | 230 | 601 |
 
 
+## Issue 明细
+
+| 仓库 | issue 编号 | 标题 |
+| --- | --- | --- |
+| **合计** | 135 个 | |
+| KMiri-rs/KMiri | [#26][182] | Need to update asterinas version or toolchain to compile tests |
+| KMiri-rs/KMiri | [#27][183] | undefined symbol miri_promise_symbolic_alignment |
+| KMiri-rs/KMiri | [#30][184] | Add popup panel to view/select functions or callgraph |
+| KMiri-rs/KMiri | [#31][185] | Computing addr offset panics in CpuLocalCell::store |
+| KMiri-rs/KMiri | [#32][186] | lazy_alloc_typed_slot_allocation panics |
+| KMiri-rs/KMiri | [#33][187] | `PageTable::page_walk` never returns None |
+| KMiri-rs/KMiri | [#34][188] | ` mirch::check_page_state` panics |
+| KMiri-rs/KMiri | [#36][189] | UB: no exposed tags have suitable permission in the borrow stack for this location |
+| KMiri-rs/KMiri | [#38][190] | Add stack borrow or tree borrow info in allocation pane |
+| KMiri-rs/KMiri | [#43][191] | Output lines are incorrect rendered |
+| KMiri-rs/KMiri | [#44][192] | Incorrect span of borrow stacks |
+| KMiri-rs/KMiri | [#48][193] | GDB script miri.py is not stable to use |
+| KMiri-rs/KMiri | [#49][194] | KMiri: resource exhaustion in `alloc_meta_frames` |
+| KMiri-rs/KMiri | [#50][195] | Crossterm event read across thread causes cursor query error |
+| KMiri-rs/KMiri | [#51][196] | Debugger has misaligned columns in stack_borrow pane |
+| KMiri-rs/KMiri | [#54][197] | Inline assembly is not supported |
+| KMiri-rs/KMiri | [#56][198] | in-bounds pointer arithmetic failed |
+| KMiri-rs/KMiri | [#57][199] | UB: dangling pointer without provenance |
+| KMiri-rs/KMiri | [#60][200] | Caller stack allocation happens during return_from_current_stack_frame |
+| KMiri-rs/KMiri | [#61][201] | Allowing multiple AllocIds point to the same addr causes UB |
+| KMiri-rs/KMiri | [#62][202] | CpuLocalCell::load overflow |
+| KMiri-rs/KMiri | [#63][203] | KMiri: pt_checker attempts an out-of-bounds page table access |
+| KMiri-rs/KMiri | [#64][204] | unsupported operation: extern static `__GLOBAL_FRAME_ALLOCATOR_REF` |
+| KMiri-rs/KMiri | [#65][205] | kern_miri_zero: page paddr is absent as key in `init_masks` |
+| KMiri-rs/KMiri | [#66][206] | heap allocatation during frame allocation is not interpreted |
+| KMiri-rs/KMiri | [#68][207] | Debugger: Instance search is limited to local project and does not scan dependencies |
+| KMiri-rs/KMiri | [#69][208] | Debugger:  Need a new and user-facing value intepretation |
+| KMiri-rs/KMiri | [#70][209] | UB: in-bounds pointer arithmetic failed |
+| KMiri-rs/KMiri | [#71][210] | Asterinas: `pop_level` panics |
+| KMiri-rs/KMiri | [#72][211] | UB: dangling pointer without provenance |
+| KMiri-rs/KMiri | [#73][212] | Asterinas: `construct_hw_cpu_id_mapping` panics |
+| KMiri-rs/KMiri | [#74][213] | KMiri doesn't show panic info |
+| KMiri-rs/KMiri | [#75][214] | Asterinas: `invoke_ffi_init_funcs` panics |
+| KMiri-rs/KMiri | [#76][215] | KMiri should reject unknown symbols and provide shims to keep them if desired |
+| KMiri-rs/KMiri | [#77][216] | Asterinas: multiple definitions of symbol `__ostd_main` |
+| KMiri-rs/KMiri | [#78][217] | Support `invoke_ffi_init_funcs` in KMiri via explicit init-function shims |
+| KMiri-rs/KMiri | [#79][218] | Page state UB: current page state is Typed |
+| KMiri-rs/KMiri | [#81][219] | Asterinas: unknown symbol `kernel_task_entry_wrapper` |
+| KMiri-rs/KMiri | [#83][220] | UB: memory access failed when creating references or pointers in `kernel_task_entry` |
+| KMiri-rs/KMiri | [#84][221] | KMiri: `init_ap_cpu_local_allocation` is not used at all |
+| KMiri-rs/KMiri | [#85][222] | `kern_miri_set_cpu_local_base` is unused in Asterinas |
+| KMiri-rs/KMiri | [#86][223] | `cpu_local_base` is not properly initialized or queried |
+| KMiri-rs/KMiri | [#87][224] | Present bit `0x1` doesn't exist for some cases |
+| KMiri-rs/KMiri | [#88][225] | Unsupported operation: can't call foreign function `ktest_ostd_extern_1` |
+| KMiri-rs/KMiri | [#89][226] | Linear mapping for vaddr refactor |
+| KMiri-rs/KMiri | [#90][227] | Resource exhaustion on thread `unnamed-1` |
+| KMiri-rs/KMiri | [#91][228] | Support ktest functions |
+| KMiri-rs/KMiri | [#92][229] | Debugger: Improve instance search by collecting as many APIs as possible |
+| KMiri-rs/KMiri | [#95][230] | `rustc_public` has incomplete implementations |
+| KMiri-rs/KMiri | [#97][231] | Undefined Behavior: constructing invalid value of type `!` |
+| KMiri-rs/KMiri | [#98][232] | Need to handle kernel memory leak before main thread exits |
+| KMiri-rs/KMiri | [#99][233] | Linker error: `miri_terminate_current_thread` is missing |
+| KMiri-rs/KMiri | [#100][234] | Debugger:  early exit happens when task switches to main thread |
+| KMiri-rs/KMiri | [#101][235] | Unused shim: `miri_terminate_current_thread` |
+| KMiri-rs/KMiri | [#102][236] | UB: write access without borrow tag |
+| KMiri-rs/KMiri | [#103][237] | Debugger: Generic functions are not fully listed or displayed |
+| KMiri-rs/KMiri | [#104][238] | Debugger: Instance name differs with that in the stack pane |
+| KMiri-rs/KMiri | [#106][239] | main thread terminated without waiting for all remaining threads |
+| KMiri-rs/KMiri | [#107][240] | kmiri-helper: serialiazation error |
+| KMiri-rs/KMiri | [#111][241] | Debugger: display the layout of Type |
+| KMiri-rs/KMiri | [#114][242] | Credit to the author who initially implemented mir debugger tui in the commit |
+| KMiri-rs/KMiri | [#130][243] | Debugger: smoother UX with `cargo miri test` |
+| KMiri-rs/KMiri | [#131][244] | TockOS: kmiri needs adjustment to run tests |
+| KMiri-rs/KMiri | [#132][245] | TockOS: `0x0` address given to `addr_from_alloc_id` |
+| KMiri-rs/KMiri | [#133][246] | TockOS: UB: invalid `TypeId` value: the hash does not match the type id metadata |
+| KMiri-rs/KMiri | [#134][247] | Stack pointer breaks invariant of return value/type |
+| KMiri-rs/KMiri | [#135][248] | vaddr has paddr value when `miri test` runs on host |
+| KMiri-rs/KMiri | [#136][249] | TockOS: UB: stack borrow violation on `test_transmute_from_immutable_slice` |
+| KMiri-rs/KMiri | [#139][250] | TockOS: stack pointer check still fails with `cargo miri test -- --skip` |
+| KMiri-rs/KMiri | [#140][251] | Regression: 24 tests under miri's `tests/pass` fail with kmiri |
+| KMiri-rs/KMiri | [#141][252] | Regression: 93 tests under miri's tests/pass fail with kmiri |
+| KMiri-rs/KMiri | [#143][253] | TockOS: no main function |
+| KMiri-rs/KMiri | [#144][254] | TockOS: unknown foreign function symbol |
+| KMiri-rs/KMiri | [#146][255] | TockOS: inline assembly is not supported |
+| KMiri-rs/KMiri | [#148][256] | Sysroot: multiple candidates for `rmeta` dependency `core` found |
+| KMiri-rs/KMiri | [#150][257] | TockOS: UB dangling reference without provenance |
+| KMiri-rs/KMiri | [#152][258] | Debugger: Could not load source snippet or basic block |
+| KMiri-rs/KMiri | [#153][259] | Debugger: end byte index 2 is not a char boundary |
+| KMiri-rs/KMiri | [#155][260] | TockOS: Segmentation fault |
+| KMiri-rs/KMiri | [#156][261] | TockOS: UB: constructing invalid value of type `StaticRef<sifive::clint::ClintRegisters>` encountered 0, but expected >= 1 |
+| KMiri-rs/KMiri | [#158][262] | TockOS: inline assembly is not supported in `panic_fmt` |
+| KMiri-rs/KMiri | [#159][263] | TockOS: UB: dangling reference `0xc000000[noalloc]` without provenance |
+| KMiri-rs/KMiri | [#160][264] | TockOS: extern static `_sstack` is not supported by Miri |
+| KMiri-rs/KMiri | [#161][265] | TockOS: UB: dangling reference `0x80100000[noalloc]` without provenance |
+| KMiri-rs/KMiri | [#162][266] | TockOS: inline assembly is not supported in `has_pending_interrupts` |
+| KMiri-rs/KMiri | [#165][267] | BlueOS: miri toolchain requires extra components |
+| KMiri-rs/KMiri | [#166][268] | BlueOS: `ninja -C out/none kernel/infra:check_infra_by_miri` command failed |
+| KMiri-rs/KMiri | [#167][269] | BlueOS: failed to resolve: use of undeclared crate or module spin |
+| KMiri-rs/KMiri | [#168][270] | BlueOS: invalid ASCII identifier |
+| KMiri-rs/KMiri | [#171][271] | BlueOS: found `strlen` symbol definition that clashes with a built-in shim |
+| KMiri-rs/KMiri | [#173][272] | BlueOS: Rust toolchain is too old |
+| KMiri-rs/KMiri | [#174][273] | BlusOS: miri sysroot has been prebuilt |
+| KMiri-rs/KMiri | [#178][274] | kmiri-helper: panic at `tcx.crate_hash` |
+| KMiri-rs/KMiri | [#179][275] | cargo-kmiri-helper: crate `rustc_middle` required to be available in rlib format, but was not found in this form |
+| KMiri-rs/KMiri | [#183][276] | BlueOS: fail to compile `compiler_builtins` for vivo-specific targets |
+| KMiri-rs/KMiri | [#184][277] | BlueOS: API breakage during toolchain update |
+| KMiri-rs/KMiri | [#186][278] | BlueOS: const trait breakage due to toolchain update |
+| KMiri-rs/KMiri | [#189][279] | BlueOS: can't find crate for `tracing_attributes` which `rustc_middle` depends on |
+| KMiri-rs/KMiri | [#190][280] | BlueOS: handle  `rustup` if it doesn't exist when `rustc` and `MIRI_SYSROOT` are available |
+| KMiri-rs/KMiri | [#191][281] | BlueOS: multiple `librustc_driver` versions in the sysroot |
+| KMiri-rs/KMiri | [#192][282] | BlueOS: the current sysroot was built without `-Zalways-encode-mir`, or libcore seems missing |
+| KMiri-rs/KMiri | [#193][283] | miri-script: command not found: `cargo +nightly-2026-07-21-x86_64-unknown-linux-gnu` |
+| KMiri-rs/KMiri | [#194][284] | BlueOS: command not found: `rustup` |
+| KMiri-rs/KMiri | [#196][285] | BlueOS: stack address check fails |
+| KMiri-rs/KMiri | [#197][286] | BlueOS: UB: not granting access to tag `<189575>` because that would remove `[SharedReadOnly for <189580>]` which is strongly protected |
+| KMiri-rs/KMiri | [#201][287] | Reproduce static write access without `UnsafeCell` |
+| KMiri-rs/KMiri | [#203][288] | BlueOS: `--debugger`  doesn't work |
+| KMiri-rs/KMiri | [#208][289] | BlueOS: `bench_push_and_pop` resource exhaustion: there are no more free addresses in the address space |
+| KMiri-rs/KMiri | [#215][290] | BlueOS: UB: `test_concurrent_ops1` data race |
+| KMiri-rs/KMiri | [#233][291] | BlueOS: error: suspicious definition of the runtime `memmove` symbol used by the standard library |
+| KMiri-rs/KMiri | [#239][292] | BlueOS: `iheap::tests::concurrent_stress`  tag does not exist in the borrow stack |
+| KMiri-rs/KMiri | [#240][293] | `blueos_infra::string::strlen` does not have a "optimized_mir" |
+| KMiri-rs/KMiri | [#243][294] | BlueOS: `INoLock::this_mut` is an unsound API that breaks aliasing rules |
+| KMiri-rs/KMiri | [#245][295] | BlueOS: Needs `make qemu_run` to run the kernel |
+| KMiri-rs/KMiri | [#246][296] | BlueOS: Enable kernel unit tests on kmiri |
+| KMiri-rs/KMiri | [#247][297] | BlueOS: Unsupported  `pthread_mutexattr` when mixing qemu_riscv64 board and kmiri for host libtest framework |
+| KMiri-rs/KMiri | [#248][298] | BlueOS: Allocations in kernel unit tests have problems (blueos global allocator is not adapted yet?) |
+| KMiri-rs/KMiri | [#250][299] | BlueOS: UB: constructing invalid value in `test_async_disconnect` |
+| KMiri-rs/KMiri | [#251][300] | BlueOS: `max_free_block_comprehensive` test panics |
+| KMiri-rs/KMiri | [#255][301] | BlueOS: Enable page table in `boot.toml` and test page table code in `miri_start` |
+| KMiri-rs/KMiri | [#256][302] | BlueOS: Remove fake and useless physical access from `miri_start` and the kernel |
+| KMiri-rs/KMiri | [#269][303] | Miri Stacked Borrows report on Rust-for-Linux bitmap ZST-DST pointer access pattern (may be modeling mismatch) |
+| KMiri-rs/KMiri | [#273][304] | DragonOS: UB `unaligned reference` for ext4 test `depth_greater_than_zero_detaches_only_empty_right_spine` |
+| KMiri-rs/KMiri | [#274][305] | DragonOS: UB ext4 test `direct_append_rejects_unwritten_tail` violates stack borrow |
+| asterinas/asterinas | [#3251][306] | udevadm: not found in `make nixos` |
+| asterinas/asterinas | [#3252][307] | Unable to install anything on Asterinas NixOS |
+| asterinas/asterinas | [#3262][308] | Build docker images more actively in CI |
+| asterinas/asterinas | [#3642][309] | Flaky uncaught panic error in  x86-64 `conformance-test (gvisor, multiboot2-smp4)` test job |
+| asterinas/asterinas | [#3700][310] | Flaky hello test on AsterNixOS |
+| asterinas/asterinas | [#3813][311] | Unit tests are not run for all crates |
+| asterinas/asterinas | [#3814][312] | `nixfmt --check ./distro` is deprecated |
+| asterinas/asterinas | [#3817][313] | Flaky `xfstests (ext2)` failure |
+| asterinas/asterinas | [#3890][314] | Auto publish crates |
+| asterinas/asterinas.github.io | [#10][315] | Robust and fluent page deployment to review and preview |
+| asterinas/asterinas.github.io | [#11][316] | Robust and fluent page deployment to review and preview |
 ## 链接
 
 [1]: https://github.com/KMiri-rs/DragonOS/pull/1
@@ -413,3 +553,138 @@
 [179]: https://github.com/asterinas/asterinas.github.io/pull/12
 [180]: https://github.com/asterinas/asterinas.github.io/pull/13
 [181]: https://github.com/asterinas/asterinas.github.io/pull/14
+[182]: https://github.com/KMiri-rs/KMiri/issues/26
+[183]: https://github.com/KMiri-rs/KMiri/issues/27
+[184]: https://github.com/KMiri-rs/KMiri/issues/30
+[185]: https://github.com/KMiri-rs/KMiri/issues/31
+[186]: https://github.com/KMiri-rs/KMiri/issues/32
+[187]: https://github.com/KMiri-rs/KMiri/issues/33
+[188]: https://github.com/KMiri-rs/KMiri/issues/34
+[189]: https://github.com/KMiri-rs/KMiri/issues/36
+[190]: https://github.com/KMiri-rs/KMiri/issues/38
+[191]: https://github.com/KMiri-rs/KMiri/issues/43
+[192]: https://github.com/KMiri-rs/KMiri/issues/44
+[193]: https://github.com/KMiri-rs/KMiri/issues/48
+[194]: https://github.com/KMiri-rs/KMiri/issues/49
+[195]: https://github.com/KMiri-rs/KMiri/issues/50
+[196]: https://github.com/KMiri-rs/KMiri/issues/51
+[197]: https://github.com/KMiri-rs/KMiri/issues/54
+[198]: https://github.com/KMiri-rs/KMiri/issues/56
+[199]: https://github.com/KMiri-rs/KMiri/issues/57
+[200]: https://github.com/KMiri-rs/KMiri/issues/60
+[201]: https://github.com/KMiri-rs/KMiri/issues/61
+[202]: https://github.com/KMiri-rs/KMiri/issues/62
+[203]: https://github.com/KMiri-rs/KMiri/issues/63
+[204]: https://github.com/KMiri-rs/KMiri/issues/64
+[205]: https://github.com/KMiri-rs/KMiri/issues/65
+[206]: https://github.com/KMiri-rs/KMiri/issues/66
+[207]: https://github.com/KMiri-rs/KMiri/issues/68
+[208]: https://github.com/KMiri-rs/KMiri/issues/69
+[209]: https://github.com/KMiri-rs/KMiri/issues/70
+[210]: https://github.com/KMiri-rs/KMiri/issues/71
+[211]: https://github.com/KMiri-rs/KMiri/issues/72
+[212]: https://github.com/KMiri-rs/KMiri/issues/73
+[213]: https://github.com/KMiri-rs/KMiri/issues/74
+[214]: https://github.com/KMiri-rs/KMiri/issues/75
+[215]: https://github.com/KMiri-rs/KMiri/issues/76
+[216]: https://github.com/KMiri-rs/KMiri/issues/77
+[217]: https://github.com/KMiri-rs/KMiri/issues/78
+[218]: https://github.com/KMiri-rs/KMiri/issues/79
+[219]: https://github.com/KMiri-rs/KMiri/issues/81
+[220]: https://github.com/KMiri-rs/KMiri/issues/83
+[221]: https://github.com/KMiri-rs/KMiri/issues/84
+[222]: https://github.com/KMiri-rs/KMiri/issues/85
+[223]: https://github.com/KMiri-rs/KMiri/issues/86
+[224]: https://github.com/KMiri-rs/KMiri/issues/87
+[225]: https://github.com/KMiri-rs/KMiri/issues/88
+[226]: https://github.com/KMiri-rs/KMiri/issues/89
+[227]: https://github.com/KMiri-rs/KMiri/issues/90
+[228]: https://github.com/KMiri-rs/KMiri/issues/91
+[229]: https://github.com/KMiri-rs/KMiri/issues/92
+[230]: https://github.com/KMiri-rs/KMiri/issues/95
+[231]: https://github.com/KMiri-rs/KMiri/issues/97
+[232]: https://github.com/KMiri-rs/KMiri/issues/98
+[233]: https://github.com/KMiri-rs/KMiri/issues/99
+[234]: https://github.com/KMiri-rs/KMiri/issues/100
+[235]: https://github.com/KMiri-rs/KMiri/issues/101
+[236]: https://github.com/KMiri-rs/KMiri/issues/102
+[237]: https://github.com/KMiri-rs/KMiri/issues/103
+[238]: https://github.com/KMiri-rs/KMiri/issues/104
+[239]: https://github.com/KMiri-rs/KMiri/issues/106
+[240]: https://github.com/KMiri-rs/KMiri/issues/107
+[241]: https://github.com/KMiri-rs/KMiri/issues/111
+[242]: https://github.com/KMiri-rs/KMiri/issues/114
+[243]: https://github.com/KMiri-rs/KMiri/issues/130
+[244]: https://github.com/KMiri-rs/KMiri/issues/131
+[245]: https://github.com/KMiri-rs/KMiri/issues/132
+[246]: https://github.com/KMiri-rs/KMiri/issues/133
+[247]: https://github.com/KMiri-rs/KMiri/issues/134
+[248]: https://github.com/KMiri-rs/KMiri/issues/135
+[249]: https://github.com/KMiri-rs/KMiri/issues/136
+[250]: https://github.com/KMiri-rs/KMiri/issues/139
+[251]: https://github.com/KMiri-rs/KMiri/issues/140
+[252]: https://github.com/KMiri-rs/KMiri/issues/141
+[253]: https://github.com/KMiri-rs/KMiri/issues/143
+[254]: https://github.com/KMiri-rs/KMiri/issues/144
+[255]: https://github.com/KMiri-rs/KMiri/issues/146
+[256]: https://github.com/KMiri-rs/KMiri/issues/148
+[257]: https://github.com/KMiri-rs/KMiri/issues/150
+[258]: https://github.com/KMiri-rs/KMiri/issues/152
+[259]: https://github.com/KMiri-rs/KMiri/issues/153
+[260]: https://github.com/KMiri-rs/KMiri/issues/155
+[261]: https://github.com/KMiri-rs/KMiri/issues/156
+[262]: https://github.com/KMiri-rs/KMiri/issues/158
+[263]: https://github.com/KMiri-rs/KMiri/issues/159
+[264]: https://github.com/KMiri-rs/KMiri/issues/160
+[265]: https://github.com/KMiri-rs/KMiri/issues/161
+[266]: https://github.com/KMiri-rs/KMiri/issues/162
+[267]: https://github.com/KMiri-rs/KMiri/issues/165
+[268]: https://github.com/KMiri-rs/KMiri/issues/166
+[269]: https://github.com/KMiri-rs/KMiri/issues/167
+[270]: https://github.com/KMiri-rs/KMiri/issues/168
+[271]: https://github.com/KMiri-rs/KMiri/issues/171
+[272]: https://github.com/KMiri-rs/KMiri/issues/173
+[273]: https://github.com/KMiri-rs/KMiri/issues/174
+[274]: https://github.com/KMiri-rs/KMiri/issues/178
+[275]: https://github.com/KMiri-rs/KMiri/issues/179
+[276]: https://github.com/KMiri-rs/KMiri/issues/183
+[277]: https://github.com/KMiri-rs/KMiri/issues/184
+[278]: https://github.com/KMiri-rs/KMiri/issues/186
+[279]: https://github.com/KMiri-rs/KMiri/issues/189
+[280]: https://github.com/KMiri-rs/KMiri/issues/190
+[281]: https://github.com/KMiri-rs/KMiri/issues/191
+[282]: https://github.com/KMiri-rs/KMiri/issues/192
+[283]: https://github.com/KMiri-rs/KMiri/issues/193
+[284]: https://github.com/KMiri-rs/KMiri/issues/194
+[285]: https://github.com/KMiri-rs/KMiri/issues/196
+[286]: https://github.com/KMiri-rs/KMiri/issues/197
+[287]: https://github.com/KMiri-rs/KMiri/issues/201
+[288]: https://github.com/KMiri-rs/KMiri/issues/203
+[289]: https://github.com/KMiri-rs/KMiri/issues/208
+[290]: https://github.com/KMiri-rs/KMiri/issues/215
+[291]: https://github.com/KMiri-rs/KMiri/issues/233
+[292]: https://github.com/KMiri-rs/KMiri/issues/239
+[293]: https://github.com/KMiri-rs/KMiri/issues/240
+[294]: https://github.com/KMiri-rs/KMiri/issues/243
+[295]: https://github.com/KMiri-rs/KMiri/issues/245
+[296]: https://github.com/KMiri-rs/KMiri/issues/246
+[297]: https://github.com/KMiri-rs/KMiri/issues/247
+[298]: https://github.com/KMiri-rs/KMiri/issues/248
+[299]: https://github.com/KMiri-rs/KMiri/issues/250
+[300]: https://github.com/KMiri-rs/KMiri/issues/251
+[301]: https://github.com/KMiri-rs/KMiri/issues/255
+[302]: https://github.com/KMiri-rs/KMiri/issues/256
+[303]: https://github.com/KMiri-rs/KMiri/issues/269
+[304]: https://github.com/KMiri-rs/KMiri/issues/273
+[305]: https://github.com/KMiri-rs/KMiri/issues/274
+[306]: https://github.com/asterinas/asterinas/issues/3251
+[307]: https://github.com/asterinas/asterinas/issues/3252
+[308]: https://github.com/asterinas/asterinas/issues/3262
+[309]: https://github.com/asterinas/asterinas/issues/3642
+[310]: https://github.com/asterinas/asterinas/issues/3700
+[311]: https://github.com/asterinas/asterinas/issues/3813
+[312]: https://github.com/asterinas/asterinas/issues/3814
+[313]: https://github.com/asterinas/asterinas/issues/3817
+[314]: https://github.com/asterinas/asterinas/issues/3890
+[315]: https://github.com/asterinas/asterinas.github.io/issues/10
+[316]: https://github.com/asterinas/asterinas.github.io/issues/11
